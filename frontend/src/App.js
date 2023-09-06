@@ -4,25 +4,28 @@ import axios from 'axios';
 import React from 'react';
 import {BrowserRouter, Route, Switch, Redirect, Link} from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const NotFound404 = ({ location }) => {
+    return (
+        <div>
+            <h1>Страница по адресу '{location.pathname}' не найдена</h1>
+        </div>
+    )
 }
 
+class App extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            'authors': []
+        }
+    }
+
+    render () {
+        return (
+            <div>
+                Main Web
+            </div>
+        )
+    }
+}
 export default App;
