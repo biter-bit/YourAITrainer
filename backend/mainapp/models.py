@@ -8,4 +8,4 @@ class Profile(models.Model):
     surname = models.CharField("surname", max_length=256)
 
     def __str__(self):
-        return f'{self.name} {self.surname} {self.user.username}'
+        return f'{self.name} {self.surname}'

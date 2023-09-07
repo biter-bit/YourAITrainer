@@ -5,7 +5,7 @@ from mainapp.models import Profile
 
 
 @receiver(user_registered, dispatch_uid="create_profile")
-def create_profile(sendler, user, request, **kwargs):
+def create_profile(sender, user, request, **kwargs):
     data = request.data
 
     Profile.objects.create(
