@@ -28,4 +28,4 @@ class ArticleModelViewSet(ViewSet, ListAPIView, RetrieveAPIView, DestroyAPIView,
     pagination_class = ArticletPagination
     filter_backends = [filters.SearchFilter]
     search_fields = ('title',)
-    filterset_fields = ('id', 'title', 'author',)
+    filterset_fields = ('id', 'title', 'source',)

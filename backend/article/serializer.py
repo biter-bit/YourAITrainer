@@ -11,4 +11,4 @@ class UserModelSerializer(ModelSerializer):
 class ArticleModelSerializer(ModelSerializer):
     class Meta:
         model = Article
-        fields = ['id', 'title', 'author', 'content', 'created_at', 'updated_at']
+        fields = ['id', 'title', 'source', 'content', 'created_at', 'updated_at', 'added_by', 'published']
