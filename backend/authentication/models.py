@@ -11,6 +11,22 @@ from django.utils.translation import gettext_lazy as _
 
 class User(AbstractBaseUser, PermissionsMixin):
     username_validator = ASCIIUsernameValidator()
+    GENDERS = (
+        ('m', 'мужской'),
+        ('f', 'женский'),
+    )
+    TRAINING_LEVELS = (
+        ('beginner', 'новичок'),
+        ('amateur', 'любитель'),
+        ('pro', 'профессионал')
+    )
+
+    PURPOSES = (
+        ('weight_loss', 'похудение'),
+        ('relief', 'рельеф тела'),
+        ('muscle_mass', 'набор мышечной массы'),
+        ('endurance', 'выносливость')
+    )
 
     username = models.CharField(
         _("username"),
@@ -49,6 +65,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     date_joined = models.DateTimeField(_("date joined"), auto_now_add=True)
     is_verified = models.BooleanField(_('verified'), default=False)
+    gender = models.CharField(verbose_name='пол', max_length=1, choices=GENDERS)
+    weight = models.SmallIntegerField(verbose_name='вес')
+    height = models.SmallIntegerField(verbose_name='рост')
+    training_level = models.CharField(verbose_name='уровень пользователя', max_length=8, choices=TRAINING_LEVELS)
+    purpose_of_training = models.CharField(verbose_name='цель программы', max_length=12, choices=PURPOSES)
 
     objects = UserManager()
 

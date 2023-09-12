@@ -9,11 +9,15 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+import os
 from datetime import timedelta
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / ".env")
 
 
 # Quick-start development settings - unsuitable for production
@@ -96,11 +100,16 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'yourtrainer',
-        'USER': 'postgres',
-        'PASSWORD': 'space',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        "NAME": os.environ.get("POSTGRES_DB"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "USER": os.environ.get("POSTGRES_USER"),
+        "HOST": os.environ.get("DATABASE_HOST"),
+        "PORT": os.environ.get("POSTGRES_PORT"),
+#        'NAME': 'yourtrainer',
+#        'USER': 'postgres',
+#        'PASSWORD': 'space',
+#        'HOST': '127.0.0.1',
+#        'PORT': '5432',
     }
 }
 
