@@ -17,6 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from programs.views import ProgramsAPIView, ApproachesAPIView, WorkoutAPIView, TrainingDayAPIView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path ('api/v1/programs/', ProgramsAPIView.as_view()),
+    path('api/v1/trainingday/', TrainingDayAPIView.as_view()),
+    path('api/v1/workout/', WorkoutAPIView.as_view()),
+    path('api/v1/approaches/', ApproachesAPIView.as_view()),
+
 ]
