@@ -1,0 +1,248 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+  background-color: #1e1e25;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1600px;
+    height: 100vh;
+    padding: 20px 120px;
+    margin: auto;
+    background-color: #1e1e25;
+  }
+
+.main_menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo {
+  width: 70px;
+  height: 70px;
+  background-image: url(../img/logo_5.png);
+  background-size: cover;
+}
+
+.title_container {
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.button_sign {
+  width: 139px;
+  height: 42px;
+  padding: 10px 26px;
+  border-width: 0px;
+  background-color: #9b3fd4;
+  border-radius: 10px;
+  color:white;
+  font-family: "Manrope-SemiBold", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.text-wrapper {
+  background-color:#1e1e25;
+  border-width: 0px;
+  font-size: 16px;
+  text-align: center;
+  font-family: "Manrope-SemiBold", Helvetica;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.body {
+  display: flex;
+  margin-top: 146px;
+  align-content: space-around;
+  align-items: center;
+}
+
+.offer {
+  display: flex;
+  flex-direction: column;
+  max-width: 519px;
+}
+
+.title {
+  font-family: "Manrope-Bold", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 64px;
+  line-height: 1.2;
+}
+
+.discription {
+  font-family: "Manrope-SemiBold", Helvetica;
+  font-weight: 600;
+  font-size: 18px;
+  color: #ffffff;
+  margin-top: 10px;
+}
+
+.call-to-action {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+
+.button_reg {
+  width: 342px;
+  height: 60px;
+  background-color: #9b3fd4;
+  border-radius: 20px;
+  font-size: 18px;
+  text-align: center;
+  font-family: "Manrope-SemiBold", Helvetica;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.p {
+  width: 192.5px;
+  font-family: "Manrope-Medium", Helvetica;
+  font-weight: 500;
+  font-size: 16px;
+  color: #ffffff;
+  letter-spacing: 0;
+  line-height: normal;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.pre {
+  min-width:550px;
+  height: 310px;
+  margin-left: -4px;
+  object-fit: cover;
+}
+
+.burger {
+  display: none;
+}
+
+.body-2 {
+  align-items: flex-start;
+  margin-top: 150px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.article {
+  position: relative;
+  width: 358.33px;
+  height: 496px;
+  background-image: url(../img/one.png);
+  background-size: cover;
+  background-position: 50% 50%;
+  margin-bottom: 50px;
+}
+
+.article-2 {
+  position: relative;
+  width: 358.33px;
+  height: 496px;
+  background-image: url(../img/one.png);
+  background-size: cover;
+  background-position: 50% 50%;
+  margin-bottom: 50px;
+}
+
+.article-3 {
+  position: relative;
+  width: 358.33px;
+  height: 496px;
+  background-image: url(../img/one.png);
+  background-size: cover;
+  background-position: 50% 50%;
+  margin-bottom: 50px;
+}
+
+.text-wrapper-4 {
+  top: 22px;
+  left: 83px;
+  font-size: 22px;
+  position: absolute;
+  font-family: "Manrope-SemiBold", Helvetica;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.text-wrapper-5 {
+  top: 101px;
+  left: 98px;
+  font-size: 18px;
+  position: absolute;
+  font-family: "Manrope-SemiBold", Helvetica;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.rectangle {
+  left: 22px;
+  position: absolute;
+  width: 314px;
+  height: 314px;
+  top: 168px;
+  background-color: #d9d9d9;
+}
+
+@media (max-width: 980px) {
+  .body-2 {
+    flex-direction: column;
+    align-content: center;
+  }
+  .title {
+    text-align: center;
+    font-size: 50px;
+  }
+  .discription {
+    text-align: center;
+    font-size: 15px;
+  }
+  .p {
+    display: none;
+  }
+  .offer {
+    align-items: center;
+    max-width: 400px;
+  }
+  .body {
+    justify-content: center;
+    flex-wrap: wrap-reverse;
+  }
+  .pre {
+    margin-left: 79px;
+    width: 400px;
+    height: 280px;
+  }
+  .button_sign {
+    display: none;
+  }
+  .text-wrapper {
+    display: none;
+  }
+  .burger {
+    display: inline;
+    width: 50px;
+    height: 35px;
+  }
+}
