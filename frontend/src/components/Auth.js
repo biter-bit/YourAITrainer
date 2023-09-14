@@ -6,34 +6,36 @@ class Auth extends React.Component {
             <div className={this.props.active ? 'model active' : "model"} onClick={() => this.props.setActive()}>
                 <div className={this.props.active ? 'model__content active' : "model__content"} onClick={e => e.stopPropagation()}>
                     <h1 className="name_reg">Авторизация</h1>
-                    <form>
+                    <form onSubmit={(event) => this.props.setAuth(event)}>
                       <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">
+                        <label htmlFor="exemail" className="form-label">
                           Email address
                         </label>
                         <input
                           type="email"
                           className="form-control"
-                          id="exampleInputEmail1"
+                          id="exemail"
                           aria-describedby="emailHelp"
+                          name="email"
                         />
                         <div id="emailHelp" className="form-text">
                           We'll never share your email with anyone else.
                         </div>
                       </div>
                       <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label">
+                        <label htmlFor="expass" className="form-label">
                           Password
                         </label>
                         <input
                           type="password"
                           className="form-control"
-                          id="exampleInputPassword1"
+                          id="expass"
+                          name="password"
                         />
                       </div>
                       <div className="mb-3 form-check">
-                        <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                        <label className="form-check-label" htmlFor="exampleCheck1">
+                        <input type="checkbox" className="form-check-input" id="excheck" />
+                        <label className="form-check-label" htmlFor="excheck">
                           Check me out
                         </label>
                       </div>

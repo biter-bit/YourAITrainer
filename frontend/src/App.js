@@ -1,10 +1,10 @@
-import React, {useState} from "react";
-import pre_2 from "./img/pre_2.png"
-import logo_5 from "./img/logo_5.png"
-import article_3 from "./img/article_3.jpeg"
-import burger from "./img/burger.png"
+import React from "react";
 import Register from "./components/Register";
 import Auth from "./components/Auth";
+import Menu from "./components/Menu";
+import Articles from "./components/Articles"
+import Offer from "./components/Offer";
+import Burger from "./components/Burger";
 import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends React.Component {
@@ -13,59 +13,49 @@ class App extends React.Component {
         this.state = {
             modelActiveAuth: false,
             modelActiveReg: false,
+            authorized: false,
+            burger_active: false,
         }
         this.inputClickAuth = this.inputClickAuth.bind(this)
         this.inputClickReg = this.inputClickReg.bind(this)
+        this.authorizedAuth = this.authorizedAuth.bind(this)
+        this.funcBurgerActive = this.funcBurgerActive.bind(this)
     }
     render() {
         return (
-            <div className="container">
-                <div className="main_menu">
-                  <div className="logo" />
-                  <div className="title_container">
-                    <button className="text-wrapper">Дневник</button>
-                    <button className="text-wrapper">Статьи</button>
-                  </div>
-                  <button className="button_sign" onClick={() => this.inputClickAuth()}>Войти</button>
-                  <input className="burger" type="image" src={burger} alt="none photo"/>
+            <div>
+                <Burger burger={this.state.burger_active} setBurger={this.funcBurgerActive}/>
+                <div className="container">
+                    <Menu setActive={this.inputClickAuth} auth={this.state.authorized} setBurger={this.funcBurgerActive}/>
+                      <div className="container_body">
+                        <Offer setActive={this.inputClickReg}/>
+                        <Articles />
+                      </div>
+                      <Register active={this.state.modelActiveReg} setActive={this.inputClickReg} />
+                      <Auth active={this.state.modelActiveAuth} setActive={this.inputClickAuth} setAuth={this.authorizedAuth}/>
                 </div>
-                <div className="body">
-                  <div className="offer">
-                    <p className="title">YourAITrainer онлайн тренер</p>
-                    <p className="discription">
-                      Сервис генерации и ведения твоих тренировок на основе ChatGPT.
-                      Работает без VPN
-                    </p>
-                    <div className="call-to-action">
-                      <button className="button_reg" onClick={() => this.inputClickReg()}>Зарегистрироваться</button>
-                      <p className="p">Построй свое тело за 30 дней</p>
-                    </div>
-                  </div>
-                  <img className="pre" src={pre_2} />
-                </div>
-                <div className="body-2">
-                  <div className="article">
-                    <div className="text-wrapper-4">Название статьи</div>
-                    <div className="text-wrapper-5">Описание статьи</div>
-                    <div className="rectangle" />
-                  </div>
-                  <div className="article-2">
-                    <div className="text-wrapper-4">Название статьи</div>
-                    <div className="text-wrapper-5">Описание статьи</div>
-                    <div className="rectangle" />
-                  </div>
-                  <div className="article-3">
-                    <div className="text-wrapper-4">Название статьи</div>
-                    <div className="text-wrapper-5">Описание статьи</div>
-                    <div className="rectangle" />
-                  </div>
-                </div>
-                <Register active={this.state.modelActiveReg} setActive={this.inputClickReg} />
-                <Auth active={this.state.modelActiveAuth} setActive={this.inputClickAuth}/>
-
             </div>
-
         )
+    }
+    funcBurgerActive() {
+        console.log(this.state.burger_active)
+        if (this.state.burger_active) {
+            this.setState({ burger_active: false })
+        }
+        else {
+            this.setState({ burger_active: true })
+        }
+    }
+    authorizedAuth(event) {
+        event.preventDefault()
+        if (this.state.authorized) {
+            this.setState({ authorized: false })
+            this.inputClickAuth()
+        }
+        else {
+            this.setState({ authorized: true })
+            this.inputClickAuth()
+        }
     }
     inputClickAuth() {
         if (this.state.modelActiveAuth) {

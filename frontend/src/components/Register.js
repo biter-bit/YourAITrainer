@@ -18,13 +18,13 @@ class Register extends React.Component {
                         />
                       </div>
                       <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">
+                        <label htmlFor="exemail2" className="form-label">
                           Email address
                         </label>
                         <input
                           type="email"
                           className="form-control"
-                          id="exampleInputEmail1"
+                          id="exemail2"
                           aria-describedby="emailHelp"
                         />
                         <div id="emailHelp" className="form-text">
@@ -32,23 +32,23 @@ class Register extends React.Component {
                         </div>
                       </div>
                       <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label">
+                        <label htmlFor="expass2" className="form-label">
                           Password
                         </label>
                         <input
                           type="password"
                           className="form-control"
-                          id="exampleInputPassword1"
+                          id="expass2"
                         />
                       </div>
                       <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label">
+                        <label htmlFor="expasscheck" className="form-label">
                           Repeat your password
                         </label>
                         <input
                           type="password"
                           className="form-control"
-                          id="exampleInputPassword1"
+                          id="expasscheck"
                         />
                       </div>
                       <div className="mb-3 form-check">
