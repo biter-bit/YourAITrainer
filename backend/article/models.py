@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
+from authentication.models import User
+
 
 class Article(models.Model):
     title = models.CharField(verbose_name='название', max_length=100)

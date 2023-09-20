@@ -11,6 +11,11 @@ class Programs (models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        db_table = 'programs'
+        verbose_name = ("Программа")
+        verbose_name_plural = ("Программы")
+
 
 class TrainingDay (models.Model):
     day = models.IntegerField()
@@ -20,6 +25,11 @@ class TrainingDay (models.Model):
 
     def __int__(self):
         return self.day
+
+    class Meta:
+        db_table = 'training_day'
+        verbose_name = ("Тренировочкый день")
+        verbose_name_plural = ("Тренировочные дни")
 
 
 class Workout (models.Model):
@@ -33,6 +43,11 @@ class Workout (models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        db_table = 'workout'
+        verbose_name = ("Тренировка")
+        verbose_name_plural = ("Тренировки")
+
 
 class Approaches (models.Model):
     index = models.SmallIntegerField()
@@ -45,3 +60,7 @@ class Approaches (models.Model):
     def __int__(self):
         return self.quantity
 
+    class Meta:
+        db_table = 'approaches'
+        verbose_name = ("Подход")
+        verbose_name_plural = ("Подходы")

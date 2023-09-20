@@ -1,15 +1,15 @@
 from pathlib import Path
 from time import time
 
-from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin, UserManager
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.validators import ASCIIUsernameValidator
 from django.core.mail import send_mail
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(AbstractUser, PermissionsMixin):
     username_validator = ASCIIUsernameValidator()
 
     username = models.CharField(
@@ -49,8 +49,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     date_joined = models.DateTimeField(_("date joined"), auto_now_add=True)
     is_verified = models.BooleanField(_('verified'), default=False)
-
-    objects = UserManager()
 
     #EMAIL_FIELD = "email"
     USERNAME_FIELD = "username"

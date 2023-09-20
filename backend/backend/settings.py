@@ -63,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -89,23 +90,23 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'yourtrainer',
-        'USER': 'postgres',
-        'PASSWORD': 'space',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
+   'default': {
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': BASE_DIR / 'db.sqlite3',
+   }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'yourtrainer',
+#         'USER': 'postgres',
+#         'PASSWORD': 'space',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
@@ -153,8 +154,10 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
+# настройка для смены автоматического поля для создания идентификаторов в моделях на большее
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# конфиг jwt
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
@@ -166,6 +169,7 @@ SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ('Bearer',),
 }
 
+# настройки аутентификации и авторизации
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -194,11 +198,12 @@ REST_FRAMEWORK = {
     # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning',
 }
 
-REST_AUTH = {
-    "USE_JWT": True,
-    "JWT_AUTH_HTTPONLY": False,
-}
+# REST_AUTH = {
+#     "USE_JWT": True,
+#     "JWT_AUTH_HTTPONLY": False,
+# }
 
+# кому доступен API
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
 else:
@@ -217,8 +222,10 @@ DJOSER = {
     'ACTIVATION_URL': 'auth/verify/{uid}/{token}/',
 }
 
+# модель пользователя Django
 AUTH_USER_MODEL = "authentication.User"
 
+# бэкенд, который использует django для аутентификации пользователей на основе модели пользователя Django
 AUTHENTICATION_BACKENDS = {
     'django.contrib.auth.backends.ModelBackend',
     'mainapp.backends.AuthBackend',
