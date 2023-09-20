@@ -20,6 +20,7 @@ from article.views import CurrentUserView, ArticleModelViewSet
 from rest_framework.routers import DefaultRouter
 from django.views.generic import RedirectView
 from rest_framework.authtoken.views import obtain_auth_token
+from programs.views import ProgramsAPIView, ApproachesAPIView, WorkoutAPIView, TrainingDayAPIView
 
 router = DefaultRouter()
 router.register('users', CurrentUserView, basename="users")
@@ -34,4 +35,8 @@ urlpatterns = [
     path('api/auth/', include('djoser.urls.jwt')),
     path('api-auth/', include('rest_framework.urls')),
     path('api-token-auth/', obtain_auth_token),
+    path('api/v1/programs/', ProgramsAPIView.as_view()),
+    path('api/v1/trainingday/', TrainingDayAPIView.as_view()),
+    path('api/v1/workout/', WorkoutAPIView.as_view()),
+    path('api/v1/approaches/', ApproachesAPIView.as_view()),
 ]
