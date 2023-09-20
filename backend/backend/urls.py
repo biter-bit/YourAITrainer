@@ -16,10 +16,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from article.views import CurrentUserView, ArticleModelViewSet
+from rest_framework.routers import DefaultRouter
+from django.views.generic import RedirectView
+from rest_framework.authtoken.views import obtain_auth_token
+
+router = DefaultRouter()
+router.register('users', CurrentUserView, basename="users")
+router.register('articles', ArticleModelViewSet, basename="articles")
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='api/')),
+    path('api/', include(router.urls)),
+    path('admin/', admin.site.urls),
     path('api/auth/', include('authentication.urls')),
     path('api/auth/', include('djoser.urls')),
     path('api/auth/', include('djoser.urls.jwt')),
-    path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api-token-auth/', obtain_auth_token),
 ]
