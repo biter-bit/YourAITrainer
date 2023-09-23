@@ -10,6 +10,6 @@ def create_profile(sender, user, request, **kwargs):
 
     Profile.objects.create(
         user=user,
-        name=data.get("name", ""),
-        surname=data.get("surname", "")
+        telegram=data.get("telegram", ""),
+        #name=data.get("name", "")
     )
