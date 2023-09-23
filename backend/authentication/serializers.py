@@ -18,10 +18,9 @@ class UserDetailSerializerDjoser(ModelSerializer):
             settings.USER_ID_FIELD,
             settings.LOGIN_FIELD,
             'first_name', 'last_name', 'phone', 'gender', 'weight', 'age', 'is_active', 'height', 'training_level',
-            'purpose_of_training', 'read_only_fields'
+            'purpose_of_training'
             # ADD HERE EXTRA FIELDS OR IN READ_ONLY_FIELDS
         )
-        read_only_fields = (settings.LOGIN_FIELD,)
 
     def update(self, instance, validated_data):
         email_field = get_user_email_field_name(User)
