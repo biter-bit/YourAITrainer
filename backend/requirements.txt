@@ -20,6 +20,7 @@ inflection==0.5.1
 Markdown==3.4.4
 oauthlib==3.2.2
 packaging==23.1
+psycopg2==2.9.7
 psycopg2-binary==2.9.7
 pycparser==2.21
 PyJWT==2.8.0
