@@ -6,6 +6,7 @@ import Articles from "./components/Articles"
 import Offer from "./components/Offer";
 import Burger from "./components/Burger";
 import 'bootstrap/dist/css/bootstrap.css';
+// import axios from "axios";
 
 class App extends React.Component {
     constructor(props) {
