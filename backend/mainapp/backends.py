@@ -1,4 +1,4 @@
-from authentication.models import User
+from authentication.models import CustomUser
 from django.db.models import Q
 from django.contrib.auth.backends import ModelBackend
 
@@ -10,14 +10,14 @@ class AuthBackend(ModelBackend):
 
     def get_user(self, user_id):
         try:
-            return User.objects.get(pk=user_id)
-        except User.DoesNotExist:
+            return CustomUser.objects.get(pk=user_id)
+        except CustomUser.DoesNotExist:
             return None
 
     def authenticate(self, request, username, password):
         try:
-            user = User.objects.get(Q(username=username) | Q(email=username) | Q(phone=username))
-        except User.DoesNotExist:
+            user = CustomUser.objects.get(Q(username=username) | Q(email=username) | Q(phone=username))
+        except CustomUser.DoesNotExist:
             return None
 
         if user.check_password(password):

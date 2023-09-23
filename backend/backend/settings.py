@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-1(n1_k#=)1%4hvb^$=gf9^o-$$m--q$a#7$1hwmypmxtbvnch4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -173,9 +173,6 @@ SIMPLE_JWT = {
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-        # 'rest_framework.authentication.SessionAuthentication',
-        # 'rest_framework.authentication.BasicAuthentication',
-        # 'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': (
         # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
@@ -214,6 +211,9 @@ else:
 
 #djoser
 DJOSER = {
+    'SERIALIZERS': {
+        'user_create_password_retype': 'article.serializers.UserModelSerializer',  # Укажите путь к вашему сериализатору пользователя
+    },
     'USER_CREATE_PASSWORD_RETYPE': True,
     'SEND_ACTIVATION_EMAIL': False,
     'SET_PASSWORD_RETYPE': True,
@@ -223,10 +223,10 @@ DJOSER = {
 }
 
 # модель пользователя Django
-AUTH_USER_MODEL = "authentication.User"
+AUTH_USER_MODEL = "authentication.CustomUser"
 
 # бэкенд, который использует django для аутентификации пользователей на основе модели пользователя Django
 AUTHENTICATION_BACKENDS = {
     'django.contrib.auth.backends.ModelBackend',
-    'mainapp.backends.AuthBackend',
+    # 'mainapp.backends.AuthBackend',
 }

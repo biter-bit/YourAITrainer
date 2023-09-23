@@ -1,3 +1,7 @@
 from django.shortcuts import render
+from djoser.views import UserViewSet
+from article.serializers import UserModelSerializer
 
-# Create your views here.
+
+class CustomUserViewSet(UserViewSet):
+    serializer_class = UserModelSerializer
