@@ -9,7 +9,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class User(AbstractUser, PermissionsMixin):
+class CustomUser(AbstractUser, PermissionsMixin):
     username_validator = ASCIIUsernameValidator()
 
     username = models.CharField(
