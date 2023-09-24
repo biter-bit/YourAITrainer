@@ -16,36 +16,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from article.views import CurrentUserView, ArticleModelViewSet
+from article.views import ArticleModelViewSet
+from authentication.views import UserListView, RegisterViewSet
 from rest_framework.routers import DefaultRouter
 from django.views.generic import RedirectView
-# from rest_framework.authtoken.views import obtain_auth_token
 from programs.views import ProgramsAPIView, ApproachesAPIView, WorkoutAPIView, TrainingDayAPIView
-from dj_rest_auth.jwt_auth import get_refresh_view
-# from dj_rest_auth.registration.views import RegisterView
-# from dj_rest_auth.views import LoginView, LogoutView, UserDetailsView
-# from djoser.views import TokenCreateView
-from rest_framework_simplejwt.views import TokenVerifyView
-from authentication.views import CustomUserViewSet
 
 router = DefaultRouter()
-router.register('users', CurrentUserView, basename="users")
+router.register('users', UserListView, basename="users")
 router.register('articles', ArticleModelViewSet, basename="articles")
 router.register('programs', ProgramsAPIView, basename='programs')
 router.register('trainingday', TrainingDayAPIView, basename='trainingday')
 router.register('workout', WorkoutAPIView, basename='workout')
 router.register('approaches', ApproachesAPIView, basename='approaches')
+router.register('auth/register', RegisterViewSet, basename="auth_register")
 
 urlpatterns = [
     path('', RedirectView.as_view(url='api/')),
     path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
     path('api/auth/', include('djoser.urls')),
-    path('api/auth/token/', include('djoser.urls.jwt')),
-    path("api/auth/token/verify/", TokenVerifyView.as_view(), name="token_verify"),
-    path("api/auth/token/refresh/", get_refresh_view().as_view(), name="token_refresh"),
-    # path("register/", RegisterView.as_view(), name="rest_register"),
-    # path("login/", LoginView.as_view(), name="rest_login"),
-    # path("logout/", LogoutView.as_view(), name="rest_logout"),
+    path('api/auth/', include('djoser.urls.jwt')),
     # path("user/", UserDetailsView.as_view(), name="rest_user_details"),
 ]
