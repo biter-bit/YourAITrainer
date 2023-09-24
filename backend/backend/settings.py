@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     "dj_rest_auth.registration",
     "corsheaders",
     'djoser',
-    'mainapp',
     'article',
     'django_filters',
     'programs.apps.ProgramsConfig',
@@ -212,7 +211,10 @@ else:
 #djoser
 DJOSER = {
     'SERIALIZERS': {
-        'user_create_password_retype': 'article.serializers.UserModelSerializer',  # Укажите путь к вашему сериализатору пользователя
+        'user_create_password_retype': 'authentication.serializers.UserModelSerializer',  # Укажите путь к вашему сериализатору пользователя
+    },
+    'PERMISSIONS': {
+        'user_create_password_retype': ['rest_framework.permissions.AllowAny'],
     },
     'USER_CREATE_PASSWORD_RETYPE': True,
     'SEND_ACTIVATION_EMAIL': False,

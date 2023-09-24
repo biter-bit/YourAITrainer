@@ -7,6 +7,7 @@ from django.contrib.auth.validators import ASCIIUsernameValidator
 from django.core.mail import send_mail
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ValidationError
 
 
 class CustomUser(AbstractUser, PermissionsMixin):
@@ -33,6 +34,7 @@ class CustomUser(AbstractUser, PermissionsMixin):
             "unique": _("A user with that email address already exists."),
         },
     )
+    password_confirmation = models.CharField(max_length=128, blank=True, null=True)
     phone = models.CharField(_('phone number'), max_length=30, blank=True, null=True)
     is_staff = models.BooleanField(
         _("staff status"),
