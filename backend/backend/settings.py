@@ -204,14 +204,14 @@ if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
 else:
     CORS_ALLOWED_ORIGINS = [
-        "http://localhost:3000/",
-        "http://127.0.0.1:3000/",
+        "http://localhost",
+        "http://127.0.0.1",
     ]
 
 #djoser
 DJOSER = {
     'SERIALIZERS': {
-        'user_create_password_retype': 'authentication.serializers.UserModelSerializer',  # Укажите путь к вашему сериализатору пользователя
+        'user_create_password_retype': 'authentication.serializers.UserModelSerializer',
     },
     'PERMISSIONS': {
         'user_create_password_retype': ['rest_framework.permissions.AllowAny'],

@@ -1,6 +1,7 @@
 import React from 'react';
 
 class Auth extends React.Component {
+
     render() {
         return (
             <div className={this.props.active ? 'model active' : "model"} onClick={() => this.props.setActive()}>
@@ -9,14 +10,14 @@ class Auth extends React.Component {
                     <form onSubmit={(event) => this.props.setAuth(event)}>
                       <div className="mb-3">
                         <label htmlFor="exemail" className="form-label">
-                          Email address
+                          Username
                         </label>
                         <input
-                          type="email"
+                          type="text"
                           className="form-control"
                           id="exemail"
                           aria-describedby="emailHelp"
-                          name="email"
+                          name="username"
                         />
                         <div id="emailHelp" className="form-text">
                           We'll never share your email with anyone else.
@@ -32,13 +33,14 @@ class Auth extends React.Component {
                           id="expass"
                           name="password"
                         />
+                        <label htmlFor="expass" className="form-label">{this.props.error}</label>
                       </div>
-                      <div className="mb-3 form-check">
-                        <input type="checkbox" className="form-check-input" id="excheck" />
-                        <label className="form-check-label" htmlFor="excheck">
-                          Check me out
-                        </label>
-                      </div>
+                      {/*<div className="mb-3 form-check">*/}
+                      {/*  <input type="checkbox" className="form-check-input" id="excheck" />*/}
+                      {/*  <label className="form-check-label" htmlFor="excheck">*/}
+                      {/*    Check me out*/}
+                      {/*  </label>*/}
+                      {/*</div>*/}
                       <button type="submit" className="btn btn-primary">
                         Submit
                       </button>
