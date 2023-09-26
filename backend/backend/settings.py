@@ -52,8 +52,7 @@ INSTALLED_APPS = [
     'django_filters',
     'programs.apps.ProgramsConfig',
 
-    'backend',
-    'users',
+
 ]
 
 MIDDLEWARE = [
@@ -65,7 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
+    #'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -237,3 +236,5 @@ AUTHENTICATION_BACKENDS = {
     'django.contrib.auth.backends.ModelBackend',
     # 'mainapp.backends.AuthBackend',
 }
+
+#STATICFILES_DIRS = (BASE_DIR/'frontend/build/static',)
