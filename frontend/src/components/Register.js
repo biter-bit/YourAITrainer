@@ -6,7 +6,7 @@ class Register extends React.Component {
             <div className={this.props.active ? 'model active' : "model"} onClick={() => this.props.setActive()}>
                 <div className={this.props.active ? 'model__content active' : "model__content"} onClick={e => e.stopPropagation()}>
                     <h1 className="name_reg">Регистрация</h1>
-                    <form>
+                    <form onSubmit={(event) => this.props.setRegister(event)}>
                       <div className="mb-3">
                         <label htmlFor="exampleInputEmail1" className="form-label">
                           Name
@@ -15,6 +15,7 @@ class Register extends React.Component {
                             type="text"
                             id="form3Example1c"
                             className="form-control"
+                            name="username"
                         />
                       </div>
                       <div className="mb-3">
@@ -26,6 +27,7 @@ class Register extends React.Component {
                           className="form-control"
                           id="exemail2"
                           aria-describedby="emailHelp"
+                          name="email"
                         />
                         <div id="emailHelp" className="form-text">
                           We'll never share your email with anyone else.
@@ -39,6 +41,7 @@ class Register extends React.Component {
                           type="password"
                           className="form-control"
                           id="expass2"
+                          name="password"
                         />
                       </div>
                       <div className="mb-3">
@@ -49,14 +52,18 @@ class Register extends React.Component {
                           type="password"
                           className="form-control"
                           id="expasscheck"
+                          name="password_confirmation"
                         />
-                      </div>
-                      <div className="mb-3 form-check">
-                        <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                        <label className="form-check-label" htmlFor="exampleCheck1">
-                          Check me out
+                        <label htmlFor="expasscheck" className="form-label">
+                            {this.props.error}
                         </label>
                       </div>
+                      {/*<div className="mb-3 form-check">*/}
+                      {/*  <input type="checkbox" className="form-check-input" id="exampleCheck1" />*/}
+                      {/*  <label className="form-check-label" htmlFor="exampleCheck1">*/}
+                      {/*    Check me out*/}
+                      {/*  </label>*/}
+                      {/*</div>*/}
                       <button type="submit" className="btn btn-primary">
                         Submit
                       </button>
