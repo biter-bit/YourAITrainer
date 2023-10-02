@@ -52,7 +52,7 @@ class CustomUser(AbstractUser, PermissionsMixin):
         },
     )
     password_confirmation = models.CharField(max_length=128, blank=True, null=True)
-    gender = models.CharField(verbose_name='пол', max_length=1, choices=GENDERS, default=False)
+    gender = models.CharField(verbose_name='пол', max_length=12, choices=GENDERS, default=False)
     age = models.PositiveIntegerField(verbose_name='возраст', default=False)
     weight = models.SmallIntegerField(verbose_name='вес', default=False)
     height = models.SmallIntegerField(verbose_name='рост', default=False)
