@@ -1,0 +1,162 @@
+.main {
+    height: 1080px;
+    width: 1920px;
+    background: #191919;
+    padding-top: 10px;
+}
+
+.header {
+    height: 68px;
+    padding-left: 63px;
+    padding-right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    justify-content: left;
+}
+
+.content {
+    display: flex;
+}
+
+.left-block {
+    padding: 0px 6px;
+    font: #FFFFFF;
+}
+
+.left-name {
+    width: 248px;
+    display: flex;
+    border-top: 1px solid #646464;
+    border-bottom: 1px solid #646464;
+    height: 88px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.left-list {
+    width: 248px;
+    padding-top: 5px;
+}
+
+.list-programs {
+    padding: 13px 0px;
+    color: #FFFF;
+
+}
+
+.train-menu {
+    padding: 2px 20px;
+    list-style-type: none;
+    background-image: url(img/Star\ 2.png);
+    background-position: 0 4px;
+    background-repeat: no-repeat;
+
+}
+
+/* .train-menu::after {
+    content: url(img/row1.png);
+    margin-left: 30px;
+} */
+
+.train-menu:hover {
+    background-color: #323232;
+    border-radius: 6px;
+}
+
+.train-list {
+    display: none;
+}
+
+.train-menu:hover .train-list {
+    display: block;
+}
+
+.left-menu {
+    width: 248px;
+    height: 184;
+    border-top: 1px solid #646464;
+    margin-top: 500px;
+    color: #FFFF;
+}
+
+.exercise {
+    width: 260px;
+    height: 1001px;
+    background-color: #252525;
+    color: #FFFFFF;
+}
+
+.exercise-list {
+    /* display: none; */
+    list-style-type: none;
+}
+
+.exercise-list li div {
+    display: flex;
+    justify-content: space-around;
+    padding: 5px 0px;
+
+}
+
+.right-block {
+    border: 1px solid white;
+    width: 1390px;
+    background-color: #FFFFFF;
+}
+
+table.iksweb {
+    text-decoration: none;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+}
+
+table.iksweb th {
+    font-weight: normal;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: #354251;
+}
+
+table.iksweb td {
+    font-size: 25px;
+    color: #354251;
+}
+
+table.iksweb td {
+    white-space: pre-wrap;
+    padding: 10px 5px;
+    line-height: 20.49px;
+    vertical-align: middle;
+    border-top: 1px solid #354251;
+}
+
+table.iksweb th {
+    font-size: 25px;
+    white-space: pre-wrap;
+    padding: 10px 5px;
+    line-height: 20.49px;
+    vertical-align: middle;
+    background-color: #323232;
+    color: #ffffff;
+
+}
+
+table.iksweb tr,
+table.iksweb th {
+    height: 80px;
+}
+
+table.iksweb tr:hover {
+    background-color: #f9fafb
+}
+
+table.iksweb tr:hover td {
+    color: #354251;
+    cursor: default;
+}
