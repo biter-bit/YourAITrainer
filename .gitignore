@@ -400,4 +400,8 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
+frontend/Dockerfile
+Dockerfile
+docker-compose.yml
+
 # End of https://www.toptal.com/developers/gitignore/api/python,node,django

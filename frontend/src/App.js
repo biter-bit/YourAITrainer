@@ -125,8 +125,9 @@ class App extends React.Component {
         } catch (error) {
             if (error.response && error.response.status === 401) {
                 this.setState({
-                    error: "Неправильный логин или пароль",
+                    error: 'gggg',
                 });
+                console.log(error)
             } else {
                 this.setState({
                     error: "Произошла ошибка при входе. Пожалуйста, попробуйте еще раз.",
