@@ -23,7 +23,6 @@ function RandomArticles() {
         <div className="articles_container">
           <div className="article" key={articles.id}>
             <a className="link" href={articles.source} target='_blank'><div className="title_article"> {articles.title}</div></a>
-            {/* <div className="description_article">{articles.source.slice(0, 20) + '...'}</div> */}
             <a className="link" href={articles.source} target='_blank'><div className="rectangle"><img src={articles.file} /></div></a>
             <div className="short_article"> {articles.short_description}</div>
           </div>
