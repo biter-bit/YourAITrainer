@@ -37,5 +37,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', include('djoser.urls')),
     path('api/auth/', include('djoser.urls.jwt')),
+    # path('api/auth/custom-token-create/', CustomTokenCreateView.as_view(), name='custom_token_create')
     # path("user/", UserDetailsView.as_view(), name="rest_user_details"),
 ]

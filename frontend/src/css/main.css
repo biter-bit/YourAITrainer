@@ -321,6 +321,16 @@ body {
   background-color: #d9d9d9;
 }
 
+.form-control.validation {
+  border-color: red
+}
+
+.form-label.validation {
+  color: red;
+  margin-top: 15px;
+  font-size: 12px;
+}
+
 @media (max-width: 960px) {
   .container {
     padding: 20px 20px;
@@ -391,14 +401,6 @@ body {
   .img_body_telephone {
     display: block;
   }
-  /*.container_offer::after {*/
-  /*  content: "";*/
-  /*  background-image: url('../img/body_bild 1.svg');*/
-  /*  background-size: cover;*/
-  /*  width: 240px;*/
-  /*  height: 172px;*/
-  /*  margin-top: 20px*/
-  /*}*/
   .container_img {
     border-width: 0;
     width: 310px;
@@ -450,12 +452,3 @@ body {
   margin-left: 29px;
 }
 }
-
-/* @media (max-width: 375px) {
-  .title {
-    font-size: 40px;
-  }
-  .discription {
-    font-size: 15px;
-  }
-} */

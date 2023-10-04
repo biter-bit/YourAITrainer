@@ -10,6 +10,7 @@ import axios from "axios";
 
 
 const link_api_auth = 'http://localhost:8000/api/auth/jwt/create/'
+// const link_api_auth = 'http://localhost:8000/api/auth/custom-token-create/'
 const link_api_register = 'http://localhost:8000/api/auth/register/'
 class App extends React.Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class App extends React.Component {
             authorized: false,
             burger_active: false,
             response: [],
-            error: ""
+            error_one: {}
         }
         this.inputClickAuth = this.inputClickAuth.bind(this)
         this.inputClickReg = this.inputClickReg.bind(this)
@@ -40,8 +41,8 @@ class App extends React.Component {
                         <Offer setActive={this.inputClickReg}/>
                         <Articles />
                       </div>
-                      <Register active={this.state.modelActiveReg} setActive={this.inputClickReg} error={this.state.error} setRegister={this.funcRegistered}/>
-                      <Auth active={this.state.modelActiveAuth} setActive={this.inputClickAuth} setAuth={this.authorizedAuth} error={this.state.error}/>
+                      <Register active={this.state.modelActiveReg} setActive={this.inputClickReg} error={this.state.error_one} setRegister={this.funcRegistered}/>
+                      <Auth active={this.state.modelActiveAuth} setActive={this.inputClickAuth} setAuth={this.authorizedAuth} error={this.state.error_one}/>
                 </div>
             </div>
         )
@@ -80,7 +81,7 @@ class App extends React.Component {
         const form = event.target
         const formData = new FormData(form)
         try {
-            const response = await axios.post(link_api_register, {
+            await axios.post(link_api_register, {
                 username: formData.get("username"),
                 password: formData.get("password"),
                 password_confirmation: formData.get("password_confirmation"),
@@ -90,11 +91,11 @@ class App extends React.Component {
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 this.setState({
-                    error: "Неверные данные",
-                });
+                    error_one: error.response.data
+                })
             } else {
                 this.setState({
-                    error: "Произошла ошибка при входе. Пожалуйста, попробуйте еще раз.",
+                    error_one: "Произошла ошибка при входе. Пожалуйста, попробуйте еще раз.",
                 });
             }
         }
@@ -123,15 +124,16 @@ class App extends React.Component {
                 this.inputClickAuth()
             }
         } catch (error) {
-            if (error.response && error.response.status === 401) {
+            if (error.response && error.response.status === 400) {
                 this.setState({
-                    error: 'gggg',
+                    error_one: error.response.data,
                 });
                 console.log(error)
             } else {
                 this.setState({
-                    error: "Произошла ошибка при входе. Пожалуйста, попробуйте еще раз.",
+                    error_one: "Произошла ошибка при входе. Пожалуйста, попробуйте еще раз.",
                 });
+                console.log(error)
             }
         }
     }
