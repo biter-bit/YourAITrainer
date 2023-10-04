@@ -15,23 +15,33 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include         
+from django.urls import path, include
+from article.views import ArticleModelViewSet
+from authentication.views import UserListView, RegisterViewSet
 from rest_framework.routers import DefaultRouter
-from rest_framework.authtoken.views import obtain_auth_token
-from rest_framework import urls
-from article.views import CurrentUserView, ArticleModelViewSet
 from django.views.generic import RedirectView
-
-
+from programs.views import ProgramsAPIView, ApproachesAPIView, WorkoutAPIView, TrainingDayAPIView
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = DefaultRouter()
-router.register('users', CurrentUserView, basename="users")
+router.register('users', UserListView, basename="users")
 router.register('articles', ArticleModelViewSet, basename="articles")
+router.register('programs', ProgramsAPIView, basename='programs')
+router.register('trainingday', TrainingDayAPIView, basename='trainingday')
+router.register('workout', WorkoutAPIView, basename='workout')
+router.register('approaches', ApproachesAPIView, basename='approaches')
+router.register('auth/register', RegisterViewSet, basename="auth_register")
 
 urlpatterns = [
     path('', RedirectView.as_view(url='api/')),
-    path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls')),
-    path('api-token-auth/', obtain_auth_token),
+    path('admin/', admin.site.urls),
+    path('api/auth/', include('djoser.urls')),
+    path('api/auth/', include('djoser.urls.jwt')),
+    # path("user/", UserDetailsView.as_view(), name="rest_user_details"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
