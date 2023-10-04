@@ -2,11 +2,13 @@ import React from "react";
 import Register from "./components/Register";
 import Auth from "./components/Auth";
 import Menu from "./components/Menu";
-import Articles from "./components/Articles"
+import RandomArticles from "./components/RandomArticles"
 import Offer from "./components/Offer";
 import Burger from "./components/Burger";
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from "axios";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 
 
 const link_api_auth = 'http://localhost:8000/api/auth/jwt/create/'
@@ -34,15 +36,19 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Burger burger={this.state.burger_active} setBurger={this.funcBurgerActive} setAuth={this.funcAuth}/>
+                <Burger burger={this.state.burger_active} setBurger={this.funcBurgerActive} setAuth={this.funcAuth} />
                 <div className="container">
-                    <Menu setActive={this.inputClickAuth} auth={this.state.authorized} setBurger={this.funcBurgerActive}/>
-                      <div className="container_body">
-                        <Offer setActive={this.inputClickReg}/>
-                        <Articles />
-                      </div>
-                      <Register active={this.state.modelActiveReg} setActive={this.inputClickReg} error={this.state.error_one} setRegister={this.funcRegistered}/>
-                      <Auth active={this.state.modelActiveAuth} setActive={this.inputClickAuth} setAuth={this.authorizedAuth} error={this.state.error_one}/>
+                    <Menu setActive={this.inputClickAuth} auth={this.state.authorized} setBurger={this.funcBurgerActive} />
+                    <div className="container_body">
+                        <Offer setActive={this.inputClickReg} />
+                        <BrowserRouter >
+                            <Routes>
+                                <Route path="/" element={<RandomArticles />} />
+                            </Routes>
+                        </BrowserRouter>
+                    </div>
+                    <Register active={this.state.modelActiveReg} setActive={this.inputClickReg} error={this.state.error} setRegister={this.funcRegistered} />
+                    <Auth active={this.state.modelActiveAuth} setActive={this.inputClickAuth} setAuth={this.authorizedAuth} error={this.state.error} />
                 </div>
             </div>
         )
@@ -54,7 +60,7 @@ class App extends React.Component {
     checkLocalStorage() {
         const access = localStorage.getItem("access")
         const refresh = localStorage.getItem("refresh")
-        if (access && refresh){
+        if (access && refresh) {
             const data = { access, refresh }
             this.setState({ response: data, authorized: true })
         }

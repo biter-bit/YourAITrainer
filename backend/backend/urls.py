@@ -21,6 +21,8 @@ from authentication.views import UserListView, RegisterViewSet
 from rest_framework.routers import DefaultRouter
 from django.views.generic import RedirectView
 from programs.views import ProgramsAPIView, ApproachesAPIView, WorkoutAPIView, TrainingDayAPIView
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = DefaultRouter()
 router.register('users', UserListView, basename="users")
@@ -40,3 +42,7 @@ urlpatterns = [
     # path('api/auth/custom-token-create/', CustomTokenCreateView.as_view(), name='custom_token_create')
     # path("user/", UserDetailsView.as_view(), name="rest_user_details"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
