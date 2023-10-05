@@ -18,14 +18,12 @@ function RandomArticles() {
 
   return (
 
-    <div>{
+    <div className="articles_container">{
       randomArticles.map(articles => (
-        <div className="articles_container">
-          <div className="article" key={articles.id}>
-            <a className="link" href={articles.source} target='_blank'><div className="title_article"> {articles.title}</div></a>
-            <a className="link" href={articles.source} target='_blank'><div className="rectangle"><img src={articles.file} /></div></a>
-            <div className="short_article"> {articles.short_description}</div>
-          </div>
+        <div className="article" key={articles.id}>
+          <a className="link" href={articles.source} target='_blank'><div className="title_article"> {articles.title}</div></a>
+          <a className="link" href={articles.source} target='_blank'><div className="rectangle"><img src={articles.file} /></div></a>
+          <div className="short_article"> {articles.short_description}</div>
         </div>
       ))
     }</div>

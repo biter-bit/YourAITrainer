@@ -3,6 +3,7 @@ import Register from "./components/Register";
 import Auth from "./components/Auth";
 import Menu from "./components/Menu";
 import RandomArticles from "./components/RandomArticles"
+import Articles from "./components/Articles";
 import Offer from "./components/Offer";
 import Burger from "./components/Burger";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -39,16 +40,17 @@ class App extends React.Component {
                 <Burger burger={this.state.burger_active} setBurger={this.funcBurgerActive} setAuth={this.funcAuth} />
                 <div className="container">
                     <Menu setActive={this.inputClickAuth} auth={this.state.authorized} setBurger={this.funcBurgerActive} />
-                    <div className="container_body">
-                        <Offer setActive={this.inputClickReg} />
-                        <BrowserRouter >
-                            <Routes>
-                                <Route path="/" element={<RandomArticles />} />
-                            </Routes>
-                        </BrowserRouter>
-                    </div>
-                    <Register active={this.state.modelActiveReg} setActive={this.inputClickReg} error={this.state.error} setRegister={this.funcRegistered} />
-                    <Auth active={this.state.modelActiveAuth} setActive={this.inputClickAuth} setAuth={this.authorizedAuth} error={this.state.error} />
+                        <div className="container_body">
+                            <Offer setActive={this.inputClickReg} />
+                            <BrowserRouter >
+                                <Routes>
+                                    <Route path="/" element={<RandomArticles />} />
+                                </Routes>
+                            </BrowserRouter>
+                            {/*<Articles />*/}
+                        </div>
+                        <Register active={this.state.modelActiveReg} setActive={this.inputClickReg} error={this.state.error_one} setRegister={this.funcRegistered} />
+                        <Auth active={this.state.modelActiveAuth} setActive={this.inputClickAuth} setAuth={this.authorizedAuth} error={this.state.error_one} />
                 </div>
             </div>
         )
