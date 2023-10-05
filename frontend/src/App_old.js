@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import 'bootstrap/dist/css/bootstrap.css';
-import { Link, BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Diary from "./Diary";
 import Main from "./components/Main";
 import ModalWindow from "./components/ModalWindow";
@@ -10,60 +10,6 @@ import ArticlePage1 from "./pages/ArticlePage";
 import ArticleList from "./pages/ArticleList";
 
 const link_api_verify = 'http://localhost:8000/api/auth/jwt/verify/'
-
-const ArticlePageMain = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState();
-
-  useEffect(() => {
-    fetch('https://localhost:3000/articles/${article.title}', {})
-      .then((res) => res.json())
-      .then((response) => {
-        setData(response);
-        setIsLoading(false);
-        console.log('ttps://localhost:3000/articles/${article.title}')
-      })
-      .catch((error) => console.log(error));
-  }, [article.title]);
-
-  return (
-    <>
-      {!isLoading && (
-      <>
-        <div class="articlePage">
-                <h1>
-                    {this.article.title}
-                </h1>
-
-             <div class="articleBlock link">
-                <div class="articleSubBlock source">
-                  {this.article.source}
-                </div>
-
-                <div class="articleSubBlock date">
-                    {this.article.created_at}
-                </div>
-              </div>
-
-              <div class="articleBlock content">
-                <div class="articleSubBlock img">
-                  <img src={this.article.img}
-                    alt={'img ' + this.article.title}
-                    align="left"
-                    vspace="5" hspace="5"
-                  />
-                </div>
-                <div class="articleSubBlock description">
-                    <p>{this.article.content}</p>
-                </div>
-              </div>
-        </div>
-      </>
-      )}
-    </>
-  );
-};
-
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -130,7 +76,7 @@ class App extends React.Component {
                     <Route path="/modal" element={<ModalWindow checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user}/>} exit={this.exitLogout}/>
                     <Route path='/articles' element={ <AppArticle  />} />
 
-                    <Route path='/article'  component={ArticlePageMain} />
+                    <Route path='/articles/:'  element={<ArticlePage1  />} />
 
 
 
