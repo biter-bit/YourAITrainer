@@ -39,7 +39,6 @@ const ArticlePage  = ({article})  => {
 const ArticleList = ({articles}) => {
     return (
     <>
-
         {articles.map((article) => <ArticlePage article={article} />)}
     </>
     )

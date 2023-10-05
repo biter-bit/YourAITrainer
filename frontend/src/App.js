@@ -12,9 +12,8 @@ export default function App() {
                  <BrowserRouter>
                     <Routes>
                         <Route path='/' element={<Main  />} />
-                        <Route path='article' element={ <AppArticle  />} />
-                        <Route path='articles' components={ <AppArticle  />} />
-                        <Route path='articles2' components={ <AppArticle  />} />
+
+                        <Route path='articles' element={ <AppArticle  />} />
 
                     </Routes>
                 </BrowserRouter>
