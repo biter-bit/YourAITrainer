@@ -7,7 +7,10 @@ class Register extends React.Component {
         //     <label htmlFor="expasscheck" className="form-label validation" key={key}>{error_one[key]}</label>
         // ));
         return (
-            <div className={this.props.active ? 'model active' : "model"} onClick={() => this.props.setActive()}>
+            <div className={this.props.active ? 'model active' : "model"} onClick={() => {
+                this.props.setActive();
+                this.props.reset();
+            }}>
                 <div className={this.props.active ? 'model__content active' : "model__content"} onClick={e => e.stopPropagation()}>
                     <h1 className="name_reg">Регистрация</h1>
                     <form onSubmit={(event) => this.props.setRegister(event)}>

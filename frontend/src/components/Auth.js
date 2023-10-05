@@ -4,7 +4,10 @@ class Auth extends React.Component {
 
     render() {
         return (
-            <div className={this.props.active ? 'model active' : "model"} onClick={() => this.props.setActive()}>
+            <div className={this.props.active ? 'model active' : "model"} onClick={() => {
+                this.props.setActive();
+                this.props.reset()
+            }}>
                 <div className={this.props.active ? 'model__content active' : "model__content"} onClick={e => e.stopPropagation()}>
                     <h1 className="name_reg">Авторизация</h1>
                     <form onSubmit={(event) => this.props.setAuth(event)}>

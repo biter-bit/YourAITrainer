@@ -33,6 +33,7 @@ class App extends React.Component {
         this.checkLocalStorage = this.checkLocalStorage.bind(this)
         this.funcAuth = this.funcAuth.bind(this)
         this.funcRegistered = this.funcRegistered.bind(this)
+        this.resetStatus = this.resetStatus.bind(this)
     }
     render() {
         return (
@@ -49,8 +50,11 @@ class App extends React.Component {
                             </BrowserRouter>
                             {/*<Articles />*/}
                         </div>
-                        <Register active={this.state.modelActiveReg} setActive={this.inputClickReg} error={this.state.error_one} setRegister={this.funcRegistered} />
-                        <Auth active={this.state.modelActiveAuth} setActive={this.inputClickAuth} setAuth={this.authorizedAuth} error={this.state.error_one} />
+                        <Register active={this.state.modelActiveReg} setActive={this.inputClickReg}
+                                  error={this.state.error_one} setRegister={this.funcRegistered}
+                                  reset={this.resetStatus}/>
+                        <Auth active={this.state.modelActiveAuth} setActive={this.inputClickAuth}
+                              setAuth={this.authorizedAuth} error={this.state.error_one} reset={this.resetStatus}/>
                 </div>
             </div>
         )
@@ -103,7 +107,7 @@ class App extends React.Component {
                 })
             } else {
                 this.setState({
-                    error_one: "Произошла ошибка при входе. Пожалуйста, попробуйте еще раз.",
+                    error_one: {'': 'Incorrect data. Please try again.'},
                 });
             }
         }
@@ -139,7 +143,7 @@ class App extends React.Component {
                 console.log(error)
             } else {
                 this.setState({
-                    error_one: "Произошла ошибка при входе. Пожалуйста, попробуйте еще раз.",
+                    error_one: {'': 'Incorrect username or password. Please try again.'},
                 });
                 console.log(error)
             }
@@ -161,6 +165,10 @@ class App extends React.Component {
         else {
             this.setState({ modelActiveReg: true })
         }
+    }
+
+    resetStatus() {
+        this.setState({ error_one: {}})
     }
 }
 
