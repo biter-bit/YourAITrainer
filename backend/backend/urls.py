@@ -16,7 +16,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-<<<<<<< HEAD
 from article.views import ArticleModelViewSet
 from authentication.views import UserListView, RegisterViewSet
 from rest_framework.routers import DefaultRouter
