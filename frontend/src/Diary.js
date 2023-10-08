@@ -1,8 +1,15 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
+import axios from "axios";
 
 class Diary extends React.Component {
-
+    componentDidMount() {
+        this.props.checkAuthentication()
+        if (!this.props.auth_user) {
+            window.location.href = '/?showModal=true';
+            this.props.setModalWindow()
+        }
+    }
     render() {
         return (
             <div className="main">
@@ -215,4 +222,4 @@ class Diary extends React.Component {
     }
 }
 
-export default Diary
+export default Diary;

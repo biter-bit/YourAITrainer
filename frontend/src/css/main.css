@@ -78,6 +78,7 @@ body {
   background-color: transparent;
   border-width: 0;
   margin-bottom: 26px;
+  text-decoration: none;
 }
 
 .button_logout {

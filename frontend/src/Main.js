@@ -3,13 +3,11 @@ import Register from "./components/Register";
 import Auth from "./components/Auth";
 import Menu from "./components/Menu";
 import RandomArticles from "./components/RandomArticles"
-import Articles from "./components/Articles";
 import Offer from "./components/Offer";
 import Burger from "./components/Burger";
+import ModalWindow from "./components/ModalWindow";
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from "axios";
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
-import Diary from "./Diary";
 
 
 
@@ -21,7 +19,6 @@ class Main extends React.Component {
         this.state = {
             modelActiveAuth: false,
             modelActiveReg: false,
-            authorized: false,
             burger_active: false,
             response: [],
             error_one: {}
@@ -30,17 +27,15 @@ class Main extends React.Component {
         this.inputClickReg = this.inputClickReg.bind(this)
         this.authorizedAuth = this.authorizedAuth.bind(this)
         this.funcBurgerActive = this.funcBurgerActive.bind(this)
-        this.checkLocalStorage = this.checkLocalStorage.bind(this)
-        this.funcAuth = this.funcAuth.bind(this)
         this.funcRegistered = this.funcRegistered.bind(this)
         this.resetStatus = this.resetStatus.bind(this)
     }
     render() {
         return (
             <div>
-                <Burger burger={this.state.burger_active} setBurger={this.funcBurgerActive} setAuth={this.funcAuth}/>
+                <Burger exitAccount={this.props.exitAccount} burger={this.state.burger_active} setBurger={this.funcBurgerActive} checkAuth={this.props.checkAuthentication}/>
                 <div className="container">
-                    <Menu setActive={this.inputClickAuth} auth={this.state.authorized} setBurger={this.funcBurgerActive} />
+                    <Menu setActive={this.inputClickAuth} auth={this.props.auth_user} setBurger={this.funcBurgerActive} />
                         <div className="container_body">
                             <Offer setActive={this.inputClickReg} />
                             <RandomArticles />
@@ -50,24 +45,21 @@ class Main extends React.Component {
                                   reset={this.resetStatus}/>
                         <Auth active={this.state.modelActiveAuth} setActive={this.inputClickAuth}
                               setAuth={this.authorizedAuth} error={this.state.error_one} reset={this.resetStatus}/>
+                        <ModalWindow setModalWindow={this.props.setModalWindow} modalActive={this.props.modalActive}/>
                 </div>
             </div>
         )
     }
     componentDidMount() {
-        this.checkLocalStorage()
-    }
-
-    checkLocalStorage() {
-        const access = localStorage.getItem("access")
-        const refresh = localStorage.getItem("refresh")
-        if (access && refresh) {
-            const data = { access, refresh }
-            this.setState({ response: data, authorized: true })
+        this.props.checkAuthentication()
+        const showModal = new URLSearchParams(window.location.search).get('showModal');
+        if (showModal === 'true') {
+            // Здесь отобразите модальное окно
+            this.props.setModalWindow();
         }
     }
+
     funcBurgerActive() {
-        console.log(this.state.burger_active)
         if (this.state.burger_active) {
             this.setState({ burger_active: false })
         }
@@ -75,15 +67,8 @@ class Main extends React.Component {
             this.setState({ burger_active: true })
         }
     }
-    funcAuth() {
-        if (this.state.authorized) {
-            this.setState({ authorized: false })
-        }
-        else {
-            this.setState({ authorized: true })
-        }
-    }
     async funcRegistered(event) {
+        // регистрация пльзователя
         event.preventDefault()
         const form = event.target
         const formData = new FormData(form)
@@ -108,6 +93,7 @@ class Main extends React.Component {
         }
     }
     async authorizedAuth(event) {
+        // авторизация пользователя
         event.preventDefault()
         const form = event.target
         const formData = new FormData(form)
@@ -119,32 +105,22 @@ class Main extends React.Component {
             localStorage.setItem("access", response.data.access);
             localStorage.setItem("refresh", response.data.refresh)
 
-            const data = localStorage.getItem("access")
-
-            if (data == null) {
-                this.setState({ authorized: false })
-                this.inputClickAuth()
-            }
-
-            else {
-                this.setState({ authorized: true })
-                this.inputClickAuth()
-            }
+            this.props.checkAuthentication()
+            this.inputClickAuth()
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 this.setState({
                     error_one: error.response.data,
                 });
-                console.log(error)
             } else {
                 this.setState({
                     error_one: {'': 'Incorrect username or password. Please try again.'},
                 });
-                console.log(error)
             }
         }
     }
     inputClickAuth() {
+        // активирует и деактивирует окно авторизации
         if (this.state.modelActiveAuth) {
             this.setState({ modelActiveAuth: false })
         }
@@ -154,6 +130,7 @@ class Main extends React.Component {
     }
 
     inputClickReg() {
+        // // активирует и деактивирует окно htubcnhfwbb
         if (this.state.modelActiveReg) {
             this.setState({ modelActiveReg: false })
         }
