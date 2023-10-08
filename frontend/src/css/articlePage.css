@@ -1,0 +1,62 @@
+
+.articlePage{
+  display: flex;
+  flex-direction: column;
+  word-break: break-all;
+
+  background-color: #fff;
+
+
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h1{
+ justify-content: center;
+}
+
+.articleBlock {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+
+
+
+  border: 1px solid #022;
+  background-color: #ddd;
+
+}
+
+.articleSubBlock{
+
+  border: 1px solid #022;
+  background-color: #fff;
+}
+
+
+.articleList{
+  display: flex;
+  justify-content: flex-start;
+  word-break: break-all;
+  background-color: #fff;
+}
+
+.articleListblock {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #022;
+  width: 100px;
+
+
+}
+
+.articleSubBlock{
+
+  border: 1px solid #052;
+  background-color: #rrr;
+}
