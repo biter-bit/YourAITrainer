@@ -7,7 +7,7 @@ class BurgerMenu extends React.Component {
         const accessAndRefreshToken = ["access", "refresh"]
         accessAndRefreshToken.forEach(key => {localStorage.removeItem(key)})
         this.props.setBurger()
-        this.props.setAuth()
+        this.props.checkAuth()
     }
     render() {
         return (
@@ -20,7 +20,7 @@ class BurgerMenu extends React.Component {
                         </button>
                         <div className="buttons_menu">
                             <Link className="button_diary" to="/diary">Дневник</Link>
-                            <button className="button_articles">Статьи</button>
+                            <a href='https://justsport.info/' className="button_articles">Статьи</a>
                             <button className="button_logout" onClick={this.logout}>Выход</button>
                         </div>
                     </div>

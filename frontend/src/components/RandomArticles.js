@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 
 function RandomArticles() {
   const [randomArticles, setRandomArticles] = useState([])
-  console.log(randomArticles)
 
   useEffect(() => {
     fetchRandomArticles()
