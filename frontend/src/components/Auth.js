@@ -4,7 +4,10 @@ class Auth extends React.Component {
 
     render() {
         return (
-            <div className={this.props.active ? 'model active' : "model"} onClick={() => this.props.setActive()}>
+            <div className={this.props.active ? 'model active' : "model"} onClick={() => {
+                this.props.setActive();
+                this.props.reset()
+            }}>
                 <div className={this.props.active ? 'model__content active' : "model__content"} onClick={e => e.stopPropagation()}>
                     <h1 className="name_reg">Авторизация</h1>
                     <form onSubmit={(event) => this.props.setAuth(event)}>
@@ -14,7 +17,7 @@ class Auth extends React.Component {
                         </label>
                         <input
                           type="text"
-                          className="form-control"
+                          className={this.props.error['username'] ? 'form-control validation' : 'form-control'}
                           id="exemail"
                           aria-describedby="emailHelp"
                           name="username"
@@ -29,18 +32,19 @@ class Auth extends React.Component {
                         </label>
                         <input
                           type="password"
-                          className="form-control"
+                          className={this.props.error['password'] ? 'form-control validation' : 'form-control'}
                           id="expass"
                           name="password"
                         />
-                        <label htmlFor="expass" className="form-label">{this.props.error}</label>
+                        <label htmlFor="expass" className="form-label validation">
+                            {Object.keys(this.props.error).map(key => (
+                                <span key={key}>
+                                    {key}: {this.props.error[key]}
+                                    <br />
+                                </span>
+                            ))}
+                        </label>
                       </div>
-                      {/*<div className="mb-3 form-check">*/}
-                      {/*  <input type="checkbox" className="form-check-input" id="excheck" />*/}
-                      {/*  <label className="form-check-label" htmlFor="excheck">*/}
-                      {/*    Check me out*/}
-                      {/*  </label>*/}
-                      {/*</div>*/}
                       <button type="submit" className="btn btn-primary">
                         Submit
                       </button>

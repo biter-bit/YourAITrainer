@@ -1,155 +1,79 @@
 import React from "react";
-import Register from "./components/Register";
-import Auth from "./components/Auth";
-import Menu from "./components/Menu";
-import Articles from "./components/Articles"
-import Offer from "./components/Offer";
-import Burger from "./components/Burger";
 import 'bootstrap/dist/css/bootstrap.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Diary from "./Diary";
+import Main from "./Main"
+import ModalWindow from "./components/ModalWindow";
 import axios from "axios";
 
 
-const link_api_auth = 'http://localhost:8000/api/auth/jwt/create/'
-const link_api_register = 'http://localhost:8000/api/auth/register/'
+const link_api_verify = 'http://localhost:8000/api/auth/jwt/verify/'
 class App extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            modelActiveAuth: false,
-            modelActiveReg: false,
-            authorized: false,
-            burger_active: false,
-            response: [],
-            error: ""
-        }
-        this.inputClickAuth = this.inputClickAuth.bind(this)
-        this.inputClickReg = this.inputClickReg.bind(this)
-        this.authorizedAuth = this.authorizedAuth.bind(this)
-        this.funcBurgerActive = this.funcBurgerActive.bind(this)
-        this.checkLocalStorage = this.checkLocalStorage.bind(this)
-        this.funcAuth = this.funcAuth.bind(this)
-        this.funcRegistered = this.funcRegistered.bind(this)
-    }
-    render() {
-        return (
-            <div>
-                <Burger burger={this.state.burger_active} setBurger={this.funcBurgerActive} setAuth={this.funcAuth}/>
-                <div className="container">
-                    <Menu setActive={this.inputClickAuth} auth={this.state.authorized} setBurger={this.funcBurgerActive}/>
-                      <div className="container_body">
-                        <Offer setActive={this.inputClickReg}/>
-                        <Articles />
-                      </div>
-                      <Register active={this.state.modelActiveReg} setActive={this.inputClickReg} error={this.state.error} setRegister={this.funcRegistered}/>
-                      <Auth active={this.state.modelActiveAuth} setActive={this.inputClickAuth} setAuth={this.authorizedAuth} error={this.state.error}/>
-                </div>
-            </div>
-        )
+          authentication_user: false, // Установите начальное состояние
+          modal_window_active: false
+        };
+        this.checkAuth = this.checkAuth.bind(this)
+        this.exitLogout = this.exitLogout.bind(this)
+        this.funcModalWindowActive = this.funcModalWindowActive.bind(this)
     }
     componentDidMount() {
-        this.checkLocalStorage()
+        this.checkAuth()
     }
 
-    checkLocalStorage() {
-        const access = localStorage.getItem("access")
-        const refresh = localStorage.getItem("refresh")
-        if (access && refresh){
-            const data = { access, refresh }
-            this.setState({ response: data, authorized: true })
-        }
-    }
-    funcBurgerActive() {
-        console.log(this.state.burger_active)
-        if (this.state.burger_active) {
-            this.setState({ burger_active: false })
-        }
-        else {
-            this.setState({ burger_active: true })
-        }
-    }
-    funcAuth() {
-        if (this.state.authorized) {
-            this.setState({ authorized: false })
+    // funcAuth() {
+    //     if (this.state.authentication_user) {
+    //         this.setState({ authentication_user: false })
+    //     }
+    //     else {
+    //         this.setState({ authentication_user: true })
+    //     }
+    // }
+
+    funcModalWindowActive() {
+        if (this.state.modal_window_active) {
+            this.setState({ modal_window_active: false })
         }
         else {
-            this.setState({ authorized: true })
+            this.setState({ modal_window_active: true })
         }
     }
-    async funcRegistered(event) {
-        event.preventDefault()
-        const form = event.target
-        const formData = new FormData(form)
-        try {
-            const response = await axios.post(link_api_register, {
-                username: formData.get("username"),
-                password: formData.get("password"),
-                password_confirmation: formData.get("password_confirmation"),
-                email: formData.get("email")
-            })
-            this.inputClickReg()
-        } catch (error) {
-            if (error.response && error.response.status === 400) {
-                this.setState({
-                    error: "Неверные данные",
-                });
+
+    async checkAuth() {
+            const access = localStorage.getItem("access")
+            let result = {}
+            if (access) {
+                result = await axios.post(link_api_verify, {
+                    token: access
+                })
+                if (Object.keys(result.data).length === 0) {
+                    this.setState({authentication_user: true})
+                } else {
+                    this.setState({authentication_user: false})
+                    const accessAndRefreshToken = ["access", "refresh"]
+                    accessAndRefreshToken.forEach(key => {localStorage.removeItem(key)})
+                }
             } else {
-                this.setState({
-                    error: "Произошла ошибка при входе. Пожалуйста, попробуйте еще раз.",
-                });
+                this.setState({authentication_user: false})
             }
-        }
-    }
-    async authorizedAuth(event) {
-        event.preventDefault()
-        const form = event.target
-        const formData = new FormData(form)
-        try {
-            const response = await axios.post(link_api_auth, {
-                username: formData.get("username"),
-                password: formData.get("password"),
-            })
-            localStorage.setItem("access", response.data.access);
-            localStorage.setItem("refresh", response.data.refresh)
-
-            const data = localStorage.getItem("access")
-
-            if (data == null) {
-                this.setState({ authorized: false })
-                this.inputClickAuth()
-            }
-
-            else {
-                this.setState({ authorized: true })
-                this.inputClickAuth()
-            }
-        } catch (error) {
-            if (error.response && error.response.status === 401) {
-                this.setState({
-                    error: "Неправильный логин или пароль",
-                });
-            } else {
-                this.setState({
-                    error: "Произошла ошибка при входе. Пожалуйста, попробуйте еще раз.",
-                });
-            }
-        }
-    }
-    inputClickAuth() {
-        if (this.state.modelActiveAuth) {
-            this.setState({ modelActiveAuth: false })
-        }
-        else {
-            this.setState({ modelActiveAuth: true })
-        }
     }
 
-    inputClickReg() {
-        if (this.state.modelActiveReg) {
-            this.setState({ modelActiveReg: false })
-        }
-        else {
-            this.setState({ modelActiveReg: true })
-        }
+    exitLogout() {
+        this.setState({authentication_user: false})
+    }
+
+    render() {
+        return (
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Main setModalWindow={this.funcModalWindowActive} modalActive={this.state.modal_window_active} checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user} exitAccount={this.exitLogout}/>} />
+                    <Route path="/diary" element={<Diary setModalWindow={this.funcModalWindowActive} modalActive={this.state.modal_window_active} checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user}/>} exit={this.exitLogout}/>
+                    <Route path="/modal" element={<ModalWindow checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user}/>} exit={this.exitLogout}/>
+                </Routes>
+            </BrowserRouter>
+        )
     }
 }
 

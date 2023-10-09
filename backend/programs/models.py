@@ -27,7 +27,7 @@ class TrainingDay(BaseModel):
     day_num = models.SmallIntegerField(verbose_name='номер тренировки')
     program = models.ForeignKey(verbose_name='программа', to='Program', on_delete=models.CASCADE)
 
-    def __int__(self):
+    def __str__(self):
         return f'{self.program.name} | #{self.day_num}'
 
     class Meta:

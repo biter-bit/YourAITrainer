@@ -1,12 +1,13 @@
 import React from 'react';
 import cross from "../img/cross.png";
+import { Link } from "react-router-dom";
 
 class BurgerMenu extends React.Component {
     logout = () => {
         const accessAndRefreshToken = ["access", "refresh"]
         accessAndRefreshToken.forEach(key => {localStorage.removeItem(key)})
         this.props.setBurger()
-        this.props.setAuth()
+        this.props.checkAuth()
     }
     render() {
         return (
@@ -18,8 +19,8 @@ class BurgerMenu extends React.Component {
                             <img className="img_cross" src={cross} alt={"No img"}></img>
                         </button>
                         <div className="buttons_menu">
-                            <button className="button_diary">Дневник</button>
-                            <button className="button_articles">Статьи</button>
+                            <Link className="button_diary" to="/diary">Дневник</Link>
+                            <a href='https://justsport.info/' className="button_articles">Статьи</a>
                             <button className="button_logout" onClick={this.logout}>Выход</button>
                         </div>
                     </div>
