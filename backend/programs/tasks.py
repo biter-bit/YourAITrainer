@@ -1,3 +1,4 @@
+from authentication.models import CustomUser
 from backend import celery_app
 
 from programs.models import Program, TrainingDay, Workout, Approach
@@ -10,12 +11,12 @@ def parse_nums(num_str: str) -> int:
     return int(sum(nums) / len(nums))
 
 
-def create_models(raw_program: dict, program_name: str) -> None:
+def create_models(user_id: int, raw_program: dict, program_name: str) -> None:
     """Запись программы в БД"""
-    program_obj = Program.objects.create(name=program_name)
+    program_obj = Program.objects.create(user_id=user_id, name=program_name)
 
     for day_num, workouts in raw_program.items():
-        training_day = TrainingDay.objects.create(day_num=day_num, program=program_obj)
+        training_day = TrainingDay.objects.create(day_num=int(day_num), program=program_obj)
 
         for workout in workouts:
             num_of_approaches = workout['number_of_approaches'] if isinstance(workout['number_of_approaches'], int) \
@@ -36,7 +37,7 @@ def create_models(raw_program: dict, program_name: str) -> None:
 
 
 @celery_app.task
-def start_program_generation(gender: str, age: int, weight: float, height: int, training_level: str,
+def start_program_generation(user_id: int, gender: str, age: int, weight: float, height: int, training_level: str,
                              purpose_of_training: str) -> None:
     raw_program = program_generator.gen_program(gender=gender, age=age, weight=weight, height=height,
                                                 training_level=training_level, purpose_of_training=purpose_of_training)
@@ -46,4 +47,4 @@ def start_program_generation(gender: str, age: int, weight: float, height: int, 
     level_dict = {'beginner': 'Новичок', 'amateur': 'Любитель', 'pro': 'Профессионал'}
     program_name = f'{program_dict[purpose_of_training]} ({level_dict[training_level]})'
 
-    create_models(raw_program=raw_program, program_name=program_name)
+    create_models(user_id=user_id, raw_program=raw_program, program_name=program_name)

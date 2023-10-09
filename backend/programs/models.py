@@ -10,9 +10,9 @@ class BaseModel(models.Model):
 
 
 class Program(BaseModel):
-    name = models.CharField(verbose_name='название', max_length=256)
+    name = models.CharField(verbose_name='название', max_length=100)
     is_current = models.BooleanField(verbose_name='текущая', default=True)
-    # user = models.ForeignKey(to='Users',  on_delete=models.CASCADE) # доделать
+    user = models.ForeignKey(verbose_name='пользователь', to='authentication.CustomUser', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -24,7 +24,7 @@ class Program(BaseModel):
 
 
 class TrainingDay(BaseModel):
-    day_num = models.IntegerField(verbose_name='номер тренировки')
+    day_num = models.SmallIntegerField(verbose_name='номер тренировки')
     program = models.ForeignKey(verbose_name='программа', to='Program', on_delete=models.CASCADE)
 
     def __int__(self):
@@ -37,7 +37,7 @@ class TrainingDay(BaseModel):
 
 
 class Workout(BaseModel):
-    title = models.CharField(verbose_name='название', max_length=255)
+    title = models.CharField(verbose_name='название', max_length=100)
     description = models.TextField(verbose_name='описание')
     approach_num = models.SmallIntegerField(verbose_name='количество подходов')
     training_day = models.ForeignKey(verbose_name='тренировка', to='TrainingDay', on_delete=models.CASCADE)
