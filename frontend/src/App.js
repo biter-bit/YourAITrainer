@@ -6,7 +6,8 @@ import Main from "./components/Main";
 import ModalWindow from "./components/ModalWindow";
 import axios from "axios";
 import AppArticle from "./pages/AppArticle";
-import ArticlePage from "./pages/ArticlePage";
+import ArticlePage1 from "./pages/ArticlePage";
+import ArticleList from "./pages/ArticleList";
 
 const link_api_verify = 'http://localhost:8000/api/auth/jwt/verify/'
 class App extends React.Component {
@@ -72,8 +73,12 @@ class App extends React.Component {
                     <Route path="/" element={<Main setModalWindow={this.funcModalWindowActive} modalActive={this.state.modal_window_active} checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user} exitAccount={this.exitLogout}/>} />
                     <Route path="/diary" element={<Diary setModalWindow={this.funcModalWindowActive} modalActive={this.state.modal_window_active} checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user}/>} exit={this.exitLogout}/>
                     <Route path="/modal" element={<ModalWindow checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user}/>} exit={this.exitLogout}/>
-                    <Route path='article' element={ <AppArticle  />} />
-                    <Route path='articles' components={ <AppArticle  />} />
+                    <Route path='articles' element={ <AppArticle  />} />
+
+                     <Route path='article'>  <ArticlePage1  /></Route>
+
+
+
                 </Routes>
             </BrowserRouter>
         )
