@@ -7,8 +7,6 @@ import Main from "./Main"
 import CheckAuthComponent from "./components/CheckAuthComponent";
 import axios from "axios";
 
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-
 
 const link_api_verify = 'http://localhost:8000/api/auth/jwt/verify/'
 class App extends React.Component {
@@ -79,3 +77,4 @@ class App extends React.Component {
 }
 
 
+export default App
