@@ -6,7 +6,7 @@ class Menu extends React.Component {
     render() {
         return (
               <div className="main_menu">
-                <button className="logo" onClick={() => window.location.reload()}></button>
+                <button className="logo" onClick={() => window.location.href = '/'}></button>
                 <div className="title_container">
                   <button className="text-wrapper-button">Дневник</button>
                   <button className="text-wrapper-button">Статьи</button>

@@ -41,5 +41,8 @@
 @media (max-width: 960px) {
     .model__content {
         width: auto;
-}
+    }
+    .model.active {
+        z-index: 1;
+    }
 }
