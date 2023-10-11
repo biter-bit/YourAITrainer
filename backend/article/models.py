@@ -1,13 +1,13 @@
 from django.db import models
-from authentication.models import CustomUser
 
 
 class Article(models.Model):
-    title = models.CharField(verbose_name='название', max_length=100)
+    title = models.CharField(verbose_name='название', max_length=200)
+    short_description = models.TextField(verbose_name='краткое описание')
     content = models.TextField(verbose_name='текст')
+    file = models.ImageField(null=True,upload_to = 'images',blank=True)
     created_at = models.DateTimeField(verbose_name='время создания', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='последнее обновление', auto_now=True)
-    added_by = models.ForeignKey(CustomUser, verbose_name='пользователь', on_delete=models.CASCADE)
     source = models.CharField(verbose_name='источник', max_length=100)
     published = models.BooleanField(verbose_name='опубликовано', default=False)
     
