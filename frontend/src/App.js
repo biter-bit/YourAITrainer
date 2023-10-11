@@ -1,9 +1,13 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.css';
+import AppArticle from "./pages/AppArticle";
+import ArticlePage from "./pages/ArticlePage";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Main from "./Main"
 import CheckAuthComponent from "./components/CheckAuthComponent";
 import axios from "axios";
+
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 
 const link_api_verify = 'http://localhost:8000/api/auth/jwt/verify/'
@@ -67,10 +71,11 @@ class App extends React.Component {
                     <Route path="/diary" element={
                         <CheckAuthComponent setModalWindow={this.funcModalWindowActive} modalActive={this.state.modal_window_active} checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user} exitAccount={this.exitLogout}/>
                     } />
+                    <Route path='/articles' element={ <AppArticle  />} />
                 </Routes>
             </BrowserRouter>
         )
     }
 }
 
-export default App
+
