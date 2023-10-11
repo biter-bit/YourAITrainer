@@ -245,7 +245,7 @@ AUTHENTICATION_BACKENDS = {
 
 
 # Настройки Celery и Redis
-REDIS_HOST = '127.0.0.1'
+REDIS_HOST = 'redis'
 REDIS_PORT = 6379
 
 CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}/0'

@@ -46,7 +46,7 @@ lxml==4.9.3
 Markdown==3.4.4
 multidict==6.0.4
 oauthlib==3.2.2
-openai==0.28.1
+openai==0.28.0
 packaging==23.1
 parsel==1.8.1
 Pillow==10.0.1
