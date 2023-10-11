@@ -1,63 +1,60 @@
-import React from 'react';
-//import Menu from "./components/Menu";
+import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 
-function ArticlePage1(article) {
-        
 
-        return (
+const ArticlePage = () => {
+    const {articleId } = useParams();
+    const [isLoading, setIsLoading] = useState(true);
+    const [data, setData] = useState();
 
-            <div class="articlePage">
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/api/articles/${articleId}/`, {})
+      .then((res) => res.json())
+      .then((response) => {
+        setData(response);
+        setIsLoading(false);
+        console.log(`http://127.0.0.1:8000/api/articles/${articleId}/`)
+      })
+      .catch((error) => console.log(error));
+  }, [articleId]);
+
+  return (
+    <>
+      {!isLoading && (
+      <>
+        <div className="articlePage">
                 <h1>
-                    {this.article.title}
+                    {data.title}
                 </h1>
 
-             <div class="articleBlock link">
-                <div class="articleSubBlock source">
-                  {this.article.source}
+             <div className="articleBlock link">
+                <div className="articleSubBlock source">
+                  {data.source}
                 </div>
 
-                <div class="articleSubBlock date">
-                    {this.article.created_at}
+                <div className="articleSubBlock date">
+                    {data.created_at}
                 </div>
               </div>
 
-              <div class="articleBlock content">
-                <div class="articleSubBlock img">
-                  <img src={this.article.img}
-                    alt={'img ' + this.article.title}
+              <div className="articleBlock content">
+                <div className="articleSubBlock img">
+                  <img src={data.img}
+                    alt={'img ' + data.title}
                     align="left"
                     vspace="5" hspace="5"
                   />
                 </div>
-                <div class="articleSubBlock description">
-                    <p>{this.article.content}</p>
+                <div className="articleSubBlock description">
+                    <p>{data.content}</p>
                 </div>
               </div>
-            </div>
-        );
-
-}
-
-function ArticleList1(article) {
-    const numbers = article.numbers;
-    const listItems = numbers.map((number) =>
-    // Правильно! Ключ нужно определять внутри массива:
-    <ArticlePage1 key={number.toString()} value={number} />
+        </div>
+      </>
+      )}
+    </>
   );
-  return (
-    <ul>
-      {ArticlePage1}
-    </ul>
+};
 
-    //let { title } = useParams();
-    //let filtered_items = articles.filter((article) => article.title == title)
-    //return (
-    //<>
-    //    {articles.map((article) => <ArticlePage1 article={article} />)}
-    //</>
-    );
-}
-
-export default ArticlePage1;
+export default ArticlePage;
 

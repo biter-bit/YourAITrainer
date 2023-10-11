@@ -1,42 +1,32 @@
-import React from "react";
-
-import ArticlePage from "./ArticlePage";
-import ArticleList from "./ArticleList";
+import React, { useState, useEffect } from "react";
+import ArticlePreview from "./ArticlePreview";
 import Burger from "./../components/Burger";
 
+const AppArticle = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState();
 
-class AppArticle extends React.Component {
-    constructor(props){
-        super(props)
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/articles/", {})
+      .then((res) => res.json())
+      .then((response) => {
+        setData(response.results);
+        setIsLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
-        this.state = {
-             'articles': [],
-             'article': {},
-        }
-    }
-
-    componentDidMount() {
-        const articles = [
-            {id: 1, title: 'Грин', content: 'yhuhihiuhiuhiuhi', created_at: 1880, source:'hjjhj@jklkj.com'},
-            {id: 2, title: 'Пушкин', content: 'yhuhihiuhiuhiuhi', created_at: 1799, source:'hjkhjj$jhkj'}
-        ]
-
-        this.setState(
-            {
-            'articles': articles
-
-            }
-        )
-    }
-    render(){
-        return (
-            <>
-                 <Burger />
-                 <ArticleList articles={this.state.articles}/>
-
-            </>
-        )
-    }
-}
+  return (
+    <>
+      <Burger />
+      {!isLoading &&
+        data.map((article) => {
+          return (
+            <ArticlePreview  key={article.id} article={article} />
+          );
+        })}
+    </>
+  );
+};
 
 export default AppArticle;
