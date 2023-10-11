@@ -9,10 +9,11 @@ class BurgerMenu extends React.Component {
         this.props.setBurger()
         this.props.checkAuth()
     }
+
     render() {
         return (
                 <div className={this.props.burger ? "background_menu active" : "background_menu"} onClick={e => {
-                    {this.props.setBurger()}
+                    this.props.setBurger()
                 }}>
                     <div className="window_menu" onClick={(e) => e.stopPropagation()}>
                         <button className="button_img_cross" onClick={()=> {this.props.setBurger()}}>

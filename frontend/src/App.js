@@ -1,9 +1,8 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Diary from "./Diary";
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Main from "./Main"
-import ModalWindow from "./components/ModalWindow";
+import CheckAuthComponent from "./components/CheckAuthComponent";
 import axios from "axios";
 
 
@@ -12,8 +11,9 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          authentication_user: false, // Установите начальное состояние
-          modal_window_active: false
+            authentication_user: false, // Установите начальное состояние
+            modal_window_active: false,
+            token_api: false
         };
         this.checkAuth = this.checkAuth.bind(this)
         this.exitLogout = this.exitLogout.bind(this)
@@ -22,15 +22,6 @@ class App extends React.Component {
     componentDidMount() {
         this.checkAuth()
     }
-
-    // funcAuth() {
-    //     if (this.state.authentication_user) {
-    //         this.setState({ authentication_user: false })
-    //     }
-    //     else {
-    //         this.setState({ authentication_user: true })
-    //     }
-    // }
 
     funcModalWindowActive() {
         if (this.state.modal_window_active) {
@@ -50,13 +41,16 @@ class App extends React.Component {
                 })
                 if (Object.keys(result.data).length === 0) {
                     this.setState({authentication_user: true})
+                    return true
                 } else {
                     this.setState({authentication_user: false})
                     const accessAndRefreshToken = ["access", "refresh"]
                     accessAndRefreshToken.forEach(key => {localStorage.removeItem(key)})
+                    return false
                 }
             } else {
                 this.setState({authentication_user: false})
+                return false
             }
     }
 
@@ -69,8 +63,10 @@ class App extends React.Component {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Main setModalWindow={this.funcModalWindowActive} modalActive={this.state.modal_window_active} checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user} exitAccount={this.exitLogout}/>} />
-                    <Route path="/diary" element={<Diary setModalWindow={this.funcModalWindowActive} modalActive={this.state.modal_window_active} checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user}/>} exit={this.exitLogout}/>
-                    <Route path="/modal" element={<ModalWindow checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user}/>} exit={this.exitLogout}/>
+                    {/*<Route path="/diary" element={<Diary setModalWindow={this.funcModalWindowActive} modalActive={this.state.modal_window_active} checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user} exitAccount={this.exitLogout}/>} />*/}
+                    <Route path="/diary" element={
+                        <CheckAuthComponent setModalWindow={this.funcModalWindowActive} modalActive={this.state.modal_window_active} checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user} exitAccount={this.exitLogout}/>
+                    } />
                 </Routes>
             </BrowserRouter>
         )

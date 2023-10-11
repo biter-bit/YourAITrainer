@@ -3,18 +3,17 @@ import { Navigate, Link } from "react-router-dom";
 import axios from "axios";
 
 class Diary extends React.Component {
-    componentDidMount() {
-        this.props.checkAuthentication()
-        if (!this.props.auth_user) {
-            window.location.href = '/?showModal=true';
-            this.props.setModalWindow()
-        }
-    }
+    // componentDidMount() {
+    //     const result = this.props.checkAuthentication()
+    //     if (result) {
+    //         window.location.href = '/?showModal=true';
+    //     }
+    // }
     render() {
         return (
             <div className="main">
             <div className="header">
-                <div className="logo">
+                <div className="logo" onClick={() => window.location.href = '/'}>
                     <img src="img/logo_5 2.png" alt="logo"/>
                     <p style={{color: "#FFFFFF", size: 32}}>Train</p>
                 </div>
