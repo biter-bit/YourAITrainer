@@ -8,7 +8,7 @@ class Article(models.Model):
     file = models.ImageField(null=True,upload_to = 'images',blank=True)
     created_at = models.DateTimeField(verbose_name='время создания', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='последнее обновление', auto_now=True)
-    source = models.CharField(verbose_name='источник', max_length=100)
+    source = models.CharField(verbose_name='источник', max_length=200)
     published = models.BooleanField(verbose_name='опубликовано', default=False)
     
     def __str__(self):
