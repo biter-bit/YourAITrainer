@@ -30,11 +30,12 @@
                     <ul class="list-programs">
                         <li class="train-menu">Программа-1
                             <ul class="train-list">
-                                <li>тренировка-1</li>
-                                <li>тренировка-2</li>
-                                <li>тренировка-3</li>
-                                <li>тренировка-4</li>
-                                <li>тренировка-5</li>
+                                <button class="button-train" onclick="cklik('1')">тренировка-1</button>
+                                <button class="button-train" onclick="cklik('1')">тренировка-2</button>
+                                <button class="button-train" onclick="cklik('1')">тренировка-3</button>
+                                <button class="button-train" onclick="cklik('1')">тренировка-4</button>
+                                <button class="button-train" onclick="cklik('1')">тренировка-5</button>
+                                <button class="button-train" onclick="cklik('1')">тренировка-6</button>
                             </ul>
                         </li>
                         <li class="train-menu">Программа-2
@@ -66,102 +67,145 @@
                     </ul>
                 </div>
             </div>
-            <div class="exercise">
-                <ul class="exercise-list">
-                    <li>
-                        <div><img src="img/Rectangle 15.png" alt="foto">
-                            <p>Упражнение-1</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div><img src="img/Rectangle 15.png" alt="foto">
-                            <p>Упражнение-2</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div><img src="img/Rectangle 15.png" alt="foto">
-                            <p>Упражнение-3</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div><img src="img/Rectangle 15.png" alt="foto">
-                            <p>Упражнение-4</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div><img src="img/Rectangle 15.png" alt="foto">
-                            <p>Упражнение-5</p>
-                        </div>
-                    </li>
-                </ul>
+            <div class="white-block">
+                <div id="1" class="exercise" style="display: none;">
+                    <ul class="exercise-list">
+                        <li>
+                            <!-- <div><img src="img/Rectangle 15.png" alt="foto"> -->
+                            <button onclick="cklik('2')" class="button-exercise">Упражнение-1</button>
+                            <!-- </div> -->
+                        </li>
+                        <li>
+                            <!-- <div><img src="img/Rectangle 15.png" alt="foto"> -->
+                            <button onclick="cklik('2')" class="button-exercise">Упражнение-2</button>
+                            <!-- </div> -->
+                        </li>
+                        <li>
+                            <!-- <div><img src="img/Rectangle 15.png" alt="foto"> -->
+                            <button onclick="cklik('2')" class="button-exercise">Упражнение-3</button>
+                            <!-- </div> -->
+                        </li>
+                        <li>
+                            <!-- <div><img src="img/Rectangle 15.png" alt="foto"> -->
+                            <button onclick="cklik('2')" class="button-exercise">Упражнение-4</button>
+                            <!-- </div> -->
+                        </li>
+                        <li>
+                            <!-- <div><img src="img/Rectangle 15.png" alt="foto"> -->
+                            <button onclick="cklik('2')" class="button-exercise">Упражнение-5</button>
+                            <!-- </div> -->
+                        </li>
+                    </ul>
+                </div>
+                <div class="table-approach">
+                    <table id="2" class="iksweb" style="display: none;">
+                        <tbody>
+                            <tr>
+                                <th><input type="checkbox"></td>
+                                <th>Номер подхода:</th>
+                                <th>Вес (кг):</th>
+                                <th>Повторения:</th>
+                                <th>Комментарии:</th>
+                                <th><input type="reset"></th>
+                            </tr>
 
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>1</td>
+                                <td>20</td>
+                                <td>4</td>
+                                <td>тест</td>
+                                <td><input type="reset"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>2</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><input type="reset"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>3</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><input type="reset"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>4</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><input type="reset"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><input type="reset"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>6</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><input type="reset"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>3</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><input type="reset"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>4</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><input type="reset"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><input type="reset"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>6</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><input type="reset"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
-            <div class="right-block">
-                <table class="iksweb">
-                    <tbody>
-                        <tr>
-                            <th><input type="checkbox"></td>
-                            <th>Номер подхода:</th>
-                            <th>Вес (кг):</th>
-                            <th>Повторения:</th>
-                            <th>Комментарии:</th>
-                            <th><input type="reset"></th>
-                        </tr>
-
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>20</td>
-                            <td>4</td>
-                            <td>тест</td>
-                            <td><input type="reset"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>2</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><input type="reset"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>3</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><input type="reset"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>4</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><input type="reset"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>5</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><input type="reset"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>6</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><input type="reset"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
         </div>
     </div>
+    <script>
+        function cklik(id) {
+            elem = document.getElementById(id); //находим блок div по его id, который передали в функцию
+            // state = elem.style.display; //смотрим, включен ли сейчас элемент
+            // if (state == '') elem.style.display = 'none'; //если включен, то выключаем
+            elem.style.display = ''; //иначе - включаем
+        }
+    </script>
+
 </body>
 
 </html>

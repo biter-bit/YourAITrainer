@@ -1,8 +1,9 @@
 .main {
-    height: 1080px;
+    height: 1070px;
     width: 1920px;
     background: #191919;
     padding-top: 10px;
+    font-family: sans-serif
 }
 
 .header {
@@ -21,15 +22,17 @@
 
 .content {
     display: flex;
+    height: 1002px;
 }
 
 .left-block {
+    width: 260px;
     padding: 0px 6px;
     font: #FFFFFF;
 }
 
 .left-name {
-    width: 248px;
+    width: 100%;
     display: flex;
     border-top: 1px solid #646464;
     border-bottom: 1px solid #646464;
@@ -39,7 +42,7 @@
 }
 
 .left-list {
-    width: 248px;
+    width: 100%;
     padding-top: 5px;
 }
 
@@ -58,11 +61,6 @@
 
 }
 
-/* .train-menu::after {
-    content: url(img/row1.png);
-    margin-left: 30px;
-} */
-
 .train-menu:hover {
     background-color: #323232;
     border-radius: 6px;
@@ -77,36 +75,56 @@
 }
 
 .left-menu {
-    width: 248px;
+    width: 100%;
     height: 184;
     border-top: 1px solid #646464;
     margin-top: 500px;
     color: #FFFF;
 }
 
+.button-train {
+    background-color: #323232;
+    color: #FFFFFF;
+    border: none;
+}
+
+.white-block {
+    display: flex;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    border: black solid 1px;
+}
+
 .exercise {
     width: 260px;
-    height: 1001px;
+    height: 100%;
     background-color: #252525;
     color: #FFFFFF;
 }
 
 .exercise-list {
-    /* display: none; */
     list-style-type: none;
+    list-style-position: inside;
+    list-style-image: url(img/Rectangle\ 15.png);
+    padding: 0px 6px;
 }
 
 .exercise-list li div {
     display: flex;
-    justify-content: space-around;
-    padding: 5px 0px;
+    justify-content: space-between;
+    padding-top: 5px;
 
 }
 
-.right-block {
-    border: 1px solid white;
-    width: 1390px;
-    background-color: #FFFFFF;
+.button-exercise {
+    background-color: #252525;
+    color: #FFFFFF;
+    border: none;
+}
+
+.table-approach {
+    width: 1400px;
 }
 
 table.iksweb {
