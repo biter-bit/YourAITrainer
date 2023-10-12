@@ -54,7 +54,6 @@ class Main extends React.Component {
         this.props.checkAuthentication()
         const showModal = new URLSearchParams(window.location.search).get('showModal');
         if (showModal === 'true') {
-            // Здесь отобразите модальное окно
             this.props.setModalWindow();
         }
     }
@@ -130,7 +129,7 @@ class Main extends React.Component {
     }
 
     inputClickReg() {
-        // // активирует и деактивирует окно htubcnhfwbb
+        // активирует и деактивирует окно
         if (this.state.modelActiveReg) {
             this.setState({ modelActiveReg: false })
         }

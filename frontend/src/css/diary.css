@@ -25,7 +25,7 @@
 
 .left-block {
     padding: 0px 6px;
-    font: #FFFFFF;
+    color: #FFFFFF;
 }
 
 .left-name {
@@ -78,7 +78,7 @@
 
 .left-menu {
     width: 248px;
-    height: 184;
+    height: 184px;
     border-top: 1px solid #646464;
     margin-top: 500px;
     color: #FFFF;
