@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from "axios";
+import {Link} from 'react-router-dom';
 
 
 class RandomArticles extends React.Component {
@@ -33,8 +34,8 @@ class RandomArticles extends React.Component {
                     articleEl: [
                         ...prevState.articleEl,
                         <div className="article" key={articles.id}>
-                            <a className="link" href={articles.source} target='_blank'><div className="title_article"> {articles.title}</div></a>
-                            <a className="link" href={articles.source} target='_blank'><div className="rectangle"><img src={articles.file} /></div></a>
+                            <a className="link" href={`/article/${articles.id}`} target='_blank'><div className="title_article"> {articles.title}</div></a>
+                            <a className="link" href={`/article/${articles.id}`} target='_blank'><div className="rectangle"><img src={articles.file} /></div></a>
                             <div className="short_article"> {articles.short_description}</div>
                         </div>
                     ],
