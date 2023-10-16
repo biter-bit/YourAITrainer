@@ -178,3 +178,51 @@ table.iksweb tr:hover td {
     color: #354251;
     cursor: default;
 }
+
+@media (max-width: 360px) {
+    .main {
+        width: 375px;
+        height: 694px;
+    }
+
+    .content {
+        position: relative;
+        height: 100%;
+    }
+
+    .left-block {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 1;
+    }
+
+    .left-name {
+        justify-content: flex-start;
+    }
+
+    .white-block {
+        background-color: transparent;
+        position: absolute;
+    }
+
+    .exercise {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 2;
+    }
+
+    .table-approach {
+        width: 100%;
+        position: absolute;
+        background-color: white;
+        z-index: 3;
+    }
+
+    .none {
+        display: none;
+    }
+
+
+}
