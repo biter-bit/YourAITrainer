@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import AppArticle from "./pages/AppArticle";
 import ArticlePage from "./pages/ArticlePage";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import Main from "./components/Main";
+import Main from "./Main";
 import Diary from "./Diary";
 import CheckAuthComponent from "./components/CheckAuthComponent";
 import axios from "axios";
