@@ -432,7 +432,10 @@ body {
 .title_article {
     width: 200px;
     height: 50px;
-    /*white-space: nowrap;*/
+    display: -webkit-box;
+    -wibkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: center;

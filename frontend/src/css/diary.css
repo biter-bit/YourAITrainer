@@ -1,35 +1,88 @@
-.main {
-    height: 1080px;
-    width: 1920px;
-    background: #191919;
-    padding-top: 10px;
+* {
+    margin: 0;
+    padding: 0;
 }
 
-.header {
-    height: 68px;
-    padding-left: 63px;
-    padding-right: 10px;
+.diary-container-exercise {
+    background-color: pink;
+}
+
+.diary-container-diary-main {
+    background-color: green;
+}
+
+.container-diary-background {
+    background-color: #1e1e25;
+    width: 100vw;
+    height: 100vh;
+}
+
+.container-content-diary {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    max-width: 1920px;
+    height: 100vh;
+    padding: 20px 120px;
+    margin: 0 auto
 }
 
-.logo {
+.diary-container-window-user {
     display: flex;
-    justify-content: left;
-}
-
-.content {
-    display: flex;
-}
-
-.left-block {
-    padding: 0px 6px;
-    color: #FFFFFF;
-}
-
-.left-name {
+    flex-direction: column;
+    justify-content: space-around;
     width: 248px;
+    font: #FFFFFF;
+    margin-left: 6px;
+}
+
+.diary-container-header-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.container-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+    cursor: pointer;
+}
+
+.container-logo:hover {
+    transform: scale(1.1)
+}
+
+.logo-diary {
+    width: 50px;
+    height: 50px;
+    background: none;
+    border: none;
+    background-image: url(../img/logo_5.png);
+    background-size: cover;
+    outline: none;
+}
+
+.logo-name {
+    font-size: 32px;
+    font-style: normal;
+    line-height: normal;
+    font-weight: 400;
+    font-family: Manrope;
+    color: #FFF;
+    margin-left: 10px;
+}
+
+.button-menu-diary {
+    width: 125px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #9B9B9B;
+}
+
+.diary-container-icon-name-user {
+    width: 100%;
     display: flex;
     border-top: 1px solid #646464;
     border-bottom: 1px solid #646464;
@@ -38,7 +91,27 @@
     align-items: center;
 }
 
-.left-list {
+.diary-name-user {
+    color: #FFF;
+    font-family: Manrope;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: auto;
+}
+
+.diary-button-generic-program {
+    width: 248px;
+    height: 47px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    background: #323232;
+    margin-top: 47px;
+    border-width: 0;
+}
+
+.diary-container-list-program {
     width: 248px;
     padding-top: 5px;
 }
@@ -58,12 +131,8 @@
 
 }
 
-/* .train-menu::after {
-    content: url(img/row1.png);
-    margin-left: 30px;
-} */
-
 .train-menu:hover {
+
     background-color: #323232;
     border-radius: 6px;
 }
@@ -76,87 +145,120 @@
     display: block;
 }
 
-.left-menu {
+.diary-main-menu {
     width: 248px;
     height: 184px;
     border-top: 1px solid #646464;
-    margin-top: 500px;
     color: #FFFF;
 }
 
-.exercise {
-    width: 260px;
-    height: 1001px;
-    background-color: #252525;
-    color: #FFFFFF;
-}
-
-.exercise-list {
-    /* display: none; */
+.diary-main-list {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    padding-top: 17px;
     list-style-type: none;
 }
 
-.exercise-list li div {
-    display: flex;
-    justify-content: space-around;
-    padding: 5px 0px;
-
-}
-
-.right-block {
-    border: 1px solid white;
-    width: 1390px;
-    background-color: #FFFFFF;
-}
-
-table.iksweb {
+.diary-main-element {
     text-decoration: none;
-    border-collapse: collapse;
-    width: 100%;
-    text-align: center;
+    color: white;
 }
 
-table.iksweb th {
-    font-weight: normal;
-    font-size: 14px;
-    color: #ffffff;
-    background-color: #354251;
-}
-
-table.iksweb td {
-    font-size: 25px;
-    color: #354251;
-}
-
-table.iksweb td {
-    white-space: pre-wrap;
-    padding: 10px 5px;
-    line-height: 20.49px;
-    vertical-align: middle;
-    border-top: 1px solid #354251;
-}
-
-table.iksweb th {
-    font-size: 25px;
-    white-space: pre-wrap;
-    padding: 10px 5px;
-    line-height: 20.49px;
-    vertical-align: middle;
+.button-train {
     background-color: #323232;
-    color: #ffffff;
-
+    color: #FFFFFF;
+    border: none;
 }
 
-table.iksweb tr,
-table.iksweb th {
-    height: 80px;
-}
+/*.white-block {*/
+/*    display: flex;*/
+/*    background-color: white;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    border: black solid 1px;*/
+/*}*/
 
-table.iksweb tr:hover {
-    background-color: #f9fafb
-}
+/*.exercise {*/
+/*    width: 260px;*/
+/*    height: 100%;*/
+/*    background-color: #252525;*/
+/*    color: #FFFFFF;*/
+/*}*/
 
-table.iksweb tr:hover td {
-    color: #354251;
-    cursor: default;
-}
+/*.exercise-list {*/
+/*    list-style-type: none;*/
+/*    list-style-position: inside;*/
+/*    list-style-image: url(../img/rectangle.png);*/
+/*    padding: 0px 6px;*/
+/*}*/
+
+/*.exercise-list li div {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    padding-top: 5px;*/
+
+/*}*/
+
+/*.button-exercise {*/
+/*    background-color: #252525;*/
+/*    color: #FFFFFF;*/
+/*    border: none;*/
+/*}*/
+
+/*.table-approach {*/
+/*    width: 1400px;*/
+/*}*/
+
+/*table.iksweb {*/
+/*    text-decoration: none;*/
+/*    border-collapse: collapse;*/
+/*    width: 100%;*/
+/*    text-align: center;*/
+/*}*/
+
+/*table.iksweb th {*/
+/*    font-weight: normal;*/
+/*    font-size: 14px;*/
+/*    color: #ffffff;*/
+/*    background-color: #354251;*/
+/*}*/
+
+/*table.iksweb td {*/
+/*    font-size: 25px;*/
+/*    color: #354251;*/
+/*}*/
+
+/*table.iksweb td {*/
+/*    white-space: pre-wrap;*/
+/*    padding: 10px 5px;*/
+/*    line-height: 20.49px;*/
+/*    vertical-align: middle;*/
+/*    border-top: 1px solid #354251;*/
+/*}*/
+
+/*table.iksweb th {*/
+/*    font-size: 25px;*/
+/*    white-space: pre-wrap;*/
+/*    padding: 10px 5px;*/
+/*    line-height: 20.49px;*/
+/*    vertical-align: middle;*/
+/*    background-color: #323232;*/
+/*    color: #ffffff;*/
+
+/*}*/
+
+/*table.iksweb tr,*/
+/*table.iksweb th {*/
+/*    height: 80px;*/
+/*}*/
+
+/*table.iksweb tr:hover {*/
+/*    background-color: #f9fafb*/
+/*}*/
+
+/*table.iksweb tr:hover td {*/
+/*    color: #354251;*/
+/*    cursor: default;*/
+/*}*/

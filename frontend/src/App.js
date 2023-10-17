@@ -22,7 +22,7 @@ class App extends React.Component {
         this.funcModalWindowActive = this.funcModalWindowActive.bind(this)
     }
     componentDidMount() {
-        this.checkAuth()
+        this.checkAuth().then(r => undefined)
     }
 
     funcModalWindowActive() {
@@ -65,7 +65,6 @@ class App extends React.Component {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Main setModalWindow={this.funcModalWindowActive} modalActive={this.state.modal_window_active} checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user} exitAccount={this.exitLogout}/>} />
-                    {/*<Route path="/diary" element={<Diary setModalWindow={this.funcModalWindowActive} modalActive={this.state.modal_window_active} checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user} exitAccount={this.exitLogout}/>} />*/}
                     <Route path="/diary" element={
                         <CheckAuthComponent setModalWindow={this.funcModalWindowActive} modalActive={this.state.modal_window_active} checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user} exitAccount={this.exitLogout}/>
                     } />
