@@ -11,8 +11,8 @@ import axios from "axios";
 
 
 
-const link_api_auth = 'http://localhost:8000/api/auth/jwt/create/'
-const link_api_register = 'http://localhost:8000/api/auth/register/'
+const link_api_auth = 'http://192.168.31.62:8000/api/auth/jwt/create/'
+const link_api_register = 'http://192.168.31.62:8000/api/auth/register/'
 class Main extends React.Component {
     constructor(props) {
         super(props)
@@ -21,7 +21,8 @@ class Main extends React.Component {
             modelActiveReg: false,
             burger_active: false,
             response: [],
-            error_one: {}
+            error_one: {},
+            exercise: {}
         }
         this.inputClickAuth = this.inputClickAuth.bind(this)
         this.inputClickReg = this.inputClickReg.bind(this)
@@ -140,6 +141,10 @@ class Main extends React.Component {
 
     resetStatus() {
         this.setState({ error_one: {}})
+    }
+
+    handleButtonClick(button) {
+
     }
 }
 
