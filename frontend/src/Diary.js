@@ -41,7 +41,7 @@ class Diary extends React.Component {
     return (
         <div style={{color: "white"}}>
           {isLoading ? (
-              <ClipLoader color="#36d7b7" />
+              <div className="loading-icon">Loading...</div>
           ) : (
               <div>
                 {data && <button onClick={() => this.funcGenericProgram()}>Нажми</button>}

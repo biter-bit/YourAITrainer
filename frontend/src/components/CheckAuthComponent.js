@@ -28,7 +28,11 @@ class CheckAuthComponent extends React.Component {
             trainingProgram={this.props.trainingProgram}
             setTrainingProgram={this.funcAddProgram}
             loadingProgram={this.state.loadingProgram}
+<<<<<<< HEAD
             setLoadingProgram={this.props.setLoadingProgram}
+=======
+            setLoadingProgram={this.funcLoadingSuccess}
+>>>>>>> parent of 30a6a8d (update-v3)
 
           />
         );
