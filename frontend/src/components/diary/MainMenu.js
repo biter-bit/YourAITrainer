@@ -43,17 +43,17 @@ class MainMenu extends React.Component {
               <div className="diary-main-menu">
                 <ul className="diary-main-list">
                   <li className="diary-main-element_list">
-                    <a className='diary-main-element'>
+                    <a className='diary-main-element' href="#">
                       Личный кабинет
                     </a>
                   </li>
                   <li className="diary-main-element_list">
-                    <a className='diary-main-element'>
+                    <a className='diary-main-element' href="#">
                       Статьи
                     </a>
                   </li>
                   <li className="diary-main-element_list">
-                    <a className='diary-main-element'>
+                    <a className='diary-main-element' href="#">
                       Выход
                     </a>
                   </li>

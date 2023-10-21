@@ -3,7 +3,6 @@ import MainMenu from "./components/diary/MainMenu";
 import Exercises from "./components/diary/Exercises";
 import TrainingDiary from "./components/diary/TrainingDiary";
 import axios from "axios";
-import ClipLoader from "react-spinners/ClipLoader"
 
 
 const link_api_generic_program = 'http://192.168.31.62:8000/api/generation'
