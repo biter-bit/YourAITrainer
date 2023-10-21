@@ -3,7 +3,6 @@ from backend import celery_app
 
 from programs.models import Program, TrainingDay, Workout, Approach
 from services import program_generator
-import json
 
 
 def parse_nums(num_str: str) -> int:
@@ -29,7 +28,7 @@ def create_models(user_id: int, raw_program: dict, program_name: str) -> None:
             workout_obj = Workout.objects.create(
                 title=workout['title'],
                 description=workout['desc'],
-                approach_num=num_of_approaches,
+                num_of_approaches=num_of_approaches,
                 training_day=training_day
             )
 
@@ -39,15 +38,13 @@ def create_models(user_id: int, raw_program: dict, program_name: str) -> None:
 
 @celery_app.task
 def start_program_generation(user_id: int, gender: str, age: int, weight: float, height: int, training_level: str,
-                             purpose_of_training: str) -> str:
+                             purpose_of_training: str) -> None:
     raw_program = program_generator.gen_program(gender=gender, age=age, weight=weight, height=height,
                                                 training_level=training_level, purpose_of_training=purpose_of_training)
-    with open('test.json', 'w') as file:
-        json.dump(raw_program, file)
+
     program_dict = {'weight_loss': 'Похудение', 'relief': 'Рельеф тела', 'muscle_mass': 'Набор мышечной массы',
                     'endurance': 'Выносливость'}
     level_dict = {'beginner': 'Новичок', 'amateur': 'Любитель', 'pro': 'Профессионал'}
     program_name = f'{program_dict[purpose_of_training]} ({level_dict[training_level]})'
 
     create_models(user_id=user_id, raw_program=raw_program, program_name=program_name)
-    return raw_program

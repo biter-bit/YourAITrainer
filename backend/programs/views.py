@@ -6,7 +6,6 @@ from .models import Program, Workout, TrainingDay, Approach
 from .serializers import ProgramsSerializer, TrainingDaySerializer, WorkoutSerializer, ApproachesSerializer, \
     GenerationSerializer
 from .tasks import start_program_generation
-from celery.result import AsyncResult
 
 
 class ProgramsAPIView(ViewSet, generics.ListAPIView):
@@ -44,7 +43,7 @@ class GenerationAPIView(APIView):
         # user.purpose_of_training = data['purpose_of_training']
         # user.save()
 
-        result = start_program_generation.delay(
+        start_program_generation.delay(
             user_id=user.id,
             gender=data['gender'],
             age=data['age'],
@@ -54,18 +53,5 @@ class GenerationAPIView(APIView):
             purpose_of_training=data['purpose_of_training']
         )
 
-        return Response({'status': 'generation_started', 'number_task': result.id})
+        return Response({'status': 'generation_started'})
 
-
-class CheckTaskCelery(APIView):
-    def get(self, request):
-        task_id = request.query_params.get('task_id')
-        task = AsyncResult(task_id)
-        if task.ready():
-            if task.successful():
-                result = task.result
-                return Response({"status": "Success", 'result': result})
-            else:
-                return Response({"status": "Fail", 'result': 'Task failed'})
-
-        return Response({"status": "Panding"})
