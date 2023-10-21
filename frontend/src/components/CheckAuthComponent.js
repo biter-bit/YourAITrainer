@@ -26,9 +26,9 @@ class CheckAuthComponent extends React.Component {
             modalActive={this.props.modalActive}
             exitAccount={this.props.exitAccount}
             trainingProgram={this.props.trainingProgram}
-            setTrainingProgram={this.funcAddProgram}
-            loadingProgram={this.state.loadingProgram}
-            setLoadingProgram={this.funcLoadingSuccess}
+            setTrainingProgram={this.props.setTrainingProgram}
+            loadingProgram={this.props.loadingProgram}
+            setLoadingProgram={this.props.setLoadingProgram}
 
           />
         );

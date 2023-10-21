@@ -70,7 +70,12 @@ class App extends React.Component {
     }
 
     funcLoadingSuccess() {
-        this.setState({loadingProgram: false})
+        /* Меняет значение статуса программы (загружется или нет) */
+        if (this.state.loadingProgram) {
+            this.setState({loadingProgram: false})
+        } else {
+            this.setState({loadingProgram: true})
+        }
     }
 
     render() {

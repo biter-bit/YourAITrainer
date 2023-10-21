@@ -20,7 +20,7 @@ from article.views import ArticleModelViewSet
 from authentication.views import UserListView, RegisterViewSet
 from rest_framework.routers import DefaultRouter
 from django.views.generic import RedirectView
-from programs.views import ProgramsAPIView, ApproachesAPIView, WorkoutAPIView, TrainingDayAPIView, GenerationAPIView
+from programs.views import ProgramsAPIView, ApproachesAPIView, WorkoutAPIView, TrainingDayAPIView, GenerationAPIView, CheckTaskCelery
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -37,6 +37,7 @@ urlpatterns = [
     path('', RedirectView.as_view(url='api/')),
     path('api/', include(router.urls)),
     path('api/generation', GenerationAPIView.as_view(), name='generation'),
+    path('api/check_task', CheckTaskCelery.as_view(), name='check_task'),
     path('admin/', admin.site.urls),
     path('api/auth/', include('djoser.urls')),
     path('api/auth/', include('djoser.urls.jwt')),
