@@ -3,6 +3,7 @@ import MainMenu from "./components/diary/MainMenu";
 import Exercises from "./components/diary/Exercises";
 import TrainingDiary from "./components/diary/TrainingDiary";
 import axios from "axios";
+import ClipLoader from "react-spinners/ClipLoader"
 
 
 const link_api_generic_program = 'http://192.168.31.62:8000/api/generation'
@@ -40,7 +41,7 @@ class Diary extends React.Component {
     return (
         <div style={{color: "white"}}>
           {isLoading ? (
-              <div className="loading-icon">Loading...</div>
+              <ClipLoader color="#36d7b7" />
           ) : (
               <div>
                 {data && <button onClick={() => this.funcGenericProgram()}>Нажми</button>}

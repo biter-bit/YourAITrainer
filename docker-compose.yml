@@ -40,7 +40,7 @@ services:
   trainer_front:
     build:
       context: .
-      dockerfile: ./frontend/Dockerfile
+      dockerfile: frontend/Dockerfile
     command: npm start
     volumes:
       - ./frontend:/app/frontend

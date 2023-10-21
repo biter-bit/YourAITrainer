@@ -42,7 +42,7 @@ class TrainingDiary extends React.Component {
                     <input type='text' className='text-diary-main-3' placeholder='...'/>
                   </div>
                   <div className="diary-main_5">
-                    <img className='img-diary-main-2' src={blackPlus}/>
+                    <img className='img-diary-main-2' src={blackPlus} alt={'img'}/>
                     <input type='text' className='text-diary-main-2' placeholder='...'/>
                     <input type='text' className='text-diary-main-2' placeholder='...'/>
                     <input type='text' className='text-diary-main-2' placeholder='...'/>
