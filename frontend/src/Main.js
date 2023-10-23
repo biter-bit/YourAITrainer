@@ -9,8 +9,6 @@ import ModalWindow from "./components/ModalWindow";
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from "axios";
 
-
-
 const link_api_auth = 'http://localhost:8000/api/auth/jwt/create/'
 const link_api_register = 'http://localhost:8000/api/auth/register/'
 class Main extends React.Component {
@@ -68,7 +66,7 @@ class Main extends React.Component {
         }
     }
     async funcRegistered(event) {
-        // регистрация пльзователя
+        // регистрация пользователя
         event.preventDefault()
         const form = event.target
         const formData = new FormData(form)
