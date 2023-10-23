@@ -50,4 +50,4 @@ def start_program_generation(user_id: int, gender: str, age: int, weight: float,
     program_name = f'{program_dict[purpose_of_training]} ({level_dict[training_level]})'
 
     create_models(user_id=user_id, raw_program=raw_program, program_name=program_name)
-    return raw_program
+    return 'Ok'
