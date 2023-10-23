@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+.img_button_diary_gif {
+    margin-top: 5px
+}
+
 .diary-img-exercise {
     width: 48px;
     height: 48px;
@@ -31,9 +35,22 @@
 }
 
 .diary-container-exercises {
+    display: none;
+    cursor: pointer;
+    margin-top: 63px;
     width: 260px;
     background-color: #252525;
+    box-shadow: -12px -10px 22px 0px rgba(0, 0, 0, 0.62);
+    overflow: auto;
+}
+
+.diary-container-exercises.active {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
     margin-top: 63px;
+    width: 260px;
+    background-color: #252525;
     box-shadow: -12px -10px 22px 0px rgba(0, 0, 0, 0.62);
     overflow: auto;
 }
@@ -243,9 +260,28 @@
     margin-top: 32px;
 }
 
-.button-train:active {
+/*.diary-container-exercises:hover + .diary-container-exercises{*/
+/*    display: flex;*/
+/*    justify-content: flex-start;*/
+/*    flex-direction: column;*/
+/*    !*color: #00EDDF;*!*/
+/*}*/
+
+.button-train.active {
+    background-color: #323232;
     color: #00EDDF;
+    font-family: Manrope;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border: none;
+    margin-top: 32px;
 }
+
+/*.button-train:active {*/
+/*    color: #00EDDF;*/
+/*}*/
 
 .diary-button-exercise {
     border: none;
@@ -265,7 +301,7 @@
 
 .diary-container-diary-main-button {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     height: 63px;
     width: 100%;
@@ -399,6 +435,39 @@
     font-weight: 400;
     line-height: normal;
     background-color: transparent;
+}
+
+.diary-settings-modal-window {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.2s;
+}
+
+.diary-settings-modal-window.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.diary-settings-modal-content {
+    padding: 20px;
+    border-radius: 12px;
+    background-color: white;
+    width: 60%;
+    transform: scale(0.5);
+    transition: 0.4s all;
+}
+
+.diary-settings-modal-content.active {
+    transform: scale(1);
 }
 
 @media (max-width: 1180px) {

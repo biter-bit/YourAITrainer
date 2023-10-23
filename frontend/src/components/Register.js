@@ -9,7 +9,7 @@ class Register extends React.Component {
         return (
             <div className={this.props.active ? 'model active' : "model"} onClick={() => {
                 this.props.setActive();
-                this.props.reset();
+                this.props.funcSetError({});
             }}>
                 <div className={this.props.active ? 'model__content active' : "model__content"} onClick={e => e.stopPropagation()}>
                     <h1 className="name_reg">Регистрация</h1>

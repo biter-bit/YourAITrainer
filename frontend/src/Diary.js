@@ -4,84 +4,51 @@ import MainMenu from "./components/diary/MainMenu";
 import Exercises from "./components/diary/Exercises";
 import TrainingDiary from "./components/diary/TrainingDiary";
 import ClipLoader from "react-spinners/ClipLoader";
+import WindowSettings from "./components/diary/AddSettings"
 
 
-const link_api_generic_program = 'http://192.168.31.62:8000/api/generation'
-const link_api_check_celery = 'http://192.168.31.62:8000/api/check_task'
 class Diary extends React.Component {
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
-  }
 
-  async funcGenericProgram() {
-      const accessToken = localStorage.getItem("access")
-      if (accessToken) {
-          try {
-              const response = await axios.post(
-              link_api_generic_program, {
-                id: 1,
-                gender: 'm',
-                age: 23,
-                weight: 83.1,
-                height: 28,
-                training_level: "beginner",
-                purpose_of_training: "weight_loss"
-              }, {
-                  headers: {'Authorization': `Bearer ${accessToken}`}
-              });
-              this.props.setLoadingProgram()
-              console.log('yes')
-              this.funcCheckTaskBackend(response.data.number_task)
-          } catch(error) {
-            console.error(error);
-          }
-      }
-  }
-
-  async funcCheckTaskBackend(task_id) {
-      try {
-          const response = await axios.get(link_api_check_celery + `?task_id=${task_id}`, {
-              params: {task_id}
-          })
-          if (response.data.status === 'Panding') {
-              setTimeout(() => this.funcCheckTaskBackend(task_id), 30000);
-          } else if (response.data.status === 'Success') {
-              const result = response.data.result
-              this.props.setLoadingProgram()
-              this.props.setTrainingProgram(response.data.result)
-              console.log('Task result:', result)
-          } else if (response.data.status === 'Fail') {
-              this.props.setLoadingProgram()
-              console.error("Task failed")
-          }
-      } catch (error) {
-          console.error(error)
-      }
   }
 
   render() {
-    const data = this.props.trainingProgram
-    const isLoading = this.props.loadingProgram
+
     return (
-        <div style={{color: "white"}}>
-          {isLoading ? (
-              <ClipLoader color="#36d7b7" />
-          ) : (
-              <div>
-                {data && <button onClick={() => this.funcGenericProgram()}>Нажми</button>}
-              </div>
-          )}
+
+        <div className="container-diary-background">
+          <div className="container-content-diary">
+            <MainMenu
+                trainingProgram={this.props.trainingProgram}
+                setTrainingProgram={this.props.setTrainingProgram}
+                loadingProgram={this.props.loadingProgram}
+                setLoadingProgram={this.props.setLoadingProgram}
+                trainingDays={this.props.trainingDays}
+                funcAddTrainingDay={this.props.funcAddTrainingDay}
+                loadingTrainingDay={this.props.loadingTrainingDay}
+                setLoadingTraining={this.props.setLoadingTraining}
+                exerciseActive={this.props.exerciseActive}
+                funcExerciseActive={this.props.funcExerciseActive}
+                funcWindowSettingsActive={this.props.funcWindowSettingsActive}
+            />
+            <Exercises
+                exerciseActive={this.props.exerciseActive}
+            />
+            <TrainingDiary />
+            <WindowSettings
+                loadingProgram={this.props.loadingProgram}
+                setLoadingProgram={this.props.setLoadingProgram}
+                windowSettingsActive={this.props.windowSettingsActive}
+                funcWindowSettingsActive={this.props.funcWindowSettingsActive}
+                error_one={this.props.error_one}
+                funcChangeError={this.props.funcChangeError}
+            />
+          </div>
         </div>
-        // <div className="container-diary-background">
-        //   <div className="container-content-diary">
-        //     <MainMenu />
-        //     <Exercises />
-        //     <TrainingDiary />
-        //   </div>
-        // </div>
     )
   }
 }

@@ -34,7 +34,7 @@ class RandomArticles extends React.Component {
                         ...prevState.articleEl,
                         <div className="article" key={articles.id}>
                             <a className="link" href={articles.source} target='_blank'><div className="title_article"> {articles.title}</div></a>
-                            <a className="link" href={articles.source} target='_blank'><img className='rectangle' src={articles.file} /></a>
+                            <a className="link" href={articles.source} target='_blank'><img className='rectangle' src={articles.file}  alt={'hh'}/></a>
                             <div className="short_article"> {articles.short_description}</div>
                         </div>
                     ],
