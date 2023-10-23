@@ -1,224 +1,89 @@
 import React from 'react';
-import { Navigate, Link } from "react-router-dom";
 import axios from "axios";
+import MainMenu from "./components/diary/MainMenu";
+import Exercises from "./components/diary/Exercises";
+import TrainingDiary from "./components/diary/TrainingDiary";
+import ClipLoader from "react-spinners/ClipLoader";
 
+
+const link_api_generic_program = 'http://192.168.31.62:8000/api/generation'
+const link_api_check_celery = 'http://192.168.31.62:8000/api/check_task'
 class Diary extends React.Component {
-    // componentDidMount() {
-    //     const result = this.props.checkAuthentication()
-    //     if (result) {
-    //         window.location.href = '/?showModal=true';
-    //     }
-    // }
-    render() {
-        return (
-            <div className="main">
-            <div className="header">
-                <div className="logo" onClick={() => window.location.href = '/'}>
-                    <img src="img/logo_5 2.png" alt="logo"/>
-                    <p style={{color: "#FFFFFF", size: 32}}>Train</p>
-                </div>
-                <button style={{width: 125, height: 48, borderRadius: 8}}>Создать</button>
-            </div>
-            <div className="content">
-                <div className="left-block">
-                    <div className="left-name">
-                        <img src="img/Rec25.png" alt="foto1"/>
-                        <p style={{color: "#FFFFFF", fontSize: 14}}>Иван Петрович Иванов</p>
-                    </div>
-                    <button
-                        style={{
-                            width: 248,
-                            height: 47,
-                            marginTop: 50,
-                            borderRadius: 6,
-                            backgroundColor: "#323232"
-                        }}
-                    >
-                        <img src="img/plus_2 1.png" alt="plus"/>
-                    </button>
-                    <div className="left-list">
-                        <ul className="list-programs">
-                            <li className="train-menu">
-                                Программа-1
-                                <ul className="train-list">
-                                    <li>тренировка-1</li>
-                                    <li>тренировка-2</li>
-                                    <li>тренировка-3</li>
-                                    <li>тренировка-4</li>
-                                    <li>тренировка-5</li>
-                                </ul>
-                            </li>
-                            <li className="train-menu">
-                                Программа-2
-                                <ul className="train-list">
-                                    <li>тренировка-1</li>
-                                    <li>тренировка-2</li>
-                                    <li>тренировка-3</li>
-                                    <li>тренировка-4</li>
-                                    <li>тренировка-5</li>
-                                </ul>
-                            </li>
-                            <li className="train-menu">
-                                Программа-3
-                                <ul className="train-list">
-                                    <li>тренировка-1</li>
-                                    <li>тренировка-2</li>
-                                    <li>тренировка-3</li>
-                                    <li>тренировка-4</li>
-                                    <li>тренировка-5</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="left-menu">
-                        <ul style={{listStyleType: "none"}}>
-                            <li>
-                                {/*<a style={{color: "#FFFFFF", textDecoration: "none"}} href="#">*/}
-                                {/*    Личный кабинет*/}
-                                {/*</a>*/}
-                                <Link style={{color: "#FFFFFF", textDecoration: "none"}} to="/">Главная</Link>
-                            </li>
-                            <li>
-                                <a style={{color: "#FFFFFF", textDecoration: "none"}} href="#">
-                                    Статьи
-                                </a>
-                            </li>
-                            <li>
-                                <a style={{color: "#FFFFFF", textDecoration: "none"}} href="#">
-                                    Выход
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div className="exercise">
-                    <ul className="exercise-list">
-                        <li>
-                            <div>
-                                <img src="img/Rec25.png" alt="foto"/>
-                                <p>Упражнение-1</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="./img/Rec25.png" alt="foto"/>
-                                <p>Упражнение-2</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="img/Rec25.png" alt="foto"/>
-                                <p>Упражнение-3</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="img/Rec25.png" alt="foto"/>
-                                <p>Упражнение-4</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="img/Rec25.png" alt="foto"/>
-                                <p>Упражнение-5</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div className="right-block">
-                    <table className="iksweb">
-                        <tbody>
-                        <tr>
-                            <th>
-                                <input type="checkbox"/>
-                            </th>
-                            <th>Номер подхода:</th>
-                            <th>Вес (кг):</th>
-                            <th>Повторения:</th>
-                            <th>Комментарии:</th>
-                            <th>
-                                <input type="reset"/>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox"/>
-                            </td>
-                            <td>1</td>
-                            <td>20</td>
-                            <td>4</td>
-                            <td>тест</td>
-                            <td>
-                                <input type="reset"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox"/>
-                            </td>
-                            <td>2</td>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td>
-                                <input type="reset"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox"/>
-                            </td>
-                            <td>3</td>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td>
-                                <input type="reset"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox"/>
-                            </td>
-                            <td>4</td>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td>
-                                <input type="reset"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox"/>
-                            </td>
-                            <td>5</td>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td>
-                                <input type="reset"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox"/>
-                            </td>
-                            <td>6</td>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td>
-                                <input type="reset"/>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+  }
+
+  async funcGenericProgram() {
+      const accessToken = localStorage.getItem("access")
+      if (accessToken) {
+          try {
+              const response = await axios.post(
+              link_api_generic_program, {
+                id: 1,
+                gender: 'm',
+                age: 23,
+                weight: 83.1,
+                height: 28,
+                training_level: "beginner",
+                purpose_of_training: "weight_loss"
+              }, {
+                  headers: {'Authorization': `Bearer ${accessToken}`}
+              });
+              this.props.setLoadingProgram()
+              console.log('yes')
+              this.funcCheckTaskBackend(response.data.number_task)
+          } catch(error) {
+            console.error(error);
+          }
+      }
+  }
+
+  async funcCheckTaskBackend(task_id) {
+      try {
+          const response = await axios.get(link_api_check_celery + `?task_id=${task_id}`, {
+              params: {task_id}
+          })
+          if (response.data.status === 'Panding') {
+              setTimeout(() => this.funcCheckTaskBackend(task_id), 30000);
+          } else if (response.data.status === 'Success') {
+              const result = response.data.result
+              this.props.setLoadingProgram()
+              this.props.setTrainingProgram(response.data.result)
+              console.log('Task result:', result)
+          } else if (response.data.status === 'Fail') {
+              this.props.setLoadingProgram()
+              console.error("Task failed")
+          }
+      } catch (error) {
+          console.error(error)
+      }
+  }
+
+  render() {
+    const data = this.props.trainingProgram
+    const isLoading = this.props.loadingProgram
+    return (
+        <div style={{color: "white"}}>
+          {isLoading ? (
+              <ClipLoader color="#36d7b7" />
+          ) : (
+              <div>
+                {data && <button onClick={() => this.funcGenericProgram()}>Нажми</button>}
+              </div>
+          )}
         </div>
-        )
-    }
+        // <div className="container-diary-background">
+        //   <div className="container-content-diary">
+        //     <MainMenu />
+        //     <Exercises />
+        //     <TrainingDiary />
+        //   </div>
+        // </div>
+    )
+  }
 }
 
 export default Diary;

@@ -35,16 +35,16 @@ class ProgramGenerator:
         Результат получаем с русским описанием и названием тренировок."""
 
         prompt = f'Your client is a {age} year old {self.gender_sub_prompt[gender]}. ' \
-                 f'You have to make a training plan for 12 classes. Each workout should consist ' \
+                 f'You have to make a training plan for 1 classes. Each workout should consist ' \
                  f'of {self.num_of_exercises[training_level]} exercises\n' \
                  f'Your answer should be in JSON format and not include any comments.\n' \
                  f'Your answer should consist of a dictionary, where the key is the sequence number of the ' \
-                 f'workout, and the value is a list of exercises, where the exercise is a dictionary with the ' \
+                 f'workout (for example 2 or 3), and the value is a list of exercises, where the exercise is a dictionary with the ' \
                  f'following keys and values:\n' \
                  f'- "title": the name of the exercise in russian language\n' \
                  f'- "desc": a brief description of the exercise technique for 100 - 150 words in russian language\n' \
                  f'- "number_of_approaches": recommended number of approaches\n' \
-                 f'- "number_of_repetitions": recommended number of repetitions\n\n' \
+                 f'- "number_of_repetitions": recommended number of repetitions (example 12-15)\n\n' \
                  f'When drawing up a training plan, you must take into account the following physical parameters of ' \
                  f'your client:\n' \
                  f'- {"his" if gender == "m" else "her"} weight is now {weight}kg\n' \
@@ -52,7 +52,7 @@ class ProgramGenerator:
                  f'- {"his" if gender == "m" else "her"} main goal is {self.purpose_sub_prompt[purpose_of_training]}\n' \
                  f'- {"his" if gender == "m" else "her"} experience is {self.level_sub_prompt[training_level]}.\n' \
                  f'Refer to trustworthy sources.\n' \
-                 f'Generate all 12 classes at once.'
+                 f'Generate all 1 classes at once.'
 
         return prompt
 

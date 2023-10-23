@@ -3,6 +3,13 @@
     padding: 0;
 }
 
+@font-face {
+    font-family: 'manrope';
+    src: url('Manrope-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     background-color: #1e1e25;
 }
@@ -102,7 +109,6 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .logo {
@@ -432,7 +438,10 @@ body {
 .title_article {
     width: 200px;
     height: 50px;
-    /*white-space: nowrap;*/
+    display: -webkit-box;
+    -wibkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: center;
@@ -656,10 +665,6 @@ body {
     .rectangle {
         width: 231px;
         height: 165px;
-    }
-
-    img {
-        width: 100%;
     }
 
     .window_menu {
