@@ -3,11 +3,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import AppArticle from "./pages/AppArticle";
 import ArticlePage from "./pages/ArticlePage";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import Main from "./Main"
+import Main from "./Main";
 import Diary from "./Diary";
 import CheckAuthComponent from "./components/CheckAuthComponent";
 import axios from "axios";
-
+import ModalWindow from "./components/ModalWindow";
 
 const link_api_verify = 'http://192.168.31.62:8000/api/auth/jwt/verify/'
 class App extends React.Component {
@@ -170,7 +170,10 @@ class App extends React.Component {
                             funcChangeError={this.funcChangeError}
                         />
                     } />
+                    <Route path="/modal" element={<ModalWindow checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user}/>} exit={this.exitLogout}/>
                     <Route path='/articles' element={ <AppArticle  />} />
+                    <Route exact path='/article/:articleId' element={<ArticlePage />} />
+
                 </Routes>
             </BrowserRouter>
         )
@@ -178,4 +181,4 @@ class App extends React.Component {
 }
 
 
-export default App
+export default App;

@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'article',
     'django_filters',
     'programs.apps.ProgramsConfig',
+
+
 ]
 
 MIDDLEWARE = [
@@ -91,6 +93,14 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': 'D:\\IT\\projects\\YourAITrainer\\backend\\db.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -98,6 +108,7 @@ DATABASES = {
         'USER': 'movies',
         'PASSWORD': '123456',
         'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
@@ -255,4 +266,3 @@ CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
-
