@@ -29,7 +29,16 @@ class CheckAuthComponent extends React.Component {
             setTrainingProgram={this.props.setTrainingProgram}
             loadingProgram={this.props.loadingProgram}
             setLoadingProgram={this.props.setLoadingProgram}
-
+            trainingDays={this.props.trainingDays}
+            funcAddTrainingDay={this.props.funcAddTrainingDay}
+            loadingTrainingDay={this.props.loadingTrainingDay}
+            setLoadingTraining={this.props.setLoadingTraining}
+            exerciseActive={this.props.exerciseActive}
+            funcExerciseActive={this.props.funcExerciseActive}
+            windowSettingsActive={this.props.windowSettingsActive}
+            funcWindowSettingsActive={this.props.funcWindowSettingsActive}
+            error_one={this.props.error_one}
+            funcChangeError={this.props.funcChangeError}
           />
         );
       } else {
