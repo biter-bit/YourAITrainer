@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
-
+import {Link} from 'react-router-dom';
 
 const ArticlePage = () => {
     const {articleId } = useParams();
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState();
+    const link_api_article_id = `http://127.0.0.1:8000/api/articles/${articleId}/`;
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/articles/${articleId}/`, {})
+    fetch(link_api_article_id, {})
       .then((res) => res.json())
       .then((response) => {
         setData(response);
         setIsLoading(false);
-        console.log(`http://127.0.0.1:8000/api/articles/${articleId}/`)
+        console.log(link_api_article_id)
       })
       .catch((error) => console.log(error));
   }, [articleId]);
 
   return (
-    <>
+    <div className="container-fluid">
+        <div className="btn_article">
+          <button className="logo" onClick={() => window.location.href = '/'}></button>
+          <Link className="button_sign active" to="/articles">Статьи</Link>
+        </div>
       {!isLoading && (
       <>
         <div className="articlePage">
@@ -48,11 +53,11 @@ const ArticlePage = () => {
                 <div className="articleSubBlock description">
                     <p>{data.content}</p>
                 </div>
-              </div>
+           </div>
         </div>
       </>
       )}
-    </>
+    </div>
   );
 };
 

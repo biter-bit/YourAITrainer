@@ -13,8 +13,6 @@ h1{
 }
 
 .articleBlock {
-  display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 }
@@ -31,7 +29,6 @@ h1{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  align-items: left;
 }
 
 .link{
@@ -42,4 +39,14 @@ h1{
 
 .Articleimg{
     border: 1px solid #000;
+}
+
+.btn_article{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a {
+  text-decoration: none;
 }

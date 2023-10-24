@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import ArticlePreview from "./ArticlePreview";
-import Burger from "./../components/Burger";
+import Pagination from "./Pagination";
 
 const AppArticle = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
+  const link_api_articles = 'http://127.0.0.1:8000/api/articles/'
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/articles/", {})
+    fetch(link_api_articles, {})
       .then((res) => res.json())
       .then((response) => {
         setData(response.results);
@@ -17,15 +18,16 @@ const AppArticle = () => {
   }, []);
 
   return (
-    <>
-      <Burger />
+    <div className="container-fluid">
+      <button className="logo" onClick={() => window.location.href = '/'}></button>
       {!isLoading &&
         data.map((article) => {
           return (
             <ArticlePreview  key={article.id} article={article} />
           );
         })}
-    </>
+        <Pagination />
+    </div>
   );
 };
 

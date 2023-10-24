@@ -13,6 +13,7 @@ import axios from "axios";
 
 const link_api_auth = 'http://192.168.31.62:8000/api/auth/jwt/create/'
 const link_api_register = 'http://192.168.31.62:8000/api/auth/register/'
+
 class Main extends React.Component {
     constructor(props) {
         super(props)
@@ -84,7 +85,7 @@ class Main extends React.Component {
         }
     }
     async funcRegistered(event) {
-        // регистрация пльзователя
+        // регистрация пользователя
         event.preventDefault()
         const form = event.target
         const formData = new FormData(form)

@@ -184,8 +184,8 @@ class App extends React.Component {
                         />
                     } />
                     <Route path="/modal" element={<ModalWindow checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user}/>} exit={this.exitLogout}/>
-                    <Route path='/articles' element={ <AppArticle  />} />
-                    <Route exact path='/article/:articleId' element={<ArticlePage />} />
+                    <Route path='/articles' element={<AppArticle setModalWindow={this.funcModalWindowActive} modalActive={this.state.modal_window_active}  checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user} exitAccount={this.exitLogout} />}/>
+                    <Route exact path='/article/:articleId' element={<ArticlePage setModalWindow={this.funcModalWindowActive} modalActive={this.state.modal_window_active} checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user} exitAccount={this.exitLogout} />} />
 
                 </Routes>
             </BrowserRouter>
