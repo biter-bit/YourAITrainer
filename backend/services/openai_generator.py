@@ -44,7 +44,7 @@ class ProgramGenerator:
                  f'- "title": the name of the exercise in russian language\n' \
                  f'- "desc": a brief description of the exercise technique for 100 - 150 words in russian language\n' \
                  f'- "number_of_approaches": recommended number of approaches\n' \
-                 f'- "number_of_repetitions": recommended number of repetitions (example 12-15)\n\n' \
+                 f'- "number_of_repetitions": recommended number of repetitions\n\n' \
                  f'When drawing up a training plan, you must take into account the following physical parameters of ' \
                  f'your client:\n' \
                  f'- {"his" if gender == "m" else "her"} weight is now {weight}kg\n' \
@@ -74,7 +74,7 @@ class ProgramGenerator:
         messages = self._create_messages(prompt=prompt)
 
         response = self.openai.ChatCompletion.create(
-            model='gpt-3.5-turbo-16k',
+            model='gpt-4',
             messages=messages,
             temperature=0.3,
         )
