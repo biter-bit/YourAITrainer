@@ -9,8 +9,11 @@ import ModalWindow from "./components/ModalWindow";
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from "axios";
 
-const link_api_auth = 'http://localhost:8000/api/auth/jwt/create/'
-const link_api_register = 'http://localhost:8000/api/auth/register/'
+
+
+const link_api_auth = 'http://192.168.31.62:8000/api/auth/jwt/create/'
+const link_api_register = 'http://192.168.31.62:8000/api/auth/register/'
+
 class Main extends React.Component {
     constructor(props) {
         super(props)
@@ -19,7 +22,7 @@ class Main extends React.Component {
             modelActiveReg: false,
             burger_active: false,
             response: [],
-            error_one: {}
+            exercise: {}
         }
         this.inputClickAuth = this.inputClickAuth.bind(this)
         this.inputClickReg = this.inputClickReg.bind(this)
@@ -31,19 +34,36 @@ class Main extends React.Component {
     render() {
         return (
             <div>
-                <Burger exitAccount={this.props.exitAccount} burger={this.state.burger_active} setBurger={this.funcBurgerActive} checkAuth={this.props.checkAuthentication}/>
+                <Burger
+                    exitAccount={this.props.exitAccount}
+                    burger={this.state.burger_active}
+                    setBurger={this.funcBurgerActive}
+                    checkAuth={this.props.checkAuthentication}
+                />
                 <div className="container">
                     <Menu setActive={this.inputClickAuth} auth={this.props.auth_user} setBurger={this.funcBurgerActive} />
                         <div className="container_body">
-                            <Offer setActive={this.inputClickReg} />
+                            <Offer
+                                setActive={this.inputClickReg}
+                            />
                             <RandomArticles />
                         </div>
-                        <Register active={this.state.modelActiveReg} setActive={this.inputClickReg}
-                                  error={this.state.error_one} setRegister={this.funcRegistered}
-                                  reset={this.resetStatus}/>
-                        <Auth active={this.state.modelActiveAuth} setActive={this.inputClickAuth}
-                              setAuth={this.authorizedAuth} error={this.state.error_one} reset={this.resetStatus}/>
-                        <ModalWindow setModalWindow={this.props.setModalWindow} modalActive={this.props.modalActive}/>
+                        <Register active={this.state.modelActiveReg}
+                                  setActive={this.inputClickReg}
+                                  error={this.props.error_one}
+                                  setRegister={this.funcRegistered}
+                                  funcSetError={this.props.funcChangeError}
+                        />
+                        <Auth active={this.state.modelActiveAuth}
+                              setActive={this.inputClickAuth}
+                              setAuth={this.authorizedAuth}
+                              error={this.props.error_one}
+                              funcSetError={this.props.funcChangeError}
+                        />
+                        <ModalWindow
+                            setModalWindow={this.props.setModalWindow}
+                            modalActive={this.props.modalActive}
+                        />
                 </div>
             </div>
         )
@@ -52,7 +72,6 @@ class Main extends React.Component {
         this.props.checkAuthentication()
         const showModal = new URLSearchParams(window.location.search).get('showModal');
         if (showModal === 'true') {
-            // Здесь отобразите модальное окно
             this.props.setModalWindow();
         }
     }
@@ -80,13 +99,9 @@ class Main extends React.Component {
             this.inputClickReg()
         } catch (error) {
             if (error.response && error.response.status === 400) {
-                this.setState({
-                    error_one: error.response.data
-                })
+                this.props.funcSetError(error.response.data)
             } else {
-                this.setState({
-                    error_one: {'': 'Incorrect data. Please try again.'},
-                });
+                this.props.funcSetError({'': 'Incorrect data. Please try again.'})
             }
         }
     }
@@ -107,13 +122,9 @@ class Main extends React.Component {
             this.inputClickAuth()
         } catch (error) {
             if (error.response && error.response.status === 400) {
-                this.setState({
-                    error_one: error.response.data,
-                });
+                this.props.funcSetError(error.response.data)
             } else {
-                this.setState({
-                    error_one: {'': 'Incorrect username or password. Please try again.'},
-                });
+                this.props.funcSetError({'': 'Incorrect username or password. Please try again.'})
             }
         }
     }
@@ -128,7 +139,7 @@ class Main extends React.Component {
     }
 
     inputClickReg() {
-        // // активирует и деактивирует окно htubcnhfwbb
+        // активирует и деактивирует окно
         if (this.state.modelActiveReg) {
             this.setState({ modelActiveReg: false })
         }
@@ -139,6 +150,10 @@ class Main extends React.Component {
 
     resetStatus() {
         this.setState({ error_one: {}})
+    }
+
+    handleButtonClick(button) {
+
     }
 }
 

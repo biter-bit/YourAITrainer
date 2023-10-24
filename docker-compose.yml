@@ -11,16 +11,32 @@ services:
       POSTGRES_DB: movies
     ports:
       - "5433:5432"
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
   trainer_api:
     build: .
+#    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
-    restart: always
     depends_on:
       - db
     volumes:
       - ./backend/.:/code/backend
     ports:
       - "8000:8000"
+  celery:
+    build: .
+    command: bash -c "sleep 10 && celery -A backend worker --loglevel=info"
+#    environment:
+#      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+#      - CELERY_BROKER=redis://redis:6379/0
+#      - CELERY_BACKEND=redis://redis:6379/0
+    volumes:
+      - ./backend:/code/backend
+    depends_on:
+      - redis
+      - trainer_api
   trainer_front:
     build:
       context: .

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 from datetime import timedelta
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -110,6 +111,17 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'movies',
+#         'USER': 'movies',
+#         'PASSWORD': '123456',
+#         'HOST': 'db',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
@@ -243,5 +255,14 @@ AUTHENTICATION_BACKENDS = {
 #STATICFILES_DIRS = (BASE_DIR/'frontend/build/static',)
 
 
-#MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-#MEDIA_URL = '/media/'
+# Настройки Celery и Redis
+REDIS_HOST = 'redis'
+REDIS_PORT = 6379
+
+CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}/0'
+CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}/0'
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'

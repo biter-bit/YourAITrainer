@@ -3,6 +3,13 @@
     padding: 0;
 }
 
+@font-face {
+    font-family: 'manrope';
+    src: url('Manrope-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     background-color: #1e1e25;
 }
@@ -102,7 +109,6 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .logo {
@@ -216,8 +222,8 @@ body {
 }
 
 .burger_img {
-    width: 40px;
-    height: 40px;
+    width: 55px;
+    height: 55px;
     transition: 1s;
 }
 
@@ -372,10 +378,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-width: 400px;
-    max-width: 400px;
-    min-height: 450px;
-    max-height: 450px;
     background-image: url(../img/one.png);
     background-size: cover;
     margin-bottom: 50px;
@@ -434,13 +436,18 @@ body {
 }
 
 .title_article {
-    width: 300px;
+    width: 200px;
     height: 50px;
+    display: -webkit-box;
+    -wibkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     text-align: center;
     margin-left: 10px;
     margin-right: 10px;
-    overflow: hidden;
-    margin-top: 0px;
+    margin-top: 20px;
     font-size: 20px;
     font-family: "Manrope-SemiBold", Helvetica;
     font-weight: 500;
@@ -462,9 +469,14 @@ body {
 .rectangle {
     margin-top: 20px;
     margin-bottom: 20px;
-    width: 300px;
+    width: 270px;
     height: 216px;
     background-color: #d9d9d9;
+}
+
+.rectangle img {
+    max-width: 100%;
+    height: auto;
 }
 
 .form-control.validation {
@@ -480,7 +492,10 @@ body {
 .short_article {
     width: 300px;
     height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     margin-top: 5px;
+    margin-bottom: 20px;
     font-weight: normal;
     font-size: 15px;
     font-family: "Manrope-SemiBold", Helvetica;
@@ -507,10 +522,10 @@ body {
     }
 
     .burger_button {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
     }
 
     .burger_button.active {
@@ -522,8 +537,8 @@ body {
     }
 
     .burger_img {
-        width: 28px;
-        height: 27px;
+        width: 38px;
+        height: 37px;
     }
 
     .text-wrapper-button {
@@ -655,10 +670,6 @@ body {
     .rectangle {
         width: 231px;
         height: 165px;
-    }
-
-    img {
-        width: 100%;
     }
 
     .window_menu {
