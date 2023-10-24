@@ -34,9 +34,14 @@ class Diary extends React.Component {
                 exerciseActive={this.props.exerciseActive}
                 funcExerciseActive={this.props.funcExerciseActive}
                 funcWindowSettingsActive={this.props.funcWindowSettingsActive}
+                currentTraining={this.props.currentTraining}
+                funcCurrentTrainingChange={this.props.funcCurrentTrainingChange}
             />
             <Exercises
                 exerciseActive={this.props.exerciseActive}
+                trainingProgram={this.props.trainingProgram}
+                currentTraining={this.props.currentTraining}
+                funcCurrentTrainingChange={this.props.funcCurrentTrainingChange}
             />
             <TrainingDiary />
             <WindowSettings

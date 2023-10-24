@@ -39,6 +39,8 @@ class CheckAuthComponent extends React.Component {
             funcWindowSettingsActive={this.props.funcWindowSettingsActive}
             error_one={this.props.error_one}
             funcChangeError={this.props.funcChangeError}
+            currentTraining={this.props.currentTraining}
+            funcCurrentTrainingChange={this.props.funcCurrentTrainingChange}
           />
         );
       } else {

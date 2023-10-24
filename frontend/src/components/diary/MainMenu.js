@@ -8,13 +8,10 @@ import axios from "axios";
 
 const link_api_get_all_data_user = 'http://192.168.31.62:8000/api/programs/get/all'
 class MainMenu extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         data: {}
-    //     }
-    //     this.funcGetData = this.funcGetData.bind(this)
-    // }
+    constructor(props) {
+        super(props);
+        this.hoverTimeout = null;
+    }
     componentDidMount() {
         this.funcGetData()
     }
@@ -40,8 +37,18 @@ class MainMenu extends React.Component {
         }
     }
 
-    funcExerciseActive() {
+    funcExerciseActive(program_id, trainingDay_id) {
+        this.props.funcCurrentTrainingChange({'program': program_id, 'training_day': trainingDay_id})
         this.props.funcExerciseActive()
+    }
+
+    funcMemorizingInformationHover(name) {
+        let result;
+        const element = document.getElementById(name)
+        element.addEventListener("mouseover", function(event) {
+            result = element.getAttribute("data-info");
+        })
+        return result
     }
 
     render() {
@@ -92,8 +99,14 @@ class MainMenu extends React.Component {
                                     {training_days
                                         .filter((trainingDay) => trainingDay.program === program.id)
                                         .map((trainingDay, index) => (
-                                        <ul className="train-list" key={index}>
-                                            <button className={this.props.exerciseActive ? "button-train active" : "button-train"} onClick={e => this.funcExerciseActive()}>
+                                        <ul className="train-list" key={index}
+                                            onMouseEnter={() => this.funcExerciseActive(program.id, trainingDay.id)}
+                                            // onMouseLeave={() => this.funcExerciseActive(program.id, trainingDay.id)}
+                                        >
+                                            <button
+                                                className=
+                                                    {this.props.exerciseActive ? "button-train active" : "button-train"}
+                                            >
                                                 <div>
                                                     Тренировка №{trainingDay.day_num}
                                                 </div>
