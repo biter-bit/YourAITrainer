@@ -25,7 +25,8 @@ class App extends React.Component {
             approachesProgram: {},
             exerciseActive: false,
             windowSettingsActive: false,
-            error_one: {}
+            error_one: {},
+            currentTraining: ''
         };
         this.checkAuth = this.checkAuth.bind(this)
         this.exitLogout = this.exitLogout.bind(this)
@@ -37,6 +38,7 @@ class App extends React.Component {
         this.funcExerciseActive = this.funcExerciseActive.bind(this)
         this.funcWindowSettingsActive = this.funcWindowSettingsActive.bind(this)
         this.funcChangeError = this.funcChangeError.bind(this)
+        this.funcCurrentTrainingChange = this.funcCurrentTrainingChange.bind(this)
     }
     componentDidMount() {
         this.checkAuth().then(r => undefined)
@@ -132,6 +134,15 @@ class App extends React.Component {
         this.setState({error_one: data})
     }
 
+    funcCurrentTrainingChange(program) {
+        const currentTraining = this.state.currentTraining
+        const updatedTraining = {
+            ...currentTraining,
+            ...program
+        }
+        this.setState({currentTraining: updatedTraining})
+    }
+
     render() {
         return (
             <BrowserRouter>
@@ -168,6 +179,8 @@ class App extends React.Component {
                             funcWindowSettingsActive={this.funcWindowSettingsActive}
                             error_one={this.state.error_one}
                             funcChangeError={this.funcChangeError}
+                            currentTraining={this.state.currentTraining}
+                            funcCurrentTrainingChange={this.funcCurrentTrainingChange}
                         />
                     } />
                     <Route path="/modal" element={<ModalWindow checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user}/>} exit={this.exitLogout}/>

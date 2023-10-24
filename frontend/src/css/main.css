@@ -474,6 +474,11 @@ body {
     background-color: #d9d9d9;
 }
 
+.rectangle img {
+    max-width: 100%;
+    height: auto;
+}
+
 .form-control.validation {
     border-color: red
 }
