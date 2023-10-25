@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ArticlePreview from "./ArticlePreview";
-import Pagination from "./Pagination";
+// import Pagination from "./Pagination";
 
 const AppArticle = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
-  const link_api_articles = 'http://127.0.0.1:8000/api/articles/'
+  const link_api_articles = 'http://192.168.31.62:10001/api/articles/'
 
   useEffect(() => {
     fetch(link_api_articles, {})
@@ -26,7 +26,7 @@ const AppArticle = () => {
             <ArticlePreview  key={article.id} article={article} />
           );
         })}
-        <Pagination />
+        {/*<Pagination />*/}
     </div>
   );
 };

@@ -99,9 +99,9 @@ class Main extends React.Component {
             this.inputClickReg()
         } catch (error) {
             if (error.response && error.response.status === 400) {
-                this.props.funcSetError(error.response.data)
+                this.props.funcChangeError(error.response.data)
             } else {
-                this.props.funcSetError({'': 'Incorrect data. Please try again.'})
+                this.props.funcChangeError({'': 'Incorrect data. Please try again.'})
             }
         }
     }
@@ -122,9 +122,9 @@ class Main extends React.Component {
             this.inputClickAuth()
         } catch (error) {
             if (error.response && error.response.status === 400) {
-                this.props.funcSetError(error.response.data)
+                this.props.funcChangeError(error.response.data)
             } else {
-                this.props.funcSetError({'': 'Incorrect username or password. Please try again.'})
+                this.props.funcChangeError({'': 'Incorrect username or password. Please try again.'})
             }
         }
     }
