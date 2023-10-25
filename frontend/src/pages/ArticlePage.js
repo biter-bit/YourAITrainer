@@ -44,7 +44,7 @@ const ArticlePage = () => {
 
               <div className="articleBlock content">
                 <div className="articleSubBlock img">
-                  <img src={data.img}
+                  <img src={data.file}
                     alt={'img ' + data.title}
                     align="left"
                     vspace="5" hspace="5"

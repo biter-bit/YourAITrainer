@@ -5,7 +5,7 @@ const ArticlePreview  = ({article})  => {
         return (
         <div key={article.id} className="articleList">
           <div className="articleListblock Articleimg">
-            <img src={article.img}
+            <img src={article.file}
                     alt={'img ' + article.title}
                     align="left"
                     vspace="5" hspace="5"
