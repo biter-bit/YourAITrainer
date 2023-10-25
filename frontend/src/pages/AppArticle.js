@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ArticlePreview from "./ArticlePreview";
-import Pagination from "./Pagination";
+
 
 const AppArticle = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +26,7 @@ const AppArticle = () => {
             <ArticlePreview  key={article.id} article={article} />
           );
         })}
-        <Pagination />
+
     </div>
   );
 };
