@@ -1,5 +1,6 @@
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.request import Request
 from rest_framework.views import APIView
 from rest_framework.viewsets import ViewSet
 from .models import Program, Workout, TrainingDay, Approach
@@ -86,6 +87,7 @@ class UserAllDataView(APIView):
 
         return Response(user_data)
 
+
 class GenerationAPIView(APIView):
     def post(self, request):
         user = request.user
@@ -126,3 +128,90 @@ class CheckTaskCelery(APIView):
                 return Response({"status": "Fail", 'result': 'Task failed'})
 
         return Response({"status": "Panding"})
+
+
+class SaveTrainingDay(APIView):
+    obj = {
+        "1": [
+            {
+                "id": 1,
+                "time_create": "2023-10-23T19:57:40.014832+03:00",
+                "time_update": "2023-10-23T19:57:40.014844+03:00",
+                "quantity": 13,
+                "result": "13",
+                "workout": 1
+            },
+            {
+                "id": 2,
+                "time_create": "2023-10-23T19:57:40.016514+03:00",
+                "time_update": "2023-10-23T19:57:40.016524+03:00",
+                "quantity": 13,
+                "result": None,
+                "workout": 1
+            },
+            {
+                "id": 3,
+                "time_create": "2023-10-23T19:57:40.017606+03:00",
+                "time_update": "2023-10-23T19:57:40.017642+03:00",
+                "quantity": 13,
+                "result": None,
+                "workout": 1
+            }
+        ],
+        "2": [
+            {
+                "id": 4,
+                "time_create": "2023-10-23T19:57:40.019704+03:00",
+                "time_update": "2023-10-23T19:57:40.019713+03:00",
+                "quantity": 13,
+                "result": "12",
+                "workout": 2
+            },
+            {
+                "id": 5,
+                "time_create": "2023-10-23T19:57:40.020638+03:00",
+                "time_update": "2023-10-23T19:57:40.020645+03:00",
+                "quantity": 13,
+                "result": None,
+                "workout": 2
+            },
+            {
+                "id": 6,
+                "time_create": "2023-10-23T19:57:40.021699+03:00",
+                "time_update": "2023-10-23T19:57:40.021707+03:00",
+                "quantity": 13,
+                "result": None,
+                "workout": 2
+            }
+        ],
+        "3": [
+            {
+                "id": 7,
+                "time_create": "2023-10-23T19:57:40.023860+03:00",
+                "time_update": "2023-10-23T19:57:40.023868+03:00",
+                "quantity": 13,
+                "result": None,
+                "workout": 3
+            },
+            {
+                "id": 8,
+                "time_create": "2023-10-23T19:57:40.024804+03:00",
+                "time_update": "2023-10-23T19:57:40.024811+03:00",
+                "quantity": 13,
+                "result": None,
+                "workout": 3
+            },
+            {
+                "id": 9,
+                "time_create": "2023-10-23T19:57:40.025615+03:00",
+                "time_update": "2023-10-23T19:57:40.025622+03:00",
+                "quantity": 13,
+                "result": None,
+                "workout": 3
+            }
+        ]
+    }
+
+    def post(self, request: Request):
+        data = request.data
+        print(data)

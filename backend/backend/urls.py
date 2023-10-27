@@ -26,6 +26,8 @@ from programs.views import (ProgramsAPIView, ApproachesAPIView, WorkoutAPIView, 
 from django.conf import settings
 from django.conf.urls.static import static
 
+from programs.views import SaveTrainingDay
+
 router = DefaultRouter()
 router.register('users', UserListView, basename="users")
 router.register('articles', ArticleModelViewSet, basename="articles")
@@ -49,6 +51,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', include('djoser.urls')),
     path('api/auth/', include('djoser.urls.jwt')),
+    path('api/save', SaveTrainingDay.as_view(), name='save_approaches'),
     # path('api/auth/custom-token-create/', CustomTokenCreateView.as_view(), name='custom_token_create')
     # path("user/", UserDetailsView.as_view(), name="rest_user_details"),
 ]
