@@ -20,7 +20,7 @@ const ArticlePage = () => {
   }, [articleId]);
 
   return (
-    <div className="container-fluid">
+    <div className="container">
         <div className="btn_article">
           <button className="logo" onClick={() => window.location.href = '/'}></button>
           <Link className="button_sign active" to="/articles">Статьи</Link>

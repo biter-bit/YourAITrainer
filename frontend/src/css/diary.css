@@ -185,10 +185,10 @@
 }
 
 .train-menu {
-    padding: 11px 40px;
+    padding: 25px 40px;
     list-style-type: none;
     background-image: url(../img/Star 2.png);
-    background-position: 12px 14px;
+    background-position: 12px 29px;
     background-repeat: no-repeat;
     color: #FFF;
     font-family: Manrope;
@@ -196,7 +196,12 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
 
+.train-menu.active {
+    color: #00EDDF;
+    background-color: #323232;
+    border-radius: 6px;
 }
 
 .train-menu:hover {
@@ -210,6 +215,10 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
+}
+
+.train-list.active {
+    display: block
 }
 
 .train-menu:hover .train-list {
@@ -418,9 +427,15 @@
     width: 34px;
     height: 34px;
     flex-shrink: 0;
-    margin-right: -8px;
+    margin-right: 0;
     cursor: pointer;
     transition: 1s;
+}
+
+.img-diary-main-4 {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 
 .img-diary-main-2:hover {
@@ -479,8 +494,67 @@
     .diary-main_1-prouch-com {
         display: none;
     }
+}
+
+@media (max-width: 375px) {
+    .diary-main_1-prouch-com {
+        display: none;
+    }
+
+    .container-diary-background {
+        display: flex;
+        justify-content: center;
+
+    }
+
     .text-diary-main-3 {
         display: none;
+    }
+    .container-content-diary{
+        flex-direction: column;
+        padding: 0;
+        margin-left: 0;
+        margin-right: 0;
+        align-items: center;
+    }
+    .diary-main-menu {
+        display: none;
+    }
+    .diary-main_1 {
+        display: none;
+    }
+    .diary-container-list-program {
+        max-height: 300px;
+    }
+    .diary-container-diary-main-button {
+        position: fixed;
+        botton: 20px;
+        right: 20px;
+    }
+    .diary-container-window-user {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        /* width: 248px; */
+        /* margin-right: 5px; */
+        max-height: 1080px;
+    }
+    .logo-name {
+        color: #FFF;
+        font-family: Manrope;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .logo-diary {
+        width: 40px;
+        height: 47px;
+        flex-shrink: 0;
+    }
+    .container-logo {
+        justify-content: space-around;
     }
 }
 
