@@ -50,8 +50,8 @@ const ArticlePage = () => {
                     vspace="5" hspace="5"
                   />
                 </div>
-                <div className="articleSubBlock description">
-                    <p>{data.content}</p>
+                <div className="articleSubBlock article_text">
+                    <pre>{data.content}</pre>
                 </div>
            </div>
         </div>
