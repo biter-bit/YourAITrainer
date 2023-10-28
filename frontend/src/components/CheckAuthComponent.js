@@ -41,6 +41,17 @@ class CheckAuthComponent extends React.Component {
             funcChangeError={this.props.funcChangeError}
             currentTraining={this.props.currentTraining}
             funcCurrentTrainingChange={this.props.funcCurrentTrainingChange}
+            exerciseActive2={this.props.exerciseActive2}
+            funcExerciseActive2={this.props.funcExerciseActive2}
+            approachesTags={this.props.approachesTags}
+            funcAddApproach={this.props.funcAddApproach}
+            indexApproach={this.props.indexApproach}
+            funcIndexApproach={this.props.funcIndexApproach}
+            funcDeleteApproach={this.props.funcDeleteApproach}
+            funcHandleInputChange={this.props.funcHandleInputChange}
+            statusDataSend={this.props.statusDataSend}
+            funcSendDataOnBackend={this.props.funcSendDataOnBackend}
+            logout={this.props.logout}
           />
         );
       } else {

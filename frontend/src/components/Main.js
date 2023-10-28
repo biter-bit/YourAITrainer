@@ -59,7 +59,6 @@ class Main extends React.Component {
         }
     }
     funcBurgerActive() {
-        console.log(this.state.burger_active)
         if (this.state.burger_active) {
             this.setState({ burger_active: false })
         }

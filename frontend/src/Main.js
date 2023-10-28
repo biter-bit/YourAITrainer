@@ -27,7 +27,6 @@ class Main extends React.Component {
         this.inputClickAuth = this.inputClickAuth.bind(this)
         this.inputClickReg = this.inputClickReg.bind(this)
         this.authorizedAuth = this.authorizedAuth.bind(this)
-        this.funcBurgerActive = this.funcBurgerActive.bind(this)
         this.funcRegistered = this.funcRegistered.bind(this)
         this.resetStatus = this.resetStatus.bind(this)
     }
@@ -36,12 +35,13 @@ class Main extends React.Component {
             <div>
                 <Burger
                     exitAccount={this.props.exitAccount}
-                    burger={this.state.burger_active}
-                    setBurger={this.funcBurgerActive}
+                    burger={this.props.burger_active}
+                    setBurger={this.props.funcBurgerActive}
                     checkAuth={this.props.checkAuthentication}
+                    logout={this.props.logout}
                 />
                 <div className="container">
-                    <Menu setActive={this.inputClickAuth} auth={this.props.auth_user} setBurger={this.funcBurgerActive} />
+                    <Menu setActive={this.inputClickAuth} auth={this.props.auth_user} setBurger={this.props.funcBurgerActive} />
                         <div className="container_body">
                             <Offer
                                 setActive={this.inputClickReg}
@@ -73,15 +73,6 @@ class Main extends React.Component {
         const showModal = new URLSearchParams(window.location.search).get('showModal');
         if (showModal === 'true') {
             this.props.setModalWindow();
-        }
-    }
-
-    funcBurgerActive() {
-        if (this.state.burger_active) {
-            this.setState({ burger_active: false })
-        }
-        else {
-            this.setState({ burger_active: true })
         }
     }
     async funcRegistered(event) {

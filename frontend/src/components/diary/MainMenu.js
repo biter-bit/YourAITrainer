@@ -7,6 +7,7 @@ import axios from "axios";
 
 
 const link_api_get_all_data_user = 'http://192.168.31.62:8000/api/programs/get/all'
+
 class MainMenu extends React.Component {
     constructor(props) {
         super(props);
@@ -37,9 +38,12 @@ class MainMenu extends React.Component {
         }
     }
 
-    funcExerciseActive(program_id, trainingDay_id) {
-        this.props.funcCurrentTrainingChange({'program': program_id, 'training_day': trainingDay_id})
-        this.props.funcExerciseActive()
+    funcExerciseActive() {
+        this.props.funcExerciseActive(true)
+    }
+
+    funcExerciseDeactivate() {
+        setTimeout(() => this.props.funcExerciseActive(false), 500);
     }
 
     funcMemorizingInformationHover(name) {
@@ -50,6 +54,8 @@ class MainMenu extends React.Component {
         })
         return result
     }
+
+
 
     render() {
         const data_program = this.props.trainingProgram['programs']
@@ -100,12 +106,13 @@ class MainMenu extends React.Component {
                                         .filter((trainingDay) => trainingDay.program === program.id)
                                         .map((trainingDay, index) => (
                                         <ul className="train-list" key={index}
-                                            onMouseEnter={() => this.funcExerciseActive(program.id, trainingDay.id)}
-                                            // onMouseLeave={() => this.funcExerciseActive(program.id, trainingDay.id)}
+                                            onMouseEnter={() => this.props.funcCurrentTrainingChange({'program': program.id, 'training_day': trainingDay.id})}
                                         >
                                             <button
                                                 className=
                                                     {this.props.exerciseActive ? "button-train active" : "button-train"}
+                                                onMouseEnter={() => this.funcExerciseActive()}
+                                                onMouseLeave={() => this.funcExerciseDeactivate()}
                                             >
                                                 <div>
                                                     Тренировка №{trainingDay.day_num}
@@ -127,14 +134,12 @@ class MainMenu extends React.Component {
                             </a>
                         </li>
                         <li className="diary-main-element_list">
-                            <a className='diary-main-element' href="#">
+                            <a href='https://justsport.info/' className='diary-main-element'>
                                 Статьи
                             </a>
                         </li>
                         <li className="diary-main-element_list">
-                            <a className='diary-main-element' href="#">
-                                Выход
-                            </a>
+                            <Link className="diary-main-element" to="/" onClick={this.props.logout}>Выход</Link>
                         </li>
                     </ul>
                 </div>
