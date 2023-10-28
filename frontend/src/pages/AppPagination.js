@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import Articles from "./Articles";
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
 import Pagination from "./Pagination";
 
 const link_api_articles = 'http://127.0.0.1:8000/api/articles/';
-const ROWS_PER_PAGE = 10 //count of articles on page
 
-const AppArticle = () => {
+const AppPagination = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
   const [currentPage, setCurrentPage] = useState(1);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     fetch(link_api_articles, {})
@@ -18,30 +18,30 @@ const AppArticle = () => {
         setIsLoading(false)
       })
       .catch((error) => console.log(error))
-  }, [])
+  }, []);
 
   const lastArticleIndex = currentPage * ROWS_PER_PAGE
   const firstArticleIndex = lastArticleIndex - ROWS_PER_PAGE
-  const currentArticle = data.slice(firstArticleIndex, lastArticleIndex)
+  //const currentArticle = Array.prototype.slice.call(data,firstArticleIndex, lastArticleIndex)
   const pagination = pageNumber => setCurrentPage(pageNumber)
 
-  return (
-    <div className="container-fluid ">
-    <div className="articleListmargin">
-      <button className="logo" onClick={() => window.location.href = '/'}></button>
-      {!isLoading && (
+  //console.log(Object.entries(data).slice(0,1).map(entry => entry[1]))
+
+  //console.log(Array.prototype.slice.call(data,1,3))
+  //console.log(Object.keys(data).length)
+
+
+  return(
         <>
-            <Articles articles={currentArticle} />
+            {!isLoading && (
             <Pagination
                 ROWS_PER_PAGE={ROWS_PER_PAGE}
-                totalArticles={data.length}
+                totalArticles={Object.keys(data).length}
                 pagination={pagination}
-            />
-         </>)
-        }
-    </div>
-    </div>
-  );
+            />)}
+        </>
+    )
 };
 
-export default AppArticle;
+export default AppPagination;
+
