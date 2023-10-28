@@ -26,7 +26,7 @@ h1{
    justify-content: flex-start;
    word-break: break-all;
    background-color: #fff;
-   padding: 15px 0;
+   padding: 15px 15px;
    border: 1px solid #000;
 }
 
