@@ -6,7 +6,9 @@ import ClipLoader from "react-spinners/ClipLoader";
 import axios from "axios";
 
 
-const link_api_get_all_data_user = 'http://192.168.31.62:8000/api/programs/get/all'
+const link_api_get_all_data_user = 'http://localhost:8000/api/programs/get/all'
+const link_api_user_profile = 'http://localhost:8000/api/users/profile'
+
 class MainMenu extends React.Component {
     constructor(props) {
         super(props);
@@ -14,6 +16,7 @@ class MainMenu extends React.Component {
     }
     componentDidMount() {
         this.funcGetData()
+        this.loadProfileData()
     }
 
     async funcGetData() {
@@ -29,6 +32,24 @@ class MainMenu extends React.Component {
                 // this.setState({data: res['data']})
                 this.props.setTrainingProgram(res['data'])
                 this.props.setLoadingProgram()
+            } else {
+                console.error('error')
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    async loadProfileData() {
+        const access = localStorage.getItem("access")
+        try {
+            if (access) {
+                const res = await axios.get(link_api_user_profile, {
+                    headers: {
+                        "Authorization": `Bearer ${access}`
+                    }
+                })
+                this.props.funcSetProfile(res['data'])
             } else {
                 console.error('error')
             }
@@ -67,7 +88,7 @@ class MainMenu extends React.Component {
 
                     <div className="diary-container-icon-name-user">
                         <img className="diary-icon-user" src={rectangle} alt="foto1" />
-                        <p className="diary-name-user">Иван Петрович Иванов</p>
+                        <p className="diary-name-user">{this.props.profile['username']}</p>
                     </div>
                     <div>
                         <button className="diary-button-generic-program" onClick={() => this.props.funcWindowSettingsActive()}>
@@ -122,7 +143,11 @@ class MainMenu extends React.Component {
                 <div className="diary-main-menu">
                     <ul className="diary-main-list">
                         <li className="diary-main-element_list">
-                            <a className='diary-main-element' href="#">
+                            <a className='diary-main-element' href="profile"
+                                onClick={(element) => {
+                                    element.preventDefault();
+                                    this.props.funcWindowProfileActive();
+                                }}>
                                 Личный кабинет
                             </a>
                         </li>

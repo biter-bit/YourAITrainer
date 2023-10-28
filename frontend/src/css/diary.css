@@ -489,3 +489,41 @@
 /*        display: none;*/
 /*    }*/
 /*}*/
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-height: 1180px) {
+    .diary-settings-modal-content.active{
+        overflow-y: auto;
+        max-height: 950px;
+    }
+}
+
+@media (max-height: 900px) {
+    .diary-settings-modal-content.active{
+        overflow-y: auto;
+        max-height: 800px;
+    }
+
+    .name_reg {
+        font-size:x-large;
+    }
+}
+
+@media (max-height: 750px) {
+    .diary-settings-modal-content.active{
+        overflow-y: auto;
+        max-height: 600px;
+    }
+
+    .name_reg {
+        font-size:large;
+    }
+
+    .form-label, .form-control {
+        font-size:smaller;
+    }
+}

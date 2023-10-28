@@ -9,7 +9,7 @@ import CheckAuthComponent from "./components/CheckAuthComponent";
 import axios from "axios";
 import ModalWindow from "./components/ModalWindow";
 
-const link_api_verify = 'http://192.168.31.62:8000/api/auth/jwt/verify/'
+const link_api_verify = 'http://localhost:8000/api/auth/jwt/verify/'
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -24,7 +24,9 @@ class App extends React.Component {
             workoutProgram: {},
             approachesProgram: {},
             exerciseActive: false,
+            profile: {},
             windowSettingsActive: false,
+            windowProfileActive: false,
             error_one: {},
             currentTraining: ''
         };
@@ -36,7 +38,9 @@ class App extends React.Component {
         this.funcAddTrainingDay = this.funcAddTrainingDay.bind(this)
         this.funcLoadingTrainingSuccess = this.funcLoadingTrainingSuccess.bind(this)
         this.funcExerciseActive = this.funcExerciseActive.bind(this)
+        this.funcSetProfile = this.funcSetProfile.bind(this)
         this.funcWindowSettingsActive = this.funcWindowSettingsActive.bind(this)
+        this.funcWindowProfileActive = this.funcWindowProfileActive.bind(this)
         this.funcChangeError = this.funcChangeError.bind(this)
         this.funcCurrentTrainingChange = this.funcCurrentTrainingChange.bind(this)
     }
@@ -122,11 +126,23 @@ class App extends React.Component {
         }
     }
 
+    funcSetProfile(profile_data){
+        this.state.profile = profile_data
+    }
+
     funcWindowSettingsActive() {
         if (this.state.windowSettingsActive) {
             this.setState({windowSettingsActive: false})
         } else {
             this.setState({windowSettingsActive: true})
+        }
+    }
+
+    funcWindowProfileActive() {
+        if (this.state.windowProfileActive) {
+            this.setState({windowProfileActive: false})
+        } else {
+            this.setState({windowProfileActive: true})
         }
     }
 
@@ -176,7 +192,11 @@ class App extends React.Component {
                             exerciseActive={this.state.exerciseActive}
                             funcExerciseActive={this.funcExerciseActive}
                             windowSettingsActive={this.state.windowSettingsActive}
+                            profile={this.state.profile}
+                            funcSetProfile={this.funcSetProfile}
                             funcWindowSettingsActive={this.funcWindowSettingsActive}
+                            windowProfileActive={this.state.windowProfileActive}
+                            funcWindowProfileActive={this.funcWindowProfileActive}
                             error_one={this.state.error_one}
                             funcChangeError={this.funcChangeError}
                             currentTraining={this.state.currentTraining}

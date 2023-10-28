@@ -19,3 +19,20 @@ class UserModelSerializer(UserCreateSerializer):
         user.set_password(password)
         user.save()
         return user
+
+
+class UserProfileSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField(allow_blank=True)
+    password_confirmation = serializers.CharField(allow_blank=True)
+    email = serializers.CharField()
+    gender = serializers.CharField()
+    age = serializers.IntegerField()
+    weight = serializers.IntegerField()
+    height = serializers.IntegerField()
+    training_level = serializers.CharField()
+    purpose_of_training = serializers.CharField()
+
+    class Meta:
+        model = CustomUser
+        fields = '__all__'
