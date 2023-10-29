@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from article.views import ArticleModelViewSet
-from authentication.views import UserListView, RegisterViewSet
+from authentication.views import UserListView, RegisterViewSet, CurrentUserProfile
 from rest_framework.routers import DefaultRouter
 from django.views.generic import RedirectView
 from programs.views import (ProgramsAPIView, ApproachesAPIView, WorkoutAPIView, TrainingDayAPIView,
@@ -51,6 +51,8 @@ urlpatterns = [
     path('api/auth/', include('djoser.urls.jwt')),
     # path('api/auth/custom-token-create/', CustomTokenCreateView.as_view(), name='custom_token_create')
     # path("user/", UserDetailsView.as_view(), name="rest_user_details"),
+    path('api/users/profile', CurrentUserProfile.as_view(), name='profile'),
+    path('api/users/profile/update', CurrentUserProfile.as_view(), name='profile_update'),
 ]
 
 if settings.DEBUG:

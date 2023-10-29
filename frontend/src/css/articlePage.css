@@ -59,3 +59,29 @@ h1{
 a {
   text-decoration: none;
 }
+
+
+.article_text{
+    width: 100%;
+}
+
+pre{
+    text-wrap: wrap;
+    word-break: keep-all;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.container-fluid {
+        max-width: 1600px;
+        padding: 20px 120px;
+    }
+
+@media (max-width: 960px) {
+    .container-fluid {
+        padding: 20px 20px;
+        max-width: 375px;
+        min-width: 300px;
+    }
+
+}
