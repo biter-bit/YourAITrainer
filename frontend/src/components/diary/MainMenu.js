@@ -6,8 +6,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 import axios from "axios";
 
 
-const link_api_get_all_data_user = 'http://192.168.31.62:8000/api/programs/get/all'
-const link_api_user_profile = 'http://192.168.31.62:8000/api/users/profile'
+const link_api_get_all_data_user = 'http://localhost:8000/api/programs/get/all'
+const link_api_user_profile = 'http://localhost:8000/api/users/profile'
 
 class MainMenu extends React.Component {
     constructor(props) {
@@ -31,6 +31,7 @@ class MainMenu extends React.Component {
                 })
                 // this.setState({data: res['data']})
                 this.props.setTrainingProgram(res['data'])
+                console.log(this.props.trainingProgram)
                 this.props.setLoadingProgram()
             } else {
                 console.error('error')

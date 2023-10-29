@@ -9,8 +9,8 @@ import CheckAuthComponent from "./components/CheckAuthComponent";
 import axios from "axios";
 import ModalWindow from "./components/ModalWindow";
 
-const link_api_verify = 'http://192.168.31.62:8000/api/auth/jwt/verify/'
-const link_send_data = 'http://192.168.31.62:8000/api/save/'
+const link_api_verify = 'http://localhost:8000/api/auth/jwt/verify/'
+const link_send_data = 'http://localhost:8000/api/save/'
 class App extends React.Component {
     constructor(props) {
         super(props);

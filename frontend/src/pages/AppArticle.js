@@ -9,7 +9,7 @@ const AppArticle = () => {
   const [isLoading, setIsLoading] = useState(true);
 // <<<<<<< HEAD
 //   const [data, setData] = useState();
-//   const link_api_articles = 'http://192.168.31.62:8000/api/articles/'
+//   const link_api_articles = 'http://localhost:8000/api/articles/'
 // =======
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
