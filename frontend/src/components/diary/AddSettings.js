@@ -47,7 +47,6 @@ class WindowSettings extends React.Component {
                 //     this.props.setTrainingProgram(res.data)
                 //     console.log(this.props.trainingProgram)
                 // })
-                console.log('Task result:', result)
             } else if (response.data.status === 'Fail') {
                 this.props.setLoadingProgram()
                 console.error("Task failed")
