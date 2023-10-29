@@ -494,6 +494,9 @@
     .diary-main_1-prouch-com {
         display: none;
     }
+    .text-diary-main-3 {
+        display: none;
+    }
 }
 
 @media (max-width: 375px) {

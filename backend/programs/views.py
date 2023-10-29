@@ -140,4 +140,5 @@ class SaveTrainingDay(APIView):
                     approach.quantity = res_approach['quantity']
                     approach.result = res_approach['result']
                     approach.save()
+        return Response({"status": "Ok"})
 

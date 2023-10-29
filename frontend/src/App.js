@@ -10,7 +10,7 @@ import axios from "axios";
 import ModalWindow from "./components/ModalWindow";
 
 const link_api_verify = 'http://localhost:8000/api/auth/jwt/verify/'
-const link_send_data = 'http://localhost:8000/api/save/'
+const link_send_data = 'http://localhost:8000/api/save'
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -269,6 +269,11 @@ class App extends React.Component {
 
     async funcSendDataOnBackend() {
         const data = this.state.currentTraining
+        delete data.exercize
+        delete data.program
+        delete data.training_day
+        delete data.undefined
+        console.log(data)
         const result = await axios.post(link_send_data, data)
         console.log(`Ok - ${result}`)
         console.log(result)
