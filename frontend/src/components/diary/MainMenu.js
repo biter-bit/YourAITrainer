@@ -59,14 +59,9 @@ class MainMenu extends React.Component {
         }
     }
 
-    funcExerciseActive(program_id, trainingDay_id) {
-        this.props.funcCurrentTrainingChange({'program': program_id, 'training_day': trainingDay_id})
+    funcExerciseActive() {
         this.props.funcExerciseActive(true)
     }
-
-//     funcExerciseActive() {
-//         this.props.funcExerciseActive(true)
-//     }
 
     funcExerciseDeactivate() {
         setTimeout(() => this.props.funcExerciseActive(false), 500);
