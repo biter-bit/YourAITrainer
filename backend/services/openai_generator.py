@@ -52,7 +52,7 @@ class ProgramGenerator:
                  f'- {"his" if gender == "m" else "her"} main goal is {self.purpose_sub_prompt[purpose_of_training]}\n' \
                  f'- {"his" if gender == "m" else "her"} experience is {self.level_sub_prompt[training_level]}.\n' \
                  f'Refer to trustworthy sources.\n' \
-                 f'Generate all 1 classes at once.'
+                 f'Generate all 12 classes at once.'
 
         return prompt
 
@@ -82,3 +82,18 @@ class ProgramGenerator:
         json_result = response.choices[0].message.content
 
         return json.loads(json_result)
+
+
+if __name__ == '__main__':
+    generator = ProgramGenerator(openai_token='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')
+    result = generator.gen_program(
+        gender='m',
+        age=38,
+        weight=88,
+        height=180,
+        training_level='beginner',
+        purpose_of_training='weight_loss'
+    )
+
+    with open('result.json', 'w', encoding='utf-8') as json_file:
+        json_file.write(json.dumps(result))

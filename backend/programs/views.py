@@ -1,5 +1,6 @@
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.request import Request
 from rest_framework.views import APIView
 from rest_framework.viewsets import ViewSet
 from .models import Program, Workout, TrainingDay, Approach
@@ -86,6 +87,7 @@ class UserAllDataView(APIView):
 
         return Response(user_data)
 
+
 class GenerationAPIView(APIView):
     def post(self, request):
         user = request.user
@@ -126,3 +128,16 @@ class CheckTaskCelery(APIView):
                 return Response({"status": "Fail", 'result': 'Task failed'})
 
         return Response({"status": "Panding"})
+
+
+class SaveTrainingDay(APIView):
+    def post(self, request: Request):
+        data: dict = request.data
+        for _, workout in data.items():
+            for res_approach in workout:
+                approach = Approach.objects.get(id=res_approach['id'])
+                if approach.quantity != res_approach['quantity'] or approach.result != res_approach['result']:
+                    approach.quantity = res_approach['quantity']
+                    approach.result = res_approach['result']
+                    approach.save()
+
