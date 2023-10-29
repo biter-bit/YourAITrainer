@@ -6,6 +6,7 @@
   background-color: #fff;
   padding-left: 10px;
   padding-right: 10px;
+  align-items: center;
 }
 
 h1{
@@ -13,8 +14,10 @@ h1{
 }
 
 .articleBlock {
+  display: flex;
   justify-content: space-between;
   align-items: center;
+  text-align: justify;
 }
 
 .articleList{
@@ -23,18 +26,24 @@ h1{
    justify-content: flex-start;
    word-break: break-all;
    background-color: #fff;
+   padding: 15px 15px;
+   border: 1px solid #000;
+}
+
+.articleListmargin{
+   margin: 1rem;
 }
 
 .content {
-  display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 }
 
 .link{
-  font-family: fantasy;
-  color: blue;
   font-style: italic;
+  gap: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .Articleimg{
