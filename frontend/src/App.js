@@ -174,12 +174,15 @@ class App extends React.Component {
             ...program,
             ...allApproaches
             }
+            console.log(updatedTraining)
             this.setState({currentTraining: updatedTraining})
         } else {
+            // const status = {"status": currentTraining['exercize']}
             const updatedTraining = {
                 ...currentTraining,
                 ...program,
             }
+            console.log(updatedTraining)
             this.setState({currentTraining: updatedTraining})
         }
 
@@ -273,10 +276,9 @@ class App extends React.Component {
         delete data.program
         delete data.training_day
         delete data.undefined
-        console.log(data)
         const result = await axios.post(link_send_data, data)
-        console.log(`Ok - ${result}`)
-        console.log(result)
+        // console.log(`Ok - ${result}`)
+        // console.log(result)
     }
 
     logout = () => {

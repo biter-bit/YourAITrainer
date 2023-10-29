@@ -4,10 +4,11 @@ import basket from "../../img/basket.png"
 import app from "../../App";
 
 class TrainingDiary extends React.Component {
+
     render() {
-        if (this.props.currentTraining['exercize']) {
-            console.log(this.props.currentTraining)
-        }
+        // if (this.props.currentTraining['exercize']) {
+        //     console.log(this.props.currentTraining)
+        // }
         return (
             <div className="diary-container-diary-main">
 
@@ -35,23 +36,16 @@ class TrainingDiary extends React.Component {
                                             <input type='text' className='text-diary-main-2'
                                                    placeholder={index + 1} disabled name="number"
                                                    data-number-approach={index}/>
-                                            <input type='text' className='text-diary-main-2' placeholder='...'
-                                                   name="weight" data-number-approach={index}/>
-                                            {!approach.result && !approach.quantity ?
-                                                <input type='text' className='text-diary-main-2'
-                                                       placeholder='...' name="result" data-number-approach={index}
-                                                       onChange={this.props.funcHandleInputChange} value=""
-                                                /> :
-                                                (!approach.result ?
-                                                    <input type='text' className='text-diary-main-2'
-                                                           placeholder={approach.quantity} name="result"
-                                                           data-number-approach={index}
-                                                           onChange={this.props.funcHandleInputChange} value=""/> :
-                                                    <input type='text' className='text-diary-main-2'
-                                                           placeholder={approach.result} name="result"
-                                                           data-number-approach={index}
-                                                           onChange={this.props.funcHandleInputChange} value={approach.result}/>
-                                            )}
+                                            <input type='text' className='text-diary-main-2'
+                                                   placeholder={approach.result || '...'}
+                                                   name="result" data-number-approach={index}
+                                                   onChange={this.props.funcHandleInputChange} value={approach.result || '...'}
+                                            />
+                                            <input type='text' className='text-diary-main-2'
+                                                   placeholder={approach.quantity || '...'}
+                                                   name="quantity" data-number-approach={index}
+                                                   onChange={this.props.funcHandleInputChange} value={approach.quantity || '...'}
+                                            />
                                             <input type='text' className='text-diary-main-3' placeholder='...'
                                                    name="comments" data-number-approach={index}/>
                                             <img className='img-diary-main-4' src={basket} onClick={() => this.props.funcDeleteApproach(index)}/>

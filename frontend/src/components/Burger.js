@@ -14,7 +14,7 @@ class BurgerMenu extends React.Component {
                         </button>
                         <div className="buttons_menu">
                             <Link className="button_diary" to="/diary">Дневник</Link>
-                            <a href='https://justsport.info/' className="button_articles">Статьи</a>
+                            <Link to='articles/' className="button_articles">Статьи</Link>
                             <button className="button_logout" onClick={this.props.logout}>Выход</button>
                         </div>
                     </div>

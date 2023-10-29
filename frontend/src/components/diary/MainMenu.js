@@ -159,9 +159,9 @@ class MainMenu extends React.Component {
                             </a>
                         </li>
                         <li className="diary-main-element_list">
-                            <a href='https://justsport.info/' className='diary-main-element'>
+                            <Link to='/articles' className='diary-main-element'>
                                 Статьи
-                            </a>
+                            </Link>
                         </li>
                         <li className="diary-main-element_list">
                             <Link className="diary-main-element" to="/" onClick={this.props.logout}>Выход</Link>
