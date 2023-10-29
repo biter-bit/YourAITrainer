@@ -5,6 +5,7 @@ import Exercises from "./components/diary/Exercises";
 import TrainingDiary from "./components/diary/TrainingDiary";
 import ClipLoader from "react-spinners/ClipLoader";
 import WindowSettings from "./components/diary/AddSettings"
+import WindowProfile from "./components/Profile"
 
 
 class Diary extends React.Component {
@@ -32,7 +33,10 @@ class Diary extends React.Component {
                 setLoadingTraining={this.props.setLoadingTraining}
                 exerciseActive={this.props.exerciseActive}
                 funcExerciseActive={this.props.funcExerciseActive}
+                profile={this.props.profile}
+                funcSetProfile={this.props.funcSetProfile}
                 funcWindowSettingsActive={this.props.funcWindowSettingsActive}
+                funcWindowProfileActive={this.props.funcWindowProfileActive}
                 currentTraining={this.props.currentTraining}
                 funcCurrentTrainingChange={this.props.funcCurrentTrainingChange}
                 exerciseActive2={this.props.exerciseActive2}
@@ -69,6 +73,15 @@ class Diary extends React.Component {
                 error_one={this.props.error_one}
                 funcChangeError={this.props.funcChangeError}
 
+            />
+
+            <WindowProfile
+                profile={this.props.profile}
+                windowProfileActive={this.props.windowProfileActive}
+                funcWindowProfileActive={this.props.funcWindowProfileActive}
+                error_one={this.props.error_one}
+                funcChangeError={this.props.funcChangeError}
+                error={""}
             />
           </div>
         </div>

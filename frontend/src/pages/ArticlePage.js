@@ -6,7 +6,7 @@ const ArticlePage = () => {
     const {articleId } = useParams();
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState();
-    const link_api_article_id = `http://192.168.31.62:8000/api/articles/${articleId}/`;
+    const link_api_article_id = `http://localhost:8000/api/articles/${articleId}/`;
 
   useEffect(() => {
     fetch(link_api_article_id, {})
@@ -50,8 +50,8 @@ const ArticlePage = () => {
                     vspace="5" hspace="5"
                   />
                 </div>
-                <div className="articleSubBlock description">
-                    <p>{data.content}</p>
+                <div className="articleSubBlock article_text">
+                    <pre>{data.content}</pre>
                 </div>
            </div>
         </div>
