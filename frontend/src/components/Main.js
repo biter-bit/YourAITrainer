@@ -9,8 +9,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import axios from "axios";
 
 
-const link_api_auth = 'http://localhost:10001/api/auth/jwt/create/'
-const link_api_register = 'http://localhost:10001/api/auth/register/'
+const link_api_auth = 'http://192.168.31.62:8000/api/auth/jwt/create/'
+const link_api_register = 'http://192.168.31.62:8000/api/auth/register/'
 class Main extends React.Component {
         constructor(props) {
         super(props)

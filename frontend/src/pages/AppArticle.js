@@ -5,7 +5,7 @@ import ArticlePreview from "./ArticlePreview";
 const AppArticle = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
-  const link_api_articles = 'http://localhost:10001/api/articles/'
+  const link_api_articles = 'http://192.168.31.62:8000/api/articles/'
 
   useEffect(() => {
     fetch(link_api_articles, {})

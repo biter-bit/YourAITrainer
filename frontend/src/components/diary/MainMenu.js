@@ -6,8 +6,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 import axios from "axios";
 
 
-const link_api_get_all_data_user = 'http://localhost:8000/api/programs/get/all'
-const link_api_user_profile = 'http://localhost:8000/api/users/profile'
+const link_api_get_all_data_user = 'http://192.168.31.62:8000/api/programs/get/all'
+const link_api_user_profile = 'http://192.168.31.62:8000/api/users/profile'
 
 class MainMenu extends React.Component {
     constructor(props) {
@@ -61,7 +61,8 @@ class MainMenu extends React.Component {
     funcExerciseActive(program_id, trainingDay_id) {
         this.props.funcCurrentTrainingChange({'program': program_id, 'training_day': trainingDay_id})
         this.props.funcExerciseActive()
-      
+    }
+
 //     funcExerciseActive() {
 //         this.props.funcExerciseActive(true)
 //     }
