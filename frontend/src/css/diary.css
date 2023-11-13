@@ -56,9 +56,15 @@
 }
 
 .diary-container-diary-main {
+    display: none;
+}
+
+.diary-container-diary-main.active {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    width: 100%;
+    height: 100%;
 }
 
 .container-diary-background {
@@ -79,7 +85,7 @@
 .diary-container-window-user {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     width: 248px;
     font: #FFFFFF;
@@ -97,6 +103,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    align-self: center;
     transition: 1s;
     cursor: pointer;
     text-decoration: none;
@@ -136,7 +143,6 @@
 }
 
 .diary-container-icon-name-user {
-    margin-top: 6px;
     width: 100%;
     display: flex;
     border-top: 1px solid #646464;
@@ -144,6 +150,8 @@
     height: 88px;
     justify-content: space-around;
     align-items: center;
+    align-self: flex-start;
+    margin-top: 22px
 }
 
 .diary-name-user {
@@ -163,6 +171,7 @@
     border-radius: 6px;
     background: #323232;
     margin-top: 47px;
+    margin-bottom: 5px;
     border-width: 0;
     cursor: pointer;
     transition: 1s;
@@ -180,8 +189,11 @@
 }
 
 .list-programs {
+    flex-grow: 1;
     padding-left: 0;
     color: #FFFF;
+    width: 96%;
+    overflow-y: auto;
 }
 
 .train-menu {
@@ -293,6 +305,7 @@
 /*}*/
 
 .diary-button-exercise {
+    text-align: start;
     border: none;
     background: none;
     color: #FFF;
@@ -309,10 +322,14 @@
 }
 
 .diary-container-diary-main-button {
+    display: none;
+}
+
+.diary-container-diary-main-button.active {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    height: 63px;
+    height: 85px;
     width: 100%;
     background-color: #191919;
 }
@@ -401,6 +418,10 @@
 }
 
 .diary-main_1 {
+    display: none;
+}
+
+.diary-main_1.active {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -458,8 +479,8 @@
 }
 
 .diary-settings-modal-window {
-    height: 100vh;
-    width: 100vw;
+    margin-top: 70px;
+    height: 60%;
     background-color: rgba(0, 0, 0, 0.4);
     position: fixed;
     top: 0;
@@ -490,6 +511,11 @@
     transform: scale(1);
 }
 
+.diary-button-generic-program-img {
+    width: 30px;
+    height: 60%;
+}
+
 @media (max-width: 1180px) {
     .diary-main_1-prouch-com {
         display: none;
@@ -499,7 +525,8 @@
     }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 750px) {
+
     .diary-main_1-prouch-com {
         display: none;
     }
@@ -510,31 +537,16 @@
 
     }
 
-    .text-diary-main-3 {
-        display: none;
-    }
-    .container-content-diary{
+    .container-content-diary {
         flex-direction: column;
         padding: 0;
-        margin-left: 0;
-        margin-right: 0;
         align-items: center;
+        max-height: 844px;
+        height: 100vh;
     }
-    .diary-main-menu {
-        display: none;
-    }
-    .diary-main_1 {
-        display: none;
-    }
-    .diary-container-list-program {
-        max-height: 300px;
-    }
-    .diary-container-diary-main-button {
-        position: fixed;
-        botton: 20px;
-        right: 20px;
-    }
+
     .diary-container-window-user {
+        max-width: 100vw;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -542,7 +554,64 @@
         /* width: 248px; */
         /* margin-right: 5px; */
         max-height: 1080px;
+        width: auto;
     }
+
+    .diary-container-exercises {
+        display: none;
+        cursor: pointer;
+        margin-top: 63px;
+        width: 260px;
+        background-color: #252525;
+        box-shadow: -12px -10px 22px 0px rgba(0, 0, 0, 0.62);
+        overflow: auto;
+    }
+
+    .diary-container-exercises.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        margin-top: 108px;
+        width: 96%;
+        text-align: center;
+        background-color: #252525;
+        box-shadow: -12px -10px 22px 0px rgba(0, 0, 0, 0.62);
+    }
+
+    .diary-container-diary-main {
+        display: none;
+    }
+
+    .diary-container-diary-main.active {
+        flex-direction: column-reverse;
+        position: absolute;
+        margin-top: 103px;
+    }
+
+    .text-diary-main-3 {
+        display: none;
+    }
+
+    .diary-main-menu {
+        display: none;
+    }
+
+    .diary-main_1.active {
+
+    }
+
+    .diary-container-list-program {
+        max-height: 300px;
+    }
+
+    .diary-container-diary-main-button.active {
+        position: fixed;
+        bottom: 0;
+        right: 5px;
+        background-color: rgba(0, 0, 0, 0);
+        height: 63px;
+    }
+
     .logo-name {
         color: #FFF;
         font-family: Manrope;
@@ -551,13 +620,113 @@
         font-weight: 400;
         line-height: normal;
     }
+
     .logo-diary {
-        width: 40px;
+        color: #FFF;
+        font-family: Manrope;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-right: 0;
+        width: 45px;
         height: 47px;
-        flex-shrink: 0;
+        transition: 1s;
+        cursor: pointer;
+        text-decoration: none;
     }
+
+    .logo-diary:hover {
+        transform: scale(1.1)
+    }
+
     .container-logo {
-        justify-content: space-around;
+        justify-content: space-between;
+        cursor: none;
+        border: none;
+        width: 100vw;
+        padding-left: 12px;
+        padding-right: 12px;
+        margin-top: 26px
+    }
+
+    .container-logo:hover {
+        transform: unset;
+    }
+
+    .burger_img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .checkbox-diary-main-1 {
+        display: none;
+    }
+
+    .diary-main_2 {
+        align-items: flex-start;
+        padding-left: 5px;
+        padding-right: 5px;
+        height: 3px;
+        flex-grow: initial;
+    }
+
+    .diary-main_3 {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .diary-main_1-prouch {
+        font-size: 10px;
+        width: 30px
+        /*margin-bottom: 0*/
+    }
+
+    .img-diary-main-4 {
+        width: 15px;
+        height: 15px;
+        cursor: pointer;
+    }
+
+    .text-diary-main-2 {
+        font-size: 13px;
+    }
+
+    .diary-main_5 {
+        justify-content: center;
+    }
+
+    .diary-icon-user {
+        margin-left: 16px
+    }
+
+    .diary-name-user {
+        font-size: 17px;
+        margin-left: 16px
+    }
+
+    .diary-button-generic-program {
+        margin-top: 13px;
+        margin-bottom: 14px;
+        width: 96%;
+        height: 67px;
+    }
+
+    .train-menu {
+        font-size: 18px;
+    }
+
+    .train-menu.active {
+        font-size: 18px;
+    }
+
+    .button-train {
+        font-size: 18px;
+    }
+
+    .diary-button-generic-program-img {
+        width: 50px;
+        height: 70%;
     }
 }
 
@@ -567,40 +736,40 @@
 /*    }*/
 /*}*/
 
-.btn-container {
-    display: flex;
-    justify-content: space-between;
-}
+/*.btn-container {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*}*/
 
-@media (max-height: 1180px) {
-    .diary-settings-modal-content.active{
-        overflow-y: auto;
-        max-height: 950px;
-    }
-}
+/*@media (max-height: 1180px) {*/
+/*    .diary-settings-modal-content.active{*/
+/*        overflow-y: auto;*/
+/*        max-height: 950px;*/
+/*    }*/
+/*}*/
 
-@media (max-height: 900px) {
-    .diary-settings-modal-content.active{
-        overflow-y: auto;
-        max-height: 800px;
-    }
+/*@media (max-height: 900px) {*/
+/*    .diary-settings-modal-content.active{*/
+/*        overflow-y: auto;*/
+/*        max-height: 800px;*/
+/*    }*/
 
-    .name_reg {
-        font-size:x-large;
-    }
-}
+/*    .name_reg {*/
+/*        font-size:x-large;*/
+/*    }*/
+/*}*/
 
-@media (max-height: 750px) {
-    .diary-settings-modal-content.active{
-        overflow-y: auto;
-        max-height: 600px;
-    }
+/*@media (max-height: 750px) {*/
+/*    .diary-settings-modal-content.active{*/
+/*        overflow-y: auto;*/
+/*        max-height: 600px;*/
+/*    }*/
 
-    .name_reg {
-        font-size:large;
-    }
+/*    .name_reg {*/
+/*        font-size:large;*/
+/*    }*/
 
-    .form-label, .form-control {
-        font-size:smaller;
-    }
-}
+/*    .form-label, .form-control {*/
+/*        font-size:smaller;*/
+/*    }*/
+/*}*/

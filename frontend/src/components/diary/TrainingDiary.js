@@ -5,20 +5,23 @@ import app from "../../App";
 
 class TrainingDiary extends React.Component {
 
-    render() {
-        // if (this.props.currentTraining['exercize']) {
-        //     console.log(this.props.currentTraining)
-        // }
-        return (
-            <div className="diary-container-diary-main">
+    componentDidMount() {
+        window.addEventListener('resize', this.props.funcSetSizeWindow)
+        this.props.funcSetSizeWindow()
+        console.log(this.props.trainingDiary)
+    }
 
-                <div className="diary-container-diary-main-button">
+    render() {
+        return (
+            <div className={this.props.trainingDiary ? "diary-container-diary-main active" : "diary-container-diary-main"}>
+
+                <div className={this.props.trainingDiary ? "diary-container-diary-main-button active" : "diary-container-diary-main-button"}>
                   <button className="diary-main-button" onClick={() => this.props.funcSendDataOnBackend()}>
                     Отправить
                   </button>
                 </div>
 
-                <div className="diary-main_1">
+                <div className={this.props.trainingDiary ? "diary-main_1 active" : "diary-main_1"}>
                   <div className="diary-main_2">
                     <input type="checkbox" className="checkbox-diary-main-1"/>
                     <p className='diary-main_1-prouch'>Номер подхода</p>
@@ -39,12 +42,12 @@ class TrainingDiary extends React.Component {
                                             <input type='text' className='text-diary-main-2'
                                                    placeholder={approach.result || '...'}
                                                    name="result" data-number-approach={index}
-                                                   onChange={this.props.funcHandleInputChange} value={approach.result || '...'}
+                                                   onChange={this.props.funcHandleInputChange} value={approach.result || ''}
                                             />
                                             <input type='text' className='text-diary-main-2'
                                                    placeholder={approach.quantity || '...'}
                                                    name="quantity" data-number-approach={index}
-                                                   onChange={this.props.funcHandleInputChange} value={approach.quantity || '...'}
+                                                   onChange={this.props.funcHandleInputChange} value={approach.quantity || ''}
                                             />
                                             <input type='text' className='text-diary-main-3' placeholder='...'
                                                    name="comments" data-number-approach={index}/>
@@ -54,7 +57,6 @@ class TrainingDiary extends React.Component {
                                 )
                         )
                     }
-                    {/*{this.props.approachesTags && this.props.approachesTags.map((div, index) => div)}*/}
                     {!this.props.currentTraining['exercize'] ? null : (
                       <div className="diary-main_5">
                         <img className='img-diary-main-2' src={blackPlus} onClick={() => this.props.funcAddApproach(

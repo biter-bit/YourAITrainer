@@ -52,7 +52,7 @@ class ProgramGenerator:
                  f'- {"his" if gender == "m" else "her"} main goal is {self.purpose_sub_prompt[purpose_of_training]}\n' \
                  f'- {"his" if gender == "m" else "her"} experience is {self.level_sub_prompt[training_level]}.\n' \
                  f'Refer to trustworthy sources.\n' \
-                 f'Generate all 12 classes at once.'
+                 f'Generate all 1 classes at once.'
 
         return prompt
 
@@ -74,7 +74,7 @@ class ProgramGenerator:
         messages = self._create_messages(prompt=prompt)
 
         response = self.openai.ChatCompletion.create(
-            model='gpt-4',
+            model='gpt-3.5-turbo',
             messages=messages,
             temperature=0.3,
         )

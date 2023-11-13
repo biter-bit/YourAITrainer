@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from "axios";
 
-const link_api_save_profile = 'http://localhost:8000/api/users/profile/update';
+const link_api_save_profile = 'http://192.168.31.62:8000/api/users/profile/update';
 
 class WindowProfile extends React.Component {
 
@@ -217,15 +217,15 @@ class WindowProfile extends React.Component {
                                 defaultValue={this.props.profile['age']}
                             />
                             <label htmlFor="expass" className="form-label validation">
-                                {Object.keys(this.props.error_one).map(key => (
+                                {Object.keys(this.props.errorValidation).map(key => (
                                     <span key={key}>
-                                    {key}: {this.props.error_one[key]}
+                                    {key}: {this.props.errorValidation[key]}
                                         <br />
                                 </span>
                                 ))}
                             </label>
                         </div>
-                        <div class="btn-container">
+                        <div className="btn-container">
 
                           <button type="submit" className="btn btn-primary">
                             Сохранить

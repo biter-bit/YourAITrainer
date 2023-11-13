@@ -2,12 +2,16 @@ import React from 'react';
 import axios from "axios";
 
 
-const link_api_generic_program = 'http://localhost:8000/api/generation'
-const link_api_check_celery = 'http://localhost:8000/api/check_task'
+const link_api_generic_program = 'http://192.168.31.62:8000/api/generation'
+const link_api_check_celery = 'http://192.168.31.62:8000/api/check_task'
 class WindowSettings extends React.Component {
 
     async funcGenericProgram(event) {
         event.preventDefault()
+        if (this.props.loadingProgram) {
+            this.props.funcModalWindowDiaryError()
+            return null
+        }
         const form = event.target
         const formData = new FormData(form)
         this.props.setLoadingProgram()
@@ -26,6 +30,7 @@ class WindowSettings extends React.Component {
                         headers: {'Authorization': `Bearer ${accessToken}`}
                     });
                 this.props.funcWindowSettingsActive()
+                this.props.funcModalWindowDiaryActive()
                 this.funcCheckTaskBackend(response.data.number_task)
             } catch(error) {
                 console.error(error);
@@ -42,11 +47,8 @@ class WindowSettings extends React.Component {
                 setTimeout(() => this.funcCheckTaskBackend(task_id), 30000);
             } else if (response.data.status === 'Success') {
                 const result = response.data.result
+                this.props.funcModalWindowDiaryFinish()
                 this.props.setLoadingProgram()
-                // await axios.get(link_api_get_programs).then((res) => {
-                //     this.props.setTrainingProgram(res.data)
-                //     console.log(this.props.trainingProgram)
-                // })
             } else if (response.data.status === 'Fail') {
                 this.props.setLoadingProgram()
                 console.error("Task failed")
@@ -58,11 +60,11 @@ class WindowSettings extends React.Component {
 
     render() {
         return (
-            <div className={this.props.windowSettingsActive ? 'diary-settings-modal-window active' : "diary-settings-modal-window"} onClick={() => {
+            <div className={this.props.windowSettingsActive ? 'model active' : "model"} onClick={() => {
                 this.props.funcWindowSettingsActive();
             }}>
-                <div className={this.props.windowSettingsActive ? 'diary-settings-modal-content active' : "diary-settings-modal-content"} onClick={e => e.stopPropagation()}>
-                    <h1 className="name_reg">Введите данные для генерации</h1>
+                <div className={this.props.windowSettingsActive ? 'model__content active' : "model__content"} onClick={e => e.stopPropagation()}>
+                    <h1 className="name_reg">Генерация</h1>
                     <form onSubmit={(event) => this.funcGenericProgram(event)}>
 
                         <div className="mb-3">
@@ -135,9 +137,9 @@ class WindowSettings extends React.Component {
                                 name="age"
                             />
                             <label htmlFor="expass" className="form-label validation">
-                                {Object.keys(this.props.error_one).map(key => (
+                                {Object.keys(this.props.errorValidation).map(key => (
                                     <span key={key}>
-                                    {key}: {this.props.error_one[key]}
+                                    {key}: {this.props.errorValidation[key]}
                                         <br />
                                 </span>
                                 ))}

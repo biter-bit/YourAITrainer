@@ -2,9 +2,9 @@ import React from 'react';
 
 class Register extends React.Component {
     render() {
-        // const { error_one } = this.props.error
-        // const errorLabel = Object.keys(error_one).map((key) => (
-        //     <label htmlFor="expasscheck" className="form-label validation" key={key}>{error_one[key]}</label>
+        // const { errorValidation } = this.props.error
+        // const errorLabel = Object.keys(errorValidation).map((key) => (
+        //     <label htmlFor="expasscheck" className="form-label validation" key={key}>{errorValidation[key]}</label>
         // ));
         return (
             <div className={this.props.active ? 'model active' : "model"} onClick={() => {
@@ -33,7 +33,6 @@ class Register extends React.Component {
                           type="email"
                           className={this.props.error['email'] ? 'form-control validation' : 'form-control'}
                           id="exemail2"
-                          aria-describedby="emailHelp"
                           name="email"
                         />
                         <div id="emailHelp" className="form-text">

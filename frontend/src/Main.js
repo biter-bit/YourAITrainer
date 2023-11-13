@@ -6,30 +6,16 @@ import RandomArticles from "./components/RandomArticles"
 import Offer from "./components/Offer";
 import Burger from "./components/Burger";
 import ModalWindow from "./components/ModalWindow";
-import 'bootstrap/dist/css/bootstrap.css';
-import axios from "axios";
-
-
-
-const link_api_auth = 'http://localhost:8000/api/auth/jwt/create/'
-const link_api_register = 'http://localhost:8000/api/auth/register/'
 
 class Main extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            modelActiveAuth: false,
-            modelActiveReg: false,
-            burger_active: false,
-            response: [],
-            exercise: {}
+
+    componentDidMount() {
+        const showModal = new URLSearchParams(window.location.search).get('showModal');
+        if (showModal === 'true') {
+            this.props.setModalWindow();
         }
-        this.inputClickAuth = this.inputClickAuth.bind(this)
-        this.inputClickReg = this.inputClickReg.bind(this)
-        this.authorizedAuth = this.authorizedAuth.bind(this)
-        this.funcRegistered = this.funcRegistered.bind(this)
-        this.resetStatus = this.resetStatus.bind(this)
     }
+
     render() {
         return (
             <div>
@@ -41,110 +27,32 @@ class Main extends React.Component {
                     logout={this.props.logout}
                 />
                 <div className="container">
-                    <Menu setActive={this.inputClickAuth} auth={this.props.auth_user} setBurger={this.props.funcBurgerActive} />
-                        <div className="container_body">
-                            <Offer
-                                setActive={this.inputClickReg}
-                            />
-                            <RandomArticles />
-                        </div>
-                        <Register active={this.state.modelActiveReg}
-                                  setActive={this.inputClickReg}
-                                  error={this.props.error_one}
-                                  setRegister={this.funcRegistered}
-                                  funcSetError={this.props.funcChangeError}
+                    <Menu setActive={this.props.inputClickAuth} auth={this.props.auth_user} setBurger={this.props.funcBurgerActive} />
+                    <div className="container_body">
+                        <Offer
+                            setActive={this.props.inputClickReg}
                         />
-                        <Auth active={this.state.modelActiveAuth}
-                              setActive={this.inputClickAuth}
-                              setAuth={this.authorizedAuth}
-                              error={this.props.error_one}
+                        <RandomArticles />
+                    </div>
+                    <Register active={this.props.modelActiveReg}
+                              setActive={this.props.inputClickReg}
+                              error={this.props.errorValidation}
+                              setRegister={this.props.funcRegistered}
                               funcSetError={this.props.funcChangeError}
-                        />
-                        <ModalWindow
-                            setModalWindow={this.props.setModalWindow}
-                            modalActive={this.props.modalActive}
-                        />
+                    />
+                    <Auth active={this.props.modelActiveAuth}
+                          setActive={this.props.inputClickAuth}
+                          setAuth={this.props.authorizedAuth}
+                          error={this.props.errorValidation}
+                          funcSetError={this.props.funcChangeError}
+                    />
+                    <ModalWindow
+                        setModalWindow={this.props.setModalWindow}
+                        modalActive={this.props.modalActive}
+                    />
                 </div>
             </div>
         )
-    }
-    componentDidMount() {
-        this.props.checkAuthentication()
-        const showModal = new URLSearchParams(window.location.search).get('showModal');
-        if (showModal === 'true') {
-            this.props.setModalWindow();
-        }
-    }
-    async funcRegistered(event) {
-        // регистрация пользователя
-        event.preventDefault()
-        const form = event.target
-        const formData = new FormData(form)
-        try {
-            await axios.post(link_api_register, {
-                username: formData.get("username"),
-                password: formData.get("password"),
-                password_confirmation: formData.get("password_confirmation"),
-                email: formData.get("email")
-            })
-            this.inputClickReg()
-        } catch (error) {
-            if (error.response && error.response.status === 400) {
-                this.props.funcChangeError(error.response.data)
-            } else {
-                this.props.funcChangeError({'': 'Incorrect data. Please try again.'})
-            }
-        }
-    }
-    async authorizedAuth(event) {
-        // авторизация пользователя
-        event.preventDefault()
-        const form = event.target
-        const formData = new FormData(form)
-        try {
-            const response = await axios.post(link_api_auth, {
-                username: formData.get("username"),
-                password: formData.get("password"),
-            })
-            localStorage.setItem("access", response.data.access);
-            localStorage.setItem("refresh", response.data.refresh)
-
-            this.props.checkAuthentication()
-            this.inputClickAuth()
-        } catch (error) {
-            if (error.response && error.response.status === 400) {
-                this.props.funcChangeError(error.response.data)
-            } else {
-                this.props.funcChangeError({'': 'Incorrect username or password. Please try again.'})
-            }
-        }
-    }
-    inputClickAuth() {
-        // активирует и деактивирует окно авторизации
-        if (this.state.modelActiveAuth) {
-            this.setState({ modelActiveAuth: false })
-        }
-        else {
-            this.setState({ modelActiveAuth: true })
-        }
-    }
-
-    inputClickReg() {
-        // активирует и деактивирует окно
-        if (this.state.modelActiveReg) {
-            this.setState({ modelActiveReg: false })
-        }
-        else {
-            this.setState({ modelActiveReg: true })
-        }
-    }
-
-    resetStatus() {
-        this.setState({ error_one: {}})
-    }
-
-    handleButtonClick(button) {
-
     }
 }
 

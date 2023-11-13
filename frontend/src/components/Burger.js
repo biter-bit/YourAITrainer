@@ -13,8 +13,8 @@ class BurgerMenu extends React.Component {
                             <img className="img_cross" src={cross} alt={"No img"}></img>
                         </button>
                         <div className="buttons_menu">
-                            <Link className="button_diary" to="/diary">Дневник</Link>
-                            <Link to='articles/' className="button_articles">Статьи</Link>
+                            <Link className="button_diary" to="/diary" onClick={()=> {this.props.setBurger()}}>Дневник</Link>
+                            <Link to='articles/' className="button_articles" onClick={()=> {this.props.setBurger()}}>Статьи</Link>
                             <button className="button_logout" onClick={this.props.logout}>Выход</button>
                         </div>
                     </div>

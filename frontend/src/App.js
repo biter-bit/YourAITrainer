@@ -1,44 +1,49 @@
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.css';
+import axios from "axios";
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+
 import AppArticle from "./pages/AppArticle";
 import ArticlePage from "./pages/ArticlePage";
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Main from "./Main";
-import Diary from "./Diary";
 import CheckAuthComponent from "./components/CheckAuthComponent";
-import axios from "axios";
 import ModalWindow from "./components/ModalWindow";
 
-const link_api_verify = 'http://localhost:8000/api/auth/jwt/verify/'
-const link_send_data = 'http://localhost:8000/api/save'
+const linkApiVerify = 'http://192.168.31.62:8000/api/auth/jwt/verify/'
+const linkSendData = 'http://192.168.31.62:8000/api/save'
+const link_api_auth = 'http://192.168.31.62:8000/api/auth/jwt/create/'
+const link_api_register = 'http://192.168.31.62:8000/api/auth/register/'
+
+
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            authentication_user: false, // Установите начальное состояние
-            modal_window_active: false,
-            token_api: false,
-            loadingProgram: false,
-            loadingTrainingDay: false,
-            trainingProgram: {},
-            trainingDays: {},
-            workoutProgram: {},
-            approachesProgram: {},
-            exerciseActive: false,
-            profile: {},
-            exerciseActive2: false,
-            windowSettingsActive: false,
-            windowProfileActive: false,
-            error_one: {},
-            currentTraining: '',
-            approachesTags: [],
-            indexApproach: null,
-            statusDataSend: false,
-            burger_active: false
+            authorizationUser: true, // Авторизирован пользователь или нет
+            modalWindowValidation: false, // Активировано модальное окно или нет (проверка авторизации при переходах)
+            modalWindowDiary: false, // Активировано модальное окно генерации тренировки или нет
+            modalWindowDiaryFinish: false, // Активировано модальное окно завершения генерации или нет
+            modalWindowErrorInDiary: false, // Активировано модальное окно ошиблки генерации тренировки или нет
+            modelActiveAuth: false, // Активировано окно авторизации или нет
+            modelActiveReg: false, // Активировано окно регистрации или нет
+            loadingProgram: false, // Загружена тренировочная программа или нет
+            loadingTrainingDay: false, // Загружен тренировочный день или нет
+            trainingProgram: {}, // Тренировочная программа пользователя
+            trainingDays: {}, // Тренировочный день пользователя
+            exerciseActive: false, // Активирована панель упражнений или нет
+            exerciseActive2: false, // Активирован цвет на панели упражнений или нет
+            profile: {}, // Данные пользователя (логин)
+            windowSettingsActive: false, // Меню настройки генерации тренировки открыто или нет
+            windowProfileActive: false, // Меню пользователя открыто или нет
+            errorValidation: {}, // Ошибки для валидации
+            currentTraining: '', // Текущая тренировка (подходы)
+            burger_active: false, // Активировано меню бургера или нет
+            isMobile: window.innerWidth, // Размер экрана пользователя
+            trainingDiary: false, // Активирована модель с подходами или нет
+            burgerDiary: false // Активировано меню бургера в дневнике или нет
         };
         this.checkAuth = this.checkAuth.bind(this)
         this.exitLogout = this.exitLogout.bind(this)
-        this.funcModalWindowActive = this.funcModalWindowActive.bind(this)
+        this.funcModalWindowValidationActive = this.funcModalWindowValidationActive.bind(this)
         this.funcAddProgram = this.funcAddProgram.bind(this)
         this.funcLoadingSuccess = this.funcLoadingSuccess.bind(this)
         this.funcAddTrainingDay = this.funcAddTrainingDay.bind(this)
@@ -51,59 +56,79 @@ class App extends React.Component {
         this.funcChangeError = this.funcChangeError.bind(this)
         this.funcCurrentTrainingChange = this.funcCurrentTrainingChange.bind(this)
         this.funcAddApproach = this.funcAddApproach.bind(this)
-        this.funcIndexApproach = this.funcIndexApproach.bind(this)
         this.funcDeleteApproach = this.funcDeleteApproach.bind(this)
         this.funcHandleInputChange = this.funcHandleInputChange.bind(this)
         this.funcSendDataOnBackend = this.funcSendDataOnBackend.bind(this)
         this.logout = this.logout.bind(this)
         this.funcBurgerActive = this.funcBurgerActive.bind(this)
-    }
-    componentDidMount() {
-        this.checkAuth().then(r => undefined)
+        this.inputClickAuth = this.inputClickAuth.bind(this)
+        this.inputClickReg = this.inputClickReg.bind(this)
+        this.authorizedAuth = this.authorizedAuth.bind(this)
+        this.funcRegistered = this.funcRegistered.bind(this)
+        this.resetStatus = this.resetStatus.bind(this)
+        this.funcSetSizeWindow = this.funcSetSizeWindow.bind(this)
+        this.funcTrainingDiary = this.funcTrainingDiary.bind(this)
+        this.funcBurgerDiaryActive = this.funcBurgerDiaryActive.bind(this)
+        this.funcModalWindowDiaryActive = this.funcModalWindowDiaryActive.bind(this)
+        this.funcModalWindowDiaryError = this.funcModalWindowDiaryError.bind(this)
+        this.funcModalWindowDiaryFinish = this.funcModalWindowDiaryFinish.bind(this)
     }
 
-    funcModalWindowActive() {
-        if (this.state.modal_window_active) {
-            this.setState({ modal_window_active: false })
+    componentDidMount() {
+        this.checkAuth()
+    }
+
+    resetStatus() {
+        this.setState({ errorValidation: {}})
+    }
+
+    funcTrainingDiary(res=null) {
+        if (res) {
+            this.setState({trainingDiary: true})
+        }
+        if (!res) {
+            this.setState({trainingDiary: false})
+        }
+    }
+
+    funcModalWindowValidationActive() {
+        if (this.state.modalWindowValidation) {
+            this.setState({ modalWindowValidation: false })
         }
         else {
-            this.setState({ modal_window_active: true })
+            this.setState({ modalWindowValidation: true })
         }
     }
 
-    async checkAuth() {
-            const access = localStorage.getItem("access")
-            let result = {}
-            if (access) {
-                try {
-                    result = await axios.post(link_api_verify, {
-                        token: access
-                    })
+    funcModalWindowDiaryActive() {
+        if (this.state.modalWindowDiary) {
+            this.setState({ modalWindowDiary: false })
+        }
+        else {
+            this.setState({ modalWindowDiary: true })
+        }
+    }
 
-                    if (Object.keys(result.data).length === 0) {
-                        this.setState({authentication_user: true})
-                        return true
-                    } else {
-                        this.setState({authentication_user: false})
-                        const accessAndRefreshToken = ["access", "refresh"]
-                        accessAndRefreshToken.forEach(key => {
-                            localStorage.removeItem(key)
-                        })
-                        return false
-                    }
-                } catch (error) {
-                    console.error("Error while checking authentication:", error);
-                    this.setState({ authentication_user: false });
-                    return false;
-                }
-            } else {
-                this.setState({authentication_user: false})
-                return false
-            }
+    funcModalWindowDiaryFinish() {
+        if (this.state.modalWindowDiaryFinish) {
+            this.setState({ modalWindowDiaryFinish: false })
+        }
+        else {
+            this.setState({ modalWindowDiaryFinish: true })
+        }
+    }
+
+    funcModalWindowDiaryError() {
+        if (this.state.modalWindowErrorInDiary) {
+            this.setState({ modalWindowErrorInDiary: false })
+        }
+        else {
+            this.setState({ modalWindowErrorInDiary: true })
+        }
     }
 
     exitLogout() {
-        this.setState({authentication_user: false})
+        this.setState({authorizationUser: false})
     }
 
     funcAddProgram(program) {
@@ -160,21 +185,30 @@ class App extends React.Component {
         }
     }
 
-    funcChangeError(data) {
-        this.setState({error_one: data})
+    funcSetSizeWindow() {
+        let sizeWindow = window.innerWidth
+        this.setState({isMobile: sizeWindow}, () => {
+            console.log("isMobile updated:", this.state.isMobile);
+        });
     }
 
-    funcCurrentTrainingChange(program) {
+    funcChangeError(data) {
+        this.setState({errorValidation: data})
+    }
+
+    funcCurrentTrainingChange(category, program) {
+        if (category === 'exercize') {
+            this.funcTrainingDiary(true)
+        }
         const currentTraining = this.state.currentTraining
         if (!this.state.currentTraining[program['exercize']]) {
             const approaches = this.state.trainingProgram['approaches'].filter((approaches) => approaches['workout'] === program['exercize'])
             const allApproaches = {[program.exercize]: approaches}
             const updatedTraining = {
-            ...currentTraining,
-            ...program,
-            ...allApproaches
+                ...currentTraining,
+                ...program,
+                ...allApproaches
             }
-            console.log(updatedTraining)
             this.setState({currentTraining: updatedTraining})
         } else {
             // const status = {"status": currentTraining['exercize']}
@@ -182,7 +216,6 @@ class App extends React.Component {
                 ...currentTraining,
                 ...program,
             }
-            console.log(updatedTraining)
             this.setState({currentTraining: updatedTraining})
         }
 
@@ -219,15 +252,6 @@ class App extends React.Component {
             'time_update': formattedDate
         })
         const result = {[ind]: approaches}
-        // const divNew = (
-        //     <div key={approaches.length} className="diary-main_3">
-        //         <input type="checkbox" className="checkbox-diary-main-1"/>
-        //         <input type='text' className='text-diary-main-2' placeholder={ind}/>
-        //         <input type='text' className='text-diary-main-2' placeholder='...'/>
-        //         <input type='text' className='text-diary-main-2' placeholder='...'/>
-        //         <input type='text' className='text-diary-main-3' placeholder='...'/>
-        //     </div>
-        // )
         const updatedTraining = {
             ...currentTraining,
             ...result
@@ -263,22 +287,13 @@ class App extends React.Component {
         }
     }
 
-    funcIndexApproach() {
-        const numberOfApproaches = this.state.trainingProgram['approaches']
-            .filter(approaches => approaches['workout'] === this.state.currentTraining['exercize'])
-            .length;
-        this.setState({indexApproach: 1})
-    }
-
     async funcSendDataOnBackend() {
         const data = this.state.currentTraining
         delete data.exercize
         delete data.program
         delete data.training_day
         delete data.undefined
-        const result = await axios.post(link_send_data, data)
-        // console.log(`Ok - ${result}`)
-        // console.log(result)
+        await axios.post(linkSendData, data)
     }
 
     logout = () => {
@@ -297,30 +312,151 @@ class App extends React.Component {
         }
     }
 
+    funcBurgerDiaryActive() {
+        if (this.state.burgerDiary) {
+            this.setState({ burgerDiary: false })
+        }
+        else {
+            this.setState({ burgerDiary: true })
+        }
+    }
+
+    async funcRegistered(event) {
+        // регистрация пользователя
+        event.preventDefault()
+        const form = event.target
+        const formData = new FormData(form)
+        try {
+            await axios.post(link_api_register, {
+                username: formData.get("username"),
+                password: formData.get("password"),
+                password_confirmation: formData.get("password_confirmation"),
+                email: formData.get("email")
+            })
+            this.funcChangeError({})
+            this.inputClickReg()
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                this.funcChangeError(error.response.data)
+            } else {
+                this.funcChangeError({'': 'Incorrect data. Please try again.'})
+            }
+        }
+    }
+
+    inputClickReg() {
+        // активирует и деактивирует окно регистрации
+        if (this.state.modelActiveReg) {
+            this.setState({ modelActiveReg: false })
+        }
+        else {
+            this.setState({ modelActiveReg: true })
+        }
+    }
+
+    async authorizedAuth(event) {
+        // авторизация пользователя
+        event.preventDefault()
+        const form = event.target
+        const formData = new FormData(form)
+        try {
+            const response = await axios.post(link_api_auth, {
+                username: formData.get("username"),
+                password: formData.get("password"),
+            })
+            localStorage.setItem("access", response.data.access);
+            localStorage.setItem("refresh", response.data.refresh)
+
+            this.checkAuth()
+            this.inputClickAuth()
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                this.funcChangeError(error.response.data)
+            } else {
+                this.funcChangeError({'': 'Incorrect username or password. Please try again.'})
+            }
+        }
+    }
+
+    async checkAuth() {
+
+        /**
+         * Проверка авторизации пользователя и установка значения авторизации
+         * @returns {boolean} - Значение авторизации пользователя
+         */
+
+        const access = localStorage.getItem("access")
+        let result = {}
+
+        if (access) {
+            try {
+                result = await axios.post(linkApiVerify, {
+                    token: access
+                })
+
+                if (Object.keys(result.data).length === 0) {
+                    this.setState({authorizationUser: true})
+                    return true
+                } else {
+                    this.setState({authorizationUser: false})
+                    const accessAndRefreshToken = ["access", "refresh"]
+                    accessAndRefreshToken.forEach(key => {
+                        localStorage.removeItem(key)
+                    })
+                    return false
+                }
+            } catch (error) {
+                console.error("Error while checking authentication:", error);
+                this.setState({ authorizationUser: false });
+                return false;
+            }
+        } else {
+            this.setState({authorizationUser: false})
+            return false
+        }
+    }
+
+    inputClickAuth() {
+        // активирует и деактивирует окно авторизации
+        if (this.state.modelActiveAuth) {
+            this.setState({ modelActiveAuth: false })
+        }
+        else {
+            this.setState({ modelActiveAuth: true })
+        }
+    }
+
     render() {
         return (
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={
                         <Main
-                            setModalWindow={this.funcModalWindowActive}
-                            modalActive={this.state.modal_window_active}
+                            setModalWindow={this.funcModalWindowValidationActive}
+                            modalActive={this.state.modalWindowValidation}
                             checkAuthentication={this.checkAuth}
-                            auth_user={this.state.authentication_user}
+                            auth_user={this.state.authorizationUser}
                             exitAccount={this.exitLogout}
-                            error_one={this.state.error_one}
+                            errorValidation={this.state.errorValidation}
                             funcChangeError={this.funcChangeError}
                             logout={this.logout}
                             funcBurgerActive={this.funcBurgerActive}
                             burger_active={this.state.burger_active}
+                            modelActiveAuth={this.state.modelActiveAuth}
+                            inputClickAuth={this.inputClickAuth}
+                            modelActiveReg={this.state.modelActiveReg}
+                            inputClickReg={this.inputClickReg}
+                            authorizedAuth={this.authorizedAuth}
+                            funcRegistered={this.funcRegistered}
+                            resetStatus={this.resetStatus}
                         />
                     } />
                     <Route path="/diary" element={
                         <CheckAuthComponent
-                            setModalWindow={this.funcModalWindowActive}
-                            modalActive={this.state.modal_window_active}
+                            setModalWindow={this.funcModalWindowValidationActive}
+                            modalActive={this.state.modalWindowValidation}
                             checkAuthentication={this.checkAuth}
-                            auth_user={this.state.authentication_user}
+                            auth_user={this.state.authorizationUser}
                             exitAccount={this.exitLogout}
                             trainingProgram={this.state.trainingProgram}
                             setTrainingProgram={this.funcAddProgram}
@@ -338,26 +474,35 @@ class App extends React.Component {
                             funcWindowSettingsActive={this.funcWindowSettingsActive}
                             windowProfileActive={this.state.windowProfileActive}
                             funcWindowProfileActive={this.funcWindowProfileActive}
-                            error_one={this.state.error_one}
+                            errorValidation={this.state.errorValidation}
                             funcChangeError={this.funcChangeError}
                             currentTraining={this.state.currentTraining}
                             funcCurrentTrainingChange={this.funcCurrentTrainingChange}
                             exerciseActive2={this.state.exerciseActive2}
                             funcExerciseActive2={this.funcExerciseActive2}
-                            approachesTags={this.state.approachesTags}
                             funcAddApproach={this.funcAddApproach}
-                            indexApproach={this.state.indexApproach}
-                            funcIndexApproach={this.funcIndexApproach}
                             funcDeleteApproach={this.funcDeleteApproach}
                             funcHandleInputChange={this.funcHandleInputChange}
-                            statusDataSend={this.state.statusDataSend}
                             funcSendDataOnBackend={this.funcSendDataOnBackend}
                             logout={this.logout}
+                            isMobile={this.state.isMobile}
+                            funcSetSizeWindow={this.funcSetSizeWindow}
+                            trainingDiary={this.state.trainingDiary}
+                            funcTrainingDiary={this.funcTrainingDiary}
+                            funcBurgerDiaryActive={this.funcBurgerDiaryActive}
+                            burgerDiary={this.state.burgerDiary}
+                            modalWindowDiary={this.state.modalWindowDiary}
+                            funcModalWindowDiaryActive={this.funcModalWindowDiaryActive}
+                            funcModalWindowDiaryError={this.funcModalWindowDiaryError}
+                            modalWindowDiaryError={this.state.modalWindowErrorInDiary}
+                            modalWindowDiaryFinish={this.state.modalWindowDiaryFinish}
+                            funcModalWindowDiaryFinish={this.funcModalWindowDiaryFinish}
+
                         />
                     } />
-                    <Route path="/modal" element={<ModalWindow checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user}/>} exit={this.exitLogout}/>
-                    <Route path='/articles' element={<AppArticle setModalWindow={this.funcModalWindowActive} modalActive={this.state.modal_window_active}  checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user} exitAccount={this.exitLogout} />}/>
-                    <Route exact path='/article/:articleId' element={<ArticlePage setModalWindow={this.funcModalWindowActive} modalActive={this.state.modal_window_active} checkAuthentication={this.checkAuth} auth_user={this.state.authentication_user} exitAccount={this.exitLogout} />} />
+                    <Route path="/modal" element={<ModalWindow checkAuthentication={this.checkAuth} auth_user={this.state.authorizationUser}/>} exit={this.exitLogout}/>
+                    <Route path='/articles' element={<AppArticle setModalWindow={this.funcModalWindowValidationActive} modalActive={this.state.modalWindowValidation}  checkAuthentication={this.checkAuth} auth_user={this.state.authorizationUser} exitAccount={this.exitLogout} />}/>
+                    <Route exact path='/article/:articleId' element={<ArticlePage setModalWindow={this.funcModalWindowValidationActive} modalActive={this.state.modalWindowValidation} checkAuthentication={this.checkAuth} auth_user={this.state.authorizationUser} exitAccount={this.exitLogout} />} />
 
                 </Routes>
             </BrowserRouter>

@@ -46,3 +46,16 @@
         z-index: 1;
     }
 }
+
+@media (max-width: 375px) {
+    .name_reg {
+        font-size: 20px;
+    }
+    .form-label {
+        font-size: 10px;
+    }
+    .form-control {
+        width: 70vw;
+        font-size: 10px;
+    }
+}

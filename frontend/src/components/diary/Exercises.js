@@ -2,12 +2,8 @@ import React from "react";
 import rectangle from "../../img/rectangle.png";
 
 class Exercises extends React.Component {
-    componentDidMount() {
-
-    }
 
     render() {
-        const workouts = this.props.trainingProgram['workouts']
         return(
             <div className={`diary-container-exercises ${this.props.exerciseActive2 || this.props.exerciseActive ? "active" : ""}`}
                  onMouseEnter={() => this.props.funcExerciseActive2(true)}
@@ -27,7 +23,7 @@ class Exercises extends React.Component {
                                 <div className="diary-container-exercise" key={index}>
                                     <img className="diary-img-exercise" src={rectangle} alt="foto1" />
                                     <button
-                                        className="diary-button-exercise" onClick={() => this.props.funcCurrentTrainingChange({'exercize': workouts.id})}>
+                                        className="diary-button-exercise" onClick={() => this.props.funcCurrentTrainingChange('exercize', {'exercize': workouts.id})}>
                                         {workouts.title}
                                     </button>
                                 </div>
