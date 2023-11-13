@@ -6,7 +6,7 @@ const ArticlePage = () => {
     const {articleId } = useParams();
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState();
-    const link_api_article_id = `http://192.168.31.62:8000/api/articles/${articleId}/`;
+    const link_api_article_id = `http://52.41.36.82:8000/api/articles/${articleId}/`;
 
   useEffect(() => {
     fetch(link_api_article_id, {})
