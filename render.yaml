@@ -13,7 +13,6 @@ databases:
   - name: postgres
     databaseName: movies
     user: movies
-    password: 123456
     ipAllowList:
       - source: 0.0.0.0/0
         description: everywhere
