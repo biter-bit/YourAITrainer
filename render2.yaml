@@ -1,0 +1,36 @@
+services:
+  - name: db
+    type: postgres
+    envVars:
+      - key: POSTGRES_USER
+        value: 'movies'
+      - key: POSTGRES_PASSWORD
+        value: '123456'
+      - key: POSTGRES_DB
+        value: 'movies'
+#  - name: redis
+#    type: redis
+  - name: trainer-api
+    buildCommand: "docker build -t trainer_api . && docker run -p 8000:8000 trainer_api"
+    envVars:
+      - key: DJANGO_ALLOWED_HOSTS
+        value: "localhost 127.0.0.1 [::1]"
+      - key: CELERY_BROKER
+        value: "redis://redis:6379/0"
+      - key: CELERY_BACKEND
+        value: "redis://redis:6379/0"
+    sourceDir: ./backend
+    dependencies:
+      - name: db
+#      - name: redis
+#  - name: celery
+#    buildCommand: "docker build -t celery_worker . && docker run celery_worker"
+#    sourceDir: ./backend
+#    dependencies:
+#      - name: redis
+#      - name: trainer-api
+#  - name: trainer-front
+#    buildCommand: "docker build -t trainer_front . && docker run -p 10001:10001 trainer_front"
+#    sourceDir: .
+#    dependencies:
+#      - name: trainer-api
