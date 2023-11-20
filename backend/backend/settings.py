@@ -104,10 +104,10 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'movies',
+        'NAME': 'movies_oq7p',
         'USER': 'movies',
-        'PASSWORD': '123456',
-        'HOST': '127.0.0.1',
+        'PASSWORD': 'xqvoLQXW2yzVyqY9esecGnhX7CYTlNFh',
+        'HOST': 'dpg-cldo1jngsrdc73flunp0-a',
         'PORT': '5432',
     }
 }
