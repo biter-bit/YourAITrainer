@@ -3,7 +3,7 @@ services:
     name: django
     rootDir: backend
     runtime: python
-    buildCommand: 'pip install -r requirements.txt && python manage.py makemigrations && python manage.py migrate'
+    buildCommand: 'pip install -r requirements3.txt && python manage.py makemigrations && python manage.py migrate'
     startCommand: python manage.py runserver
     buildFilter:
       paths:
