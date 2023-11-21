@@ -2,8 +2,8 @@ import React from 'react';
 import axios from "axios";
 
 
-const link_api_generic_program = 'http://52.41.36.82:8000/api/generation'
-const link_api_check_celery = 'http://52.41.36.82:8000/api/check_task'
+const link_api_generic_program = 'http://127.0.0.1:8000/api/generation'
+const link_api_check_celery = 'http://127.0.0.1:8000/api/check_task'
 class WindowSettings extends React.Component {
 
     async funcGenericProgram(event) {

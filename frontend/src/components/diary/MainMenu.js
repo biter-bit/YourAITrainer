@@ -9,8 +9,8 @@ import ButtonsMain from "./ButtonsMain";
 import BurgerDiary from "./BurgerDiary";
 
 
-const link_api_get_all_data_user = 'http://52.41.36.82:8000/api/programs/get/all'
-const link_api_user_profile = 'http://52.41.36.82:8000/api/users/profile'
+const link_api_get_all_data_user = 'http://127.0.0.1:8000/api/programs/get/all'
+const link_api_user_profile = 'http://127.0.0.1:8000/api/users/profile'
 
 
 class MainMenu extends React.Component {
