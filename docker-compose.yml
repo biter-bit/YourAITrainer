@@ -17,8 +17,7 @@ services:
       - "6379:6379"
   trainer_api:
     build: .
-#    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn backend.wsgi:application -c config/gunicorn.conf.py"
     depends_on:
       - db
     volumes:
@@ -28,25 +27,28 @@ services:
   celery:
     build: .
     command: bash -c "sleep 10 && celery -A backend worker --loglevel=info"
-#    environment:
-#      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
-#      - CELERY_BROKER=redis://redis:6379/0
-#      - CELERY_BACKEND=redis://redis:6379/0
     volumes:
       - ./backend:/code/backend
     depends_on:
       - redis
       - trainer_api
+#  trainer_front:
+#    build:
+#      context: .
+#      dockerfile: ./frontend/Dockerfile
+#    command: npm start
+#    volumes:
+#      - ./frontend:/app/frontend
+#    ports:
+#      - "10001:10001"
+#    depends_on:
+#      - trainer_api
+
   trainer_front:
-    build:
-      context: .
-      dockerfile: ./frontend/Dockerfile
-    command: npm start
-    volumes:
-      - ./frontend:/app/frontend
+    build: ./frontend
     ports:
       - "10001:10001"
     depends_on:
-      - trainer_api
+      - nginx
 volumes:
   appdata:
