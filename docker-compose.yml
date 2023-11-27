@@ -22,6 +22,7 @@ services:
       - db
     volumes:
       - ./backend/.:/code/backend
+      - /var/www/static/back:/var/www/static/back
     ports:
       - "8000:8000"
   celery:
@@ -32,24 +33,11 @@ services:
     depends_on:
       - redis
       - trainer_api
-
   trainer_front:
-    build:
-      context: .
-      dockerfile: ./frontend/Dockerfile
-    command: npm start
-    volumes:
-      - ./frontend:/app/frontend
+    build: ./frontend
     ports:
       - "10001:10001"
     depends_on:
       - trainer_api
-
-#  trainer_front:
-#    build: ./frontend
-#    ports:
-#      - "10001:10001"
-#    depends_on:
-#      - trainer_api
 volumes:
   appdata:

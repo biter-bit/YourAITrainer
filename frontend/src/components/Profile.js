@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from "axios";
 
-const link_api_save_profile = 'http://127.0.0.1:8000/api/users/profile/update';
+const link_api_save_profile = 'http://trainer_api:8000/api/users/profile/update';
 
 class WindowProfile extends React.Component {
 
