@@ -6,7 +6,7 @@ const ROWS_PER_PAGE = 10 //count of articles on page
 
 const AppArticle = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const link_api_articles = 'https://91.200.84.202:80/api/articles/'
+  const link_api_articles = 'https://youraitrainer.ru/api/articles/'
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
