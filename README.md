@@ -1,4 +1,4 @@
-![YourAITrainer](https://github.com/biter-bit/YourAITrainer/blob/main/content/exact_inscription_youraitrainer_bodybuilding_an.jpg)
+![YourAITrainer]([https://github.com/biter-bit/YourAITrainer/blob/main/content/exact_inscription_youraitrainer_bodybuilding_an.jpg](https://github.com/biter-bit/YourAITrainer/blob/main/content/white_background_and_the_inscription_youraitrain.jpg))
 YourAITrainer
 ===============
 
