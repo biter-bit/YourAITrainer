@@ -1,4 +1,4 @@
-YourAITrainer
+![YourAITrainer](https://github.com/biter-bit/YourAITrainer/blob/main/content/exact_inscription_youraitrainer_bodybuilding_an.jpg)
 ===============
 
 Веб-сервис представляет из себя личного тренера на основе искусственного интеллекта. Позволяет создавать программу тренировок на основе цели и определенных показателей пользователя. В качестве искусственного интеллекта выступает ChatGPT 3.5-turbo-16k. Проект состоит из следующих технологий: 
