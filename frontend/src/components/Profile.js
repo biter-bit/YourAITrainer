@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from "axios";
 
-const link_api_save_profile = 'https://youraitrainer/api/users/profile/update';
+const link_api_save_profile = 'https://youraitrainer.ru/api/users/profile/update';
 
 class WindowProfile extends React.Component {
 

@@ -19,7 +19,7 @@ class RandomArticles extends React.Component {
     }
 
     async fetchRandomArticles() {
-        const response = await axios.get(`https://youraitrainer/api/articles/`)
+        const response = await axios.get(`https://youraitrainer.ru/api/articles/`)
         const shuffledData = response.data.results.sort(() => 0.5 - Math.random());
         const selectedArticles = shuffledData.slice(0, 3);
         this.setState({randomArticles: selectedArticles}, () => {
