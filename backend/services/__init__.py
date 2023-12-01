@@ -1,9 +1,8 @@
 from .openai_generator import ProgramGenerator
+import dotenv
 
-# program_generator = ProgramGenerator(openai_token='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')
+dotenv.load_dotenv()
 
-# program_generator = ProgramGenerator(openai_token='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')
-
-program_generator = ProgramGenerator(openai_token='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')
+program_generator = ProgramGenerator()
 
 __all__ = ('program_generator', )
