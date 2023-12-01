@@ -2,12 +2,23 @@ import json
 from typing import List, Dict
 
 import openai
+import httpx
+from openai import OpenAI
+import os
 
 
 class ProgramGenerator:
     def __init__(self, openai_token: str) -> None:
-        self.openai = openai
-        self.openai.api_key = openai_token
+        os.environ["OPENAI_API_KEY"] = openai_token
+        self.custom_http_client = httpx.Client(
+            proxies={
+                "http://": f"http://d6qb8k:5d85rk@94.131.87.246:9233",
+                "https://": f"http://d6qb8k:5d85rk@94.131.87.246:9233",
+            },
+        )
+        self.client = OpenAI(
+            http_client=self.custom_http_client
+        )
         self.gender_sub_prompt = {
             'm': 'man',
             'f': 'woman'
@@ -73,8 +84,8 @@ class ProgramGenerator:
 
         messages = self._create_messages(prompt=prompt)
 
-        response = self.openai.ChatCompletion.create(
-            model='gpt-3.5-turbo',
+        response = self.client.chat.completions.create(
+            model='gpt-3.5-turbo-16k',
             messages=messages,
             temperature=0.3,
         )
@@ -85,7 +96,7 @@ class ProgramGenerator:
 
 
 if __name__ == '__main__':
-    generator = ProgramGenerator(openai_token='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')
+    generator = ProgramGenerator(openai_token='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')
     result = generator.gen_program(
         gender='m',
         age=38,

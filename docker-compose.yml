@@ -34,10 +34,21 @@ services:
       - redis
       - trainer_api
   trainer_front:
-    build: ./frontend
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    command: npm start
+    volumes:
+      - ./frontend:/app/frontend
     ports:
       - "10001:10001"
     depends_on:
       - trainer_api
+#  trainer_front:
+#    build: ./frontend
+#    ports:
+#      - "10001:10001"
+#    depends_on:
+#      - trainer_api
 volumes:
   appdata:

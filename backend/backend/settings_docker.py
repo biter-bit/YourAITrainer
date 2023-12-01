@@ -16,7 +16,7 @@ DEBUG = False
 
 CORS_ALLOWED_ORIGINS = ['http://localhost:10001', 'http://127.0.0.1:10001']
 
-ALLOWED_HOSTS = ['127.0.0.1', '91.200.84.202'] # добавить домен при заливке
+ALLOWED_HOSTS = ['127.0.0.1', '91.200.84.202', 'youraitrainer.ru'] # добавить домен при заливке
 
 #DATABASES = {
 #    'default': {

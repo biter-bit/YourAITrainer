@@ -8,10 +8,10 @@ import Main from "./Main";
 import CheckAuthComponent from "./components/CheckAuthComponent";
 import ModalWindow from "./components/ModalWindow";
 
-const linkApiVerify = 'https://youraitrainer.ru/api/auth/jwt/verify/'
-const linkSendData = 'https://youraitrainer.ru/api/save'
-const link_api_auth = 'https://youraitrainer.ru/api/auth/jwt/create/'
-const link_api_register = 'https://youraitrainer.ru/api/auth/register/'
+const linkApiVerify = 'http://127.0.0.1:8000/api/auth/jwt/verify/'
+const linkSendData = 'http://127.0.0.1:8000/api/save'
+const link_api_auth = 'http://127.0.0.1:8000/api/auth/jwt/create/'
+const link_api_register = 'http://127.0.0.1:8000/api/auth/register/'
 
 
 class App extends React.Component {
