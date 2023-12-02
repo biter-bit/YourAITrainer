@@ -12,7 +12,17 @@ YourAITrainer
 
 Дополнительно можно просматривать актуальные статьи по спорту.
 
-## **Использование**
+### **Установка**
+
+1. Клонировать репозиторий: `git clone https://github.com/biter-bit/YourAITrainer.git`
+2. Перейти в директорию backend и добавить файл .env.
+3. В файл .env добавить 2 константы:
+`DJANGO_SETTINGS_MODULE = backend.settings_prod
+OPENAI_API_KEY = "<API KEY OPENAI>"`
+4. Установить docker и docker-compose на компьютер: `sudo apt install docker docker-compose`
+5. 
+
+### **Использование**
 
 Сервис можно разделить на 3 блока:
 
@@ -43,3 +53,5 @@ YourAITrainer
 ![Пример отображения страницы дневника](https://github.com/biter-bit/YourAITrainer/blob/main/content/diary.png)
 
 ![Пример отображения формы генерации тренировок](https://github.com/biter-bit/YourAITrainer/blob/main/content/generation.png)
+
+Проект еще на стадии разработки, поэтому присутствует много багов. Буду их исправлять
