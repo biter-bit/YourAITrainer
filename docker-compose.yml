@@ -13,11 +13,13 @@ services:
       - "5433:5432"
   redis:
     image: redis
+    restart: unless-stopped
     ports:
       - "6379:6379"
   trainer_api:
     build: .
     command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn backend.wsgi:application -c config/gunicorn.conf.py"
+    restart: unless-stopped
     depends_on:
       - db
     volumes:
@@ -28,6 +30,7 @@ services:
   celery:
     build: .
     command: bash -c "sleep 10 && celery -A backend worker --loglevel=info"
+    restart: unless-stopped
     volumes:
       - ./backend:/code/backend
     depends_on:
@@ -37,6 +40,7 @@ services:
     build:
       context: .
       dockerfile: ./frontend/Dockerfile
+    restart: unless-stopped
     command: npm start
     volumes:
       - ./frontend:/app/frontend

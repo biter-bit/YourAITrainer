@@ -46,7 +46,7 @@ class ProgramGenerator:
         Результат получаем с русским описанием и названием тренировок."""
 
         prompt = f'Your client is a {age} year old {self.gender_sub_prompt[gender]}. ' \
-                 f'You have to make a training plan for 6 classes. Each workout should consist ' \
+                 f'You have to make a training plan for 1 classes. Each workout should consist ' \
                  f'of {self.num_of_exercises[training_level]} exercises\n' \
                  f'Your answer should be in JSON format and not include any comments.\n' \
                  f'Your answer should consist of a dictionary, where the key is the sequence number of the ' \
@@ -63,7 +63,7 @@ class ProgramGenerator:
                  f'- {"his" if gender == "m" else "her"} main goal is {self.purpose_sub_prompt[purpose_of_training]}\n' \
                  f'- {"his" if gender == "m" else "her"} experience is {self.level_sub_prompt[training_level]}.\n' \
                  f'Refer to trustworthy sources.\n' \
-                 f'Generate all 6 classes at once.'
+                 f'Generate all 1 classes at once.'
 
         return prompt
 

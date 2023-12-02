@@ -6,5 +6,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Celery('your_ai_trainer')
+# app.conf.task_soft_time_limit = 600
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
