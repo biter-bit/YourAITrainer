@@ -18,7 +18,7 @@ YourAITrainer
 1. Клонировать репозиторий: `git clone https://github.com/biter-bit/YourAITrainer.git`
 2. Перейти в директорию backend и добавить файл .env.
 3. В файл .env добавить 2 константы:
-`DJANGO_SETTINGS_MODULE = backend.settings_prod
+`DJANGO_SETTINGS_MODULE = backend.settings_local
 OPENAI_API_KEY = "<API KEY OPENAI>"`
 4. Установить docker и docker-compose на компьютер: `sudo apt install docker docker-compose`
 5. В корне проекта запустить контейнеры docker: `sudo docker-compose up --build`
